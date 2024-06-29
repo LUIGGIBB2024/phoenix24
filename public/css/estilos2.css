@@ -1,0 +1,13 @@
+.enc_datatable
+{
+    text-align: center;
+    background-color:rgb(14, 14, 13);
+    color: white;
+    height: 20px !important;
+}
+
+.campos_datatable
+{
+  font-size: 15px;
+  height: 15px !important;
+}
