@@ -1,0 +1,116 @@
+.enc_datatable
+{
+    text-align: center !important;
+    background-color:rgb(217, 240, 15) !important;
+    color: rgb(10, 10, 10) !important;
+    height: 20px !important;
+}
+
+.campos_datatable
+{
+  font-size: 15px;
+  height: 15px !important;
+}
+
+.logoempresa
+{
+  width: 100% !important;
+  height:70% !important;
+  /*border-radius:100% !important; */
+
+}
+
+#dataTables_info
+{
+   font-size:12px !important;
+}
+a.page-item
+{
+   font-size:13px !important;
+   background-color: rgb(43, 31, 218) !important;
+   color: whitesmoke !important;
+}
+
+.dt-button {
+    font-size:13px !important;
+   background-color: rgb(43, 31, 218) !important;
+   color: whitesmoke !important;
+  }
+
+ .footer-inner
+ {
+     background-color: gray !important;
+ }
+
+ .carousel-item::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 86, 112, 0.3);
+}
+.content-text p {
+    font-size: 1.1em;
+    line-height: 19px;
+    font-weight: 300;
+
+}
+.content-text h2,
+h2 {
+    position: relative;
+}
+h2 {
+    display: inline-block;
+    margin: 0 auto;
+}
+.content-text h2::before,
+h2::before {
+    content: " ";
+    position: absolute;
+    bottom: 0px;
+    height: 3px;
+    width: 50%;
+    left: 10%;
+    background-color: var(--primary-color);
+}
+.carousel-caption h5 {
+    font-size: 3em;
+}
+
+.boton_edit
+{
+   color:rgb(20, 20, 18);
+   padding-right: 0.5em;
+
+}
+.boton_del
+{
+   color:rgb(228, 24, 24);
+}
+
+.contenedor_botones_i
+{
+   text-align: center;
+}
+
+.form-control
+{
+   font-size:15px !important;
+   height: 33px !important;
+   padding:1px !important;
+
+}
+
+.form-control-label
+{
+    font-size:15px !important;
+    height: 33px !important;
+    padding:1px !important;
+}
+
+.dataTables_info
+   {
+     margin-top:1.5em !important;
+     padding-top:0.5em !important;
+     height: 1.5em !important;
+   }
