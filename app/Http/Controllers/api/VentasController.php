@@ -904,6 +904,7 @@ class VentasController extends Controller
             ->orderBy('saldosdeinventarios.bodega')
             ->get();
 
+
         return response()->json(
             [
              'status'           => '200',
