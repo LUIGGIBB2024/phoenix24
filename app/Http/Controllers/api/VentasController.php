@@ -905,10 +905,11 @@ class VentasController extends Controller
             ->orderBy('saldosdeinventarios.bodega')
             ->get();
 
+
         return response()->json(
             [
              'status'           => '200',
-             'msg'              => 'Información de Saldos de Inventarios Año ('. $anop .')',
+             'msg'              => 'Información de Saldos de Inventarios Año  ('. $anop .')',
              'data      '        =>  $saldos,
 
             ],Response::HTTP_ACCEPTED);
