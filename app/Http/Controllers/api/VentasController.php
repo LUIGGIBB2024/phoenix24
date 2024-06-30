@@ -873,6 +873,7 @@ class VentasController extends Controller
 
     }
 
+
     public function ConsultInventories(Request $request):JsonResponse
     {
         $ctrl   = enlacevisual_nv::findOrFail(1);
@@ -884,7 +885,6 @@ class VentasController extends Controller
 
         $anop         = $request->anoproceso;
         $producto     = $request->producto;
-        //DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         $saldos = saldosdeinventario::select(
             DB::raw("saldosdeinventarios.producto as producto"),
@@ -894,12 +894,12 @@ class VentasController extends Controller
             DB::raw("saldosdeinventarios.cantidad as cantidad"),
             DB::raw("saldosdeinventarios.cantidad1 as cantidad1"),
             DB::raw("saldosdeinventarios.costopromedio as costopromedio"),
-            DB::raw("detallelistas.valor as valordeventa"))
+            DB::raw("detalledelistas.valor as valordeventa"))
             ->join('producto', 'saldosdeinventarios.producto', '=', 'producto.codigo')
-            ->join('detalledelistas', ['saldosdeinventarios.producto', '=', 'detalledlistas.producto'])
-            ->join('detalledelistas', [$lista, '=', 'detalledlistas.codigo'])
+            ->join('detalledelistas', 'saldosdeinventarios.producto', '=', 'detalledelistas.producto')
             ->where('producto.descripcion', 'like', '%' . $producto . '%')
             ->where('saldosdeinventarios.anodeproceso',$anop )
+            ->where('detalledelistas.codigo',$lista)
             ->orderBy('producto.descripcion')
             ->orderBy('saldosdeinventarios.bodega')
             ->get();
@@ -909,6 +909,7 @@ class VentasController extends Controller
              'status'           => '200',
              'msg'              => 'Información de Saldos de Inventarios Año ('. $anop .')',
              'data      '        =>  $saldos,
+
             ],Response::HTTP_ACCEPTED);
 
     }
