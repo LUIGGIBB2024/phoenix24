@@ -1,0 +1,1 @@
+<a href="{{ route('cuentasxpagar.verpagos',['id'=>$id,'nrofactura'=>$numerofactura,'saldo'=>$saldo]) }}" class="btn btn-info btn-sm botoneditar" style="font-size:9px; background:rgb(238, 16, 16);">VerPagos</a>
