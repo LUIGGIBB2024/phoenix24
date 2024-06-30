@@ -910,7 +910,7 @@ class VentasController extends Controller
              'status'           => '200',
              'msg'              => 'Información de Saldos de Inventarios Año  ('. $anop .')',
              'data'             =>  $saldos,
-             'texto14'           =>  "Prueba",
+             'texto15'           =>  "Prueba",
             ],Response::HTTP_ACCEPTED);
 
     }
