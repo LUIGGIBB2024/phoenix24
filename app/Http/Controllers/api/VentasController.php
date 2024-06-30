@@ -886,6 +886,7 @@ class VentasController extends Controller
         $anop         = $request->anoproceso;
         $producto     = $request->producto;
 
+
         $saldos = saldosdeinventario::select(
             DB::raw("saldosdeinventarios.producto as producto"),
             DB::raw("saldosdeinventarios.bodega as bodega"),
