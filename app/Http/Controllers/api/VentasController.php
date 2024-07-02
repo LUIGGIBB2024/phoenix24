@@ -351,7 +351,7 @@ class VentasController extends Controller
                 $sucursal       = !is_Null($factura['sucursal'])?$factura['sucursal']:"";
 
                 $clientes       = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
-                $clientesID     = $clientes->clientesID;
+                $clientesID     = is_object($clientes->clientesID)?$clientes->clientesID:1;
 
                 $reg_fact       = factura::updateOrCreate(['numerodefactura'=>$numerofactura, 'prefijo'=>$prefijo, 'tipodedocumento' => $tipodcto,'fechafactura' => $fechafac],
                 [
