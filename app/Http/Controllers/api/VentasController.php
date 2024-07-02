@@ -262,30 +262,30 @@ class VentasController extends Controller
                 $fechahasta     = $detalle['fechafactura'];
                 $contador++;
                 $numerofactura  = $detalle['numerofactura'];
-                $prefijo        = $detalle['prefijo'];
-                $tipodcto       = $detalle['tipodocumento'];
-                $nit            = $detalle['nit'];
-                $producto       = $detalle['producto'];
-                $bodega         = $detalle['bodega'];
-                $idregistro     = $detalle['idregistro'];
+                $prefijo        = !is_null($detalle['prefijo'])?$detalle['prefijo']:"";
+                $tipodcto       = !is_null($detalle['tipodocumento'])?$detalle['tipodocumento']:"";
+                $nit            = !is_null($detalle['nit'])?$detalle['nit']:"";
+                $producto       = !is_null($detalle['producto'])?$detalle['producto']:"";
+                $bodega         = !is_null($detalle['bodega'])?$detalle['bodega']:"";
+                $idregistro     = !is_null($detalle['idregistro'])?$detalle['idregistro']:"";
                 $cantidad1      = $detalle['peso']>0?$detalle['peso']:0;
                 $cantidad1      = $detalle['unidades']>0?$detalle['unidades']:$cantidad1;
                 $idlocal        = $detalle['idlocal'];
 
                 detalledefactura::updateOrCreate(['numerodefactura'=>$numerofactura,'tipodedocumento'=>$tipodcto, 'prefijo'=>$prefijo, 'nit' => $nit,'producto' => $producto,'bodega'=>$bodega,'idlocal'=>$idlocal],
                 [
-                    'numerofactura'         => $detalle['numerofactura'],
-                    'prefijo'               => $detalle['prefijo'],
-                    'tipodedocumento'       => $detalle['tipodocumento'],
-                    'nit'                   => $detalle['nit'],
-                    'sucursal'              => $detalle['sucursal'],
+                    //'numerofactura'         => $detalle['numerofactura'],
+                    //'prefijo'               => !is_null($detalle['prefijo'])?$detalle['prefijo']:""
+                    //'tipodedocumento'       => $detalle['tipodocumento'],
+                    //'nit'                   => $detalle['nit'],
+                    'sucursal'              => !is_null($detalle['sucursal'])?$detalle['sucursal']:"",
                     'fechadefactura'        => $detalle['fechafactura'],
                     'fechadevencimiento'    => $detalle['vencimiento'],
                     'tipodemovimiento'      => is_null($detalle['tipomvto'])?"":$detalle['tipomvto'],
-                    'producto'              => $detalle['producto'],
+                    //'producto'              => $detalle['producto'],
                     'descripcion'            => is_null($detalle['descripcion'])?"":$detalle['descripcion'],
                     'producto2'             => is_null($detalle['codigoterminado'])?"":$detalle['codigoterminado'],
-                    'bodega'                => $detalle['bodega'],
+                    //'bodega'                => $detalle['bodega'],
                     'lote'                  => is_null($detalle['lote'])?"":$detalle['lote'],
                     'cantidad'              => $detalle['cantidad'],
                     'cantidad1'             => $cantidad1,
@@ -872,7 +872,6 @@ class VentasController extends Controller
             ],Response::HTTP_ACCEPTED);
 
     }
-
 
     public function ConsultInventories(Request $request):JsonResponse
     {
