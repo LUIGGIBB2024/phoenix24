@@ -674,8 +674,8 @@ class VentasController extends Controller
                'centro'           => "",
                'scentro'          => "",
                'estado'           => $centro['estado'],
-               'usuario_created'  => $dato['usuariocreated'],
-               'usuario_updated'  => $dato['usuarioupdated'],
+               'usuario_created'  => $centro['usuariocreated'],
+               'usuario_updated'  => $centro['usuarioupdated'],
             ]);
           }
        }
