@@ -344,11 +344,11 @@ class VentasController extends Controller
             {
                 $contador++;
                 $numerofactura  = $factura['numerofactura'];
-                $prefijo        = $factura['prefijo'];
-                $tipodcto       = $factura['tipodocumento'];
+                $prefijo        = !is_Null($factura['prefijo'])?$factura['prefijo']:"";
+                $tipodcto       = !is_Null($factura['tipodocumento'])?$factura['tipodocumento']:"";
                 $fechafac       = $factura['fechafactura'];
-                $nit            = $factura['nit'];
-                $sucursal       = $factura['sucursal'];
+                $nit            = !is_Null($factura['nit'])?$factura['nit']:"";
+                $sucursal       = !is_Null($factura['sucursal'])?$factura['sucursal']:"";
 
                 $clientes       = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
                 $clientesID     = $clientes->clientesID;
@@ -356,9 +356,9 @@ class VentasController extends Controller
                 $reg_fact       = factura::updateOrCreate(['numerodefactura'=>$numerofactura, 'prefijo'=>$prefijo, 'tipodedocumento' => $tipodcto,'fechafactura' => $fechafac],
                 [
                         //$regfacturas = new factura;
-                    'numerodefactura'      => $factura['numerofactura'] ,
-                    'tipodedocumento'      => $factura['tipodocumento'] ,
-                    'prefijo'              => $factura['prefijo'],
+                    //'numerodefactura'      => $factura['numerofactura'] ,
+                    //'tipodedocumento'      => $factura['tipodocumento'] ,
+                    //'prefijo'              => $factura['prefijo'],
                     'fechafactura'         => $factura['fechafactura'],
                     'horashabitacion'      => $factura['nrodehoras'],
                     'fechavencimiento'     => $factura['vencimiento'],
