@@ -156,8 +156,8 @@ class VentasController extends Controller
 
             foreach ($clientes as $cli)
             {
-              //foreach ($cli as $dato)
-              //{
+              foreach ($cli as $dato)
+              {
                   $nit          =   $dato['nit'];
                   $sucursal     =   $dato['sucursal'];
                   $reg_clientes = cliente::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal],
@@ -243,7 +243,7 @@ class VentasController extends Controller
                     'usuario_created'       => $dato['usuariocreated'],
                     'usuario_updated'       => $dato['usuarioupdated'],
                   ]);
-               // }
+                }
             }
         }
 
