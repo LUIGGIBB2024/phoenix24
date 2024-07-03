@@ -680,11 +680,48 @@ class VentasController extends Controller
           }
        }
 
+       $contador = 0;
+       if (isset($request->detlistas))
+       {
+           $detlistas   = $request->detlistas;
+           foreach ($detlistas as $dato)
+           {
+             $codigo        = !is_null($dato['codigo'])?$dato['codigo']:"";
+             $producto      = !is_null($dato['producto'])?$dato['producto']:"";
+             $valor         = $dato['valor'];
+             $valorunidad   = $dato['valorunidad'];
+             $descuento     = $dato['descuento'];
+
+             $curproducto = DB::table('producto')->select('producto.porcentajeiva')
+            ->where('producto.codigo','=',$producto)->get();
+            $porcentaje = Empty($curproducto)?0:$curproducto->porcentajeiva;
+
+            $valorneto  = round($valor * (1  + ($porcentaje/100)),0);
+
+            detalledelista::updateOrCreate(["codigo" =>$codigo,"producto" =>$producto],
+            [
+               'valorantesdeiva'  => $dato['valor'],
+               'valor'            => $valorneto,
+               'valorunidad'      => $valorunidad,
+               'valorunifinal'    => $dato['valorotro'],
+               'proyecto'         => !is_null($dato['proyecto'])?$dato['proyecto']:"",
+               'sproyecto'        => "",
+               'centrooper'       => !is_null($dato['centrooper'])?$dato['centrooper']:"",
+               'descuento'        => $descuento,
+               'iva'              => $porcentaje,
+               'usuario_created'  => $centro['usuariocreated'],
+               'usuario_updated'  => $centro['usuarioupdated'],
+            ]);
+
+           }
+       }
+
        return response()->json(
-       [
-        'status'   => '200 OK',
-        'msg'      => 'Actualización Exitosa',
-       ],Response::HTTP_ACCEPTED);
+        [
+         'status'   => '200 OK',
+         'msg'      => 'Actualización Exitosa',
+        ],Response::HTTP_ACCEPTED);
+
     }
 
     public function ConsolidatedSalesCenter(Request $request):JsonResponse
