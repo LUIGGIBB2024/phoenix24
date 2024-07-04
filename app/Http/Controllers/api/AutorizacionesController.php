@@ -32,7 +32,8 @@ class AutorizacionesController extends Controller
             DB::raw("documentosautorizados.sucursal as sucursal"),
             DB::raw("documentosautorizados.nombredeltercero as nombredeltercero"),
             DB::raw("documentosautorizados.pin as pin"),
-            DB::raw("documentosautorizados.observaciones as observaciones"))
+            DB::raw("documentosautorizados.observaciones as observaciones"),
+            DB::raw("documentosautorizados.valordelafactura as valordelafactura"))
             ->where('documentosautorizados.estado01','=', 1)
             ->orderBy('documentosautorizados.fechadereporte','desc')
             ->get();
