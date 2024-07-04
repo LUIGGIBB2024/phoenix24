@@ -18,6 +18,7 @@ class AutorizacionesController extends Controller
         $contador = 0;
 
         $autorizaciones = autorizacion::select(
+            DB::raw("documentosautorizados.id as id"),
             DB::raw("documentosautorizados.numerodedocumento as numerodedocumento"),
             DB::raw("documentosautorizados.tipodedocumento as tipodedocumento"),
             DB::raw("documentosautorizados.prefijo as prefijo"),
