@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\AutorizacionesController;
 use App\Http\Controllers\api\OnlyInvoiceController;
 use App\Http\Controllers\api\VentasController;
 use Illuminate\Http\Request;
@@ -41,6 +42,10 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     // Rutas Actualizar / Consultar Tabla de Control
     Route::post('update-control', [AuthController::class,'UpdateControl']);
     Route::get('consult-control', [AuthController::class,'ConsultControl']);
+
+    // Autorizaciones de Documentos
+    Route::get('authorize-documents', [AutorizacionesController::class,'AuthorizeDocuments']);
+
 
 });
 
