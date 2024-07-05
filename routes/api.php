@@ -44,7 +44,7 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     Route::get('consult-control', [AuthController::class,'ConsultControl']);
 
     // Autorizaciones de Documentos
-    Route::get('authorize-documents', [AutorizacionesController::class,'AuthorizeDocuments']);
+    Route::post('authorize-documents', [AutorizacionesController::class,'AuthorizeDocuments']);
     Route::get('consult-documents', [AutorizacionesController::class,'ConsultDocuments']);
 
 
