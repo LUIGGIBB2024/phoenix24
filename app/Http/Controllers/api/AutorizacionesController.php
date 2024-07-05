@@ -50,7 +50,7 @@ class AutorizacionesController extends Controller
     public function AuthorizeDocuments(Request $request):JsonResponse
     {
 
-        $idpedido = $request;
+        $idpedido = $request->id;
 
         $document  = autorizacion::find($idpedido)->get();
 
