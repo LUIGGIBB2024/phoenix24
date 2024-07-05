@@ -52,7 +52,7 @@ class AutorizacionesController extends Controller
 
         $idpedido = $request->id;
 
-        $document  = autorizacion::indOrFail($idpedido);
+        $document  = autorizacion::findOrFail($idpedido);
 
 
         return response()->json(
