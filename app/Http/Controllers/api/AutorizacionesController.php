@@ -53,13 +53,15 @@ class AutorizacionesController extends Controller
         $idpedido = $request->id;
 
         $document  = autorizacion::findOrFail($idpedido);
+        $document->estado01 = 2;
+        $document->update();
 
 
         return response()->json(
             [
               'status'           => '200',
-              'msg'              => 'COnsulta Exitosa',
-              'datos'            => $document
+              'msg'              => 'Actualización Exitosa',
+              //'datos'            => $document
             ],Response::HTTP_ACCEPTED);
     }
 }
