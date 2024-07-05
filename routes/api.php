@@ -45,6 +45,7 @@ Route::group(['middleware'=>['auth:sanctum']],function()
 
     // Autorizaciones de Documentos
     Route::get('authorize-documents', [AutorizacionesController::class,'AuthorizeDocuments']);
+    Route::get('consult-documents', [AutorizacionesController::class,'ConsultDocuments']);
 
 
 });
