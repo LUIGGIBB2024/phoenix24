@@ -25,7 +25,7 @@ class CarteraController extends Controller
               $nrofactura   =   $dato['numerofactura'];
               $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
               $tipodocto    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:"";
-              $fecha        =   $dato['tipodocumento'];
+              $fecha        =   $dato['fechafactura'];
               $lapso        =   $dato['lapso'];
               $propiedad    =   !is_null($dato['propiedad'])?$dato['propiedad']:"";
               $vendedor     =   !is_null($dato['vendedor'])?$dato['vendedor']:"";
