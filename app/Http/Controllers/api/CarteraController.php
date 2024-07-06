@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\cartera;
+use App\Models\detalledepago;
 use App\Models\factura;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -83,5 +84,64 @@ class CarteraController extends Controller
                 'msg'          => 'Actualización Exitosa',
                 ],Response::HTTP_ACCEPTED);
        }
+
+       if (isset($request->datadtpgcxc))
+        {
+            $detalle   = $request->datadtpgcxc;
+            foreach ($detalle as $dato)
+            {
+              $consecutivo  =   $dato['consecutivo'];
+              $fecha        =   $dato['fechadocumento'];
+              $doctopago    =   !is_null($dato['documento'])?$dato['documento']:"";
+              $nit          =   !is_null($dato['nit'])?$dato['nit']:"";
+              $sucursal     =   !is_null($dato['sucursal'])?$dato['sucursal']:"";
+              $concepto     =   !is_null($dato['conceptopago'])?$dato['conceptopago']:"";
+              $nrofactura   =   $dato['numerodefactura'];
+              $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
+              $tipodocto    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:"";
+              $lapso        =   $dato['lapso'];
+              $proyecto     =   !is_null($dato['proyecto'])?$dato['proyecto']:"";
+              $sproyecto    =   !is_null($dato['sproyecto'])?$dato['sproyecto']:"";
+              $centrooper   =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
+              $cuenta       =   !is_null($dato['cuenta'])?$dato['cuenta']:"";
+              $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
+              $scentro      =   !is_null($dato['scentro'])?$dato['sscentro']:"";
+              $actividad    =   !is_null($dato['actividad'])?$dato['actividad']:"";
+              //$facturas     = factura::where('consecutivo'=>,'numerodefactura','=',$nrofactura)->where('prefijo',$prefijo)
+              //                       ->where('tipodedocumento',$tipodocto)->where('fechafactura','=',$fecha)->first();
+
+              //$facturaid     = is_object($facturas)?$facturas->FacturasID:1;
+              //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
+
+              $reg_pgo = detalledepago::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
+                         'concepto'=>$concepto,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,'prefijo'=>$prefijo],
+              [
+                'lapso'                 =>$lapso,
+                'valor'                 =>$dato['valorpago'],
+                'cuota'                 =>$dato['cuota'],
+                'saldofactura'          =>$dato['saldofactura'],
+                'fechapagodeservicios'  =>$dato['fechapagodeservicios'],
+                'proyecto'              =>$proyecto,
+                'sproyecto'             =>$sproyecto,
+                'centrooper'            =>$centrooper,
+                'cuenta'                =>$cuenta,
+                'centro'                =>$centro,
+                'scentro'               =>$scentro,
+                'facturacxcID'          =>1,
+                'recibodecajaID'        =>1,
+                'notacreditoID'         =>1,
+                'usuario_created'       =>$dato['usuariocreated'],
+                'usuario_updated'       =>$dato['usuarioupdated'],
+              ]);
+
+           }
+            return response()->json(
+                [
+                'status'       => '200',
+                'msg'          => 'Actualización Exitosa',
+                ],Response::HTTP_ACCEPTED);
+       }
+
     }
+
 }
