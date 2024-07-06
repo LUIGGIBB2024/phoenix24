@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\cartera;
+use App\Models\factura;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
@@ -34,15 +35,18 @@ class CarteraController extends Controller
               $cuenta       =   !is_null($dato['cuenta'])?$dato['cuenta']:"";
               $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
               $scentro      =   !is_null($dato['centro'])?$dato['scentro']:"";
-              $facturaid    = 1;
-              $clienteid    = 1;
 
+              $facturas     = factura::where('numerodefactura','=',$nrofactura)->where('prefijo',$prefijo)
+                                     ->where('tipodedocumento',$tipodocto)->where('fechafactura','=',$fecha)->first();
 
-              $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerofactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
+              $facturaid     = is_object($facturas)?$facturas->FacturasID:1;
+              $clienteid     = is_object($facturas)?$facturas->ClienteID:1;
+
+              $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
                                                   'prefijo'=>$prefijo,'fechafactura'=>$fecha],
               [
                 'fechadevencimiento'=>$dato['fechavencimiento'],
-                'lapso'             =>$dato['lapso'],
+                'lapso'             =>$lapso,
                 'valorfactura'      =>$dato['valorfactura'],
                 'valorintereses'    =>$dato['valorintereses'],
                 'valorseguro'       =>$dato['valorseguro'],
@@ -70,7 +74,6 @@ class CarteraController extends Controller
                 'ClientesID'        =>$clienteid,
                 'usuario_created'   =>$dato['usuariocreated'],
                 'usuario_updated'   =>$dato['usuarioupdated'],
-
               ]);
 
            }
