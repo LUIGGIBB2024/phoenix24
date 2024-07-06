@@ -112,7 +112,7 @@ class CarteraController extends Controller
 
               //$facturaid     = is_object($facturas)?$facturas->FacturasID:1;
               //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
-
+              DB::statement('SET FOREIGN_KEY_CHECKS=0;');
               $reg_pgo = detalledepago::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
                          'concepto'=>$concepto,'numerodefactura'=>$nrofactura,'tipodocumento'=>$tipodocto,'prefijo'=>$prefijo],
               [
@@ -133,6 +133,7 @@ class CarteraController extends Controller
                 'usuario_created'       =>$dato['usuariocreated'],
                 'usuario_updated'       =>$dato['usuarioupdated'],
               ]);
+              DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
            }
             return response()->json(
