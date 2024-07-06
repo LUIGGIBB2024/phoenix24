@@ -108,13 +108,15 @@ class CarteraController extends Controller
               $scentro      =   !is_null($dato['scentro'])?$dato['sscentro']:"";
               $actividad    =   !is_null($dato['actividad'])?$dato['actividad']:"";
               $facturas     =   cartera::where('numerodefactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
-                                      ->where('nit',$nit)->where('fechafactura','=',$fecha)->first();
+                                      ->where('nit',$nit)->first();
 
                                       return response()->json(
                                         [
                                         'status'       => '200',
                                         'msg'          => 'Actualización Exitosa ffff',
                                         'cxc'          => $facturas,
+                                        'numfac'       => $nrofactura,
+                                        'prefijo'       => $prefijo,
                                         ],Response::HTTP_ACCEPTED);
               $facturaid     = !is_null($facturas)?$facturas->cuentasporcobrarID:1;
               //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
