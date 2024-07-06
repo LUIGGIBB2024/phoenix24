@@ -50,6 +50,7 @@ Route::group(['middleware'=>['auth:sanctum']],function()
 
     // Procesar Información de Cuentas por Cobrar
     Route::post('process-cxc', [CarteraController::class,'ProcessCxc']);
+    Route::post('process-pagoscxc', [CarteraController::class,'ProcessPagosCxc']);
     //Route::get('consult-documents', [AutorizacionesController::class,'ConsultDocuments']);
 
 
