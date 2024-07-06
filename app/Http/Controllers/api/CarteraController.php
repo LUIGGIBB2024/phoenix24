@@ -110,14 +110,6 @@ class CarteraController extends Controller
               $facturas     =   cartera::where('numerodefactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
                                       ->where('nit',$nit)->first();
 
-                                      return response()->json(
-                                        [
-                                        'status'       => '200',
-                                        'msg'          => 'Actualización Exitosa ffff',
-                                        'cxc'          => $facturas,
-                                        'numfac'       => $nrofactura,
-                                        'prefijo'       => $prefijo,
-                                        ],Response::HTTP_ACCEPTED);
               $facturaid     = !is_null($facturas)?$facturas->cuentasporcobrarID:1;
               //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
               DB::statement('SET FOREIGN_KEY_CHECKS=0;');
