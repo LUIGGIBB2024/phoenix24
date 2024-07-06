@@ -114,7 +114,7 @@ class CarteraController extends Controller
               //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
 
               $reg_pgo = detalledepago::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
-                         'concepto'=>$concepto,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,'prefijo'=>$prefijo],
+                         'concepto'=>$concepto,'numerodefactura'=>$nrofactura,'tipodocumento'=>$tipodocto,'prefijo'=>$prefijo],
               [
                 'lapso'                 =>$lapso,
                 'valor'                 =>$dato['valorpago'],
