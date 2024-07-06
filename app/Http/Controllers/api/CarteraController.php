@@ -14,8 +14,6 @@ class CarteraController extends Controller
 {
     public function ProcessCxc(Request $request):JsonResponse
     {
-
-
         if (isset($request->datacxc))
         {
             $cartera   = $request->datacxc;
