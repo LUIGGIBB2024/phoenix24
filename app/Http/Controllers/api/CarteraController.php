@@ -107,10 +107,10 @@ class CarteraController extends Controller
               $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
               $scentro      =   !is_null($dato['scentro'])?$dato['sscentro']:"";
               $actividad    =   !is_null($dato['actividad'])?$dato['actividad']:"";
-              //$facturas     = factura::where('consecutivo'=>,'numerodefactura','=',$nrofactura)->where('prefijo',$prefijo)
-              //                       ->where('tipodedocumento',$tipodocto)->where('fechafactura','=',$fecha)->first();
+              $facturas     =   cartera::where('numerodefactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
+                                      ->where('nit',$nit)->where('fechafactura','=',$fecha)->first();
 
-              //$facturaid     = is_object($facturas)?$facturas->FacturasID:1;
+              $facturaid     = is_object($facturas)?$facturas->cuentasporcobrarID:1;
               //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
               DB::statement('SET FOREIGN_KEY_CHECKS=0;');
               $reg_pgo = detalledepago::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
@@ -127,7 +127,7 @@ class CarteraController extends Controller
                 'cuenta'                =>$cuenta,
                 'centro'                =>$centro,
                 'scentro'               =>$scentro,
-                'facturacxcID'          =>1,
+                'facturacxcID'          =>$facturaid,
                 'recibodecajaID'        =>1,
                 'notacreditoID'         =>1,
                 'usuario_created'       =>$dato['usuariocreated'],
