@@ -110,12 +110,19 @@ class CarteraController extends Controller
               $facturas     =   cartera::where('numerodefactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
                                       ->where('nit',$nit)->where('fechafactura','=',$fecha)->first();
 
-              $facturaid     = is_object($facturas)?$facturas->cuentasporcobrarID:1;
+                                      return response()->json(
+                                        [
+                                        'status'       => '200',
+                                        'msg'          => 'Actualización Exitosa ffff',
+                                        'cxc'          => $facturas,
+                                        ],Response::HTTP_ACCEPTED);
+              $facturaid     = !is_null($facturas)?$facturas->cuentasporcobrarID:1;
               //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
               DB::statement('SET FOREIGN_KEY_CHECKS=0;');
               $reg_pgo = detalledepago::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
                          'concepto'=>$concepto,'numerodefactura'=>$nrofactura,'tipodocumento'=>$tipodocto,'prefijo'=>$prefijo],
               [
+                'actividad'             =>$actividad,
                 'lapso'                 =>$lapso,
                 'valor'                 =>$dato['valorpago'],
                 'cuota'                 =>$dato['cuota'],
