@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\AutorizacionesController;
+use App\Http\Controllers\api\CarteraController;
 use App\Http\Controllers\api\OnlyInvoiceController;
 use App\Http\Controllers\api\VentasController;
 use Illuminate\Http\Request;
@@ -48,7 +49,7 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     Route::get('consult-documents', [AutorizacionesController::class,'ConsultDocuments']);
 
     // Procesar Información de Cuentas por Cobrar
-    Route::post('process-cxc', [AutorizacionesController::class,'ProcessCxc']);
+    Route::post('process-cxc', [CarteraController::class,'ProcessCxc']);
     //Route::get('consult-documents', [AutorizacionesController::class,'ConsultDocuments']);
 
 
