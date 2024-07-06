@@ -92,13 +92,13 @@ class CarteraController extends Controller
             {
               $consecutivo  =   $dato['consecutivo'];
               $fecha        =   $dato['fechadocumento'];
-              $doctopago    =   !is_null($dato['documento'])?$dato['documento']:"";
+              $doctopago    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:"";
               $nit          =   !is_null($dato['nit'])?$dato['nit']:"";
               $sucursal     =   !is_null($dato['sucursal'])?$dato['sucursal']:"";
               $concepto     =   !is_null($dato['conceptopago'])?$dato['conceptopago']:"";
               $nrofactura   =   $dato['numerodefactura'];
               $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
-              $tipodocto    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:"";
+              $tipodocto    =   !is_null($dato['docfactura'])?$dato['docfactura']:"";
               $lapso        =   $dato['lapso'];
               $proyecto     =   !is_null($dato['proyecto'])?$dato['proyecto']:"";
               $sproyecto    =   !is_null($dato['sproyecto'])?$dato['sproyecto']:"";
