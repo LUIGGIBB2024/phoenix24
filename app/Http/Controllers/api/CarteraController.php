@@ -37,11 +37,11 @@ class CarteraController extends Controller
               $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
               $scentro      =   !is_null($dato['centro'])?$dato['scentro']:"";
 
-              $facturas     = factura::where('numerodefactura','=',$nrofactura)->where('prefijo',$prefijo)
-                                     ->where('tipodedocumento',$tipodocto)->where('fechafactura','=',$fecha)->first();
+              $facturas     = factura::where('numerodefactura',$nrofactura)->where('prefijo',$prefijo)
+                                     ->where('tipodedocumento',$tipodocto)->where('fechafactura',$fecha)->first();
 
               $facturaid     = is_object($facturas)?$facturas->FacturasID:1;
-              $clienteid     = is_object($facturas)?$facturas->ClienteID:1;
+              $clienteid     = is_object($facturas)?$facturas->ClientesID:1;
 
               $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
                                                   'prefijo'=>$prefijo,'fechafactura'=>$fecha],
