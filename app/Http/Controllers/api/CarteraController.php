@@ -96,7 +96,7 @@ class CarteraController extends Controller
               $nit          =   !is_null($dato['nit'])?$dato['nit']:"";
               $sucursal     =   !is_null($dato['sucursal'])?$dato['sucursal']:"";
               $concepto     =   !is_null($dato['conceptopago'])?$dato['conceptopago']:"";
-              $nrofactura   =   $dato['numerodefactura'];
+              $nrofactura   =   $dato['numerofactura'];
               $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
               $tipodocto    =   !is_null($dato['docfactura'])?$dato['docfactura']:"";
               $lapso        =   $dato['lapso'];
