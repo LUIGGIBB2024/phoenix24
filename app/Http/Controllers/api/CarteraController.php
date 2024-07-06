@@ -112,6 +112,14 @@ class CarteraController extends Controller
 
               $facturaid     = !is_null($facturas)?$facturas->cuentasporcobrarID:1;
               //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
+
+              return response()->json(
+                [
+                'status'       => '200',
+                'msg'          => 'Actualización Exitosa fff',
+                'IDFac'        => $facturaid,
+                ],Response::HTTP_ACCEPTED);
+
               DB::statement('SET FOREIGN_KEY_CHECKS=0;');
               $reg_pgo = detalledepago::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
                          'concepto'=>$concepto,'numerodefactura'=>$nrofactura,'tipodocumento'=>$tipodocto,'prefijo'=>$prefijo],
