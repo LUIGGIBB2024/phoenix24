@@ -53,6 +53,7 @@ class CarteraController extends Controller
                 'status'       => '200',
                 'msg'          => 'Actualización Exitosacxcxcxcx',
                 'facturas'     => $facturas,
+                'facturasID'    => $facturaid,
                 ],Response::HTTP_ACCEPTED);
 
               $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
