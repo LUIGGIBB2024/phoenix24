@@ -49,7 +49,7 @@ class CarteraController extends Controller
               $facturaid     = !is_null($facturas)?$facturas->facturasID:1;
               $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
 
-              if ($contador == 3)
+              if ($lapso == "202407")
               {
                 return response()->json(
                     [
