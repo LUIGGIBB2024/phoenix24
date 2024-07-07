@@ -138,13 +138,21 @@ class CarteraController extends Controller
               DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
            }
-            return response()->json(
+           return response()->json(
                 [
                 'status'       => '200',
                 'msg'          => 'Actualización Exitosa',
                 ],Response::HTTP_ACCEPTED);
        }
-
     }
 
+    public function CarteraResumida(Request $request):JsonResponse
+    {
+        return response()->json(
+            [
+            'status'       => '200',
+            'msg'          => 'Actualización Exitosa Cartera',
+            ],Response::HTTP_ACCEPTED);
+
+    }
 }
