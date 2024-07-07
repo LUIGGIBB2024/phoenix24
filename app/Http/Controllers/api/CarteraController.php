@@ -20,6 +20,7 @@ class CarteraController extends Controller
         if (isset($request->datacxc))
         {
             $cartera   = $request->datacxc;
+            $contador = 0;
             foreach ($cartera as $dato)
             {
               $nit          =   $dato['nit'];
@@ -44,17 +45,20 @@ class CarteraController extends Controller
               $clientes     = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
 
 
-
+              $contador++;
               $facturaid     = !is_null($facturas)?$facturas->facturasID:1;
               $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
 
-              return response()->json(
-                [
-                'status'       => '200',
-                'msg'          => 'Actualización Exitosacxcxcxcx',
-                'facturas'     => $facturas,
-                'facturasID'    => $facturaid,
-                ],Response::HTTP_ACCEPTED);
+              if ($contador == 3)
+              {
+                return response()->json(
+                    [
+                    'status'       => '200',
+                    'msg'          => 'Actualización Exitosacxcxcxcx',
+                    'facturas'     => $facturas,
+                    'facturasID'    => $facturaid,
+                    ],Response::HTTP_ACCEPTED);
+              }
 
               $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
                                                   'prefijo'=>$prefijo,'fechafactura'=>$fecha],
