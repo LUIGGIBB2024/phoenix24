@@ -41,11 +41,19 @@ class CarteraController extends Controller
               $facturas     = factura::where('numerodefactura',$nrofactura)->where('prefijo',$prefijo)
                                      ->where('tipodedocumento',$tipodocto)->where('fechafactura',$fecha)->first();
 
-              $clientes      = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
+              $clientes     = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
+
 
 
               $facturaid     = !is_null($facturas)?$facturas->facturasid:1;
               $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
+
+              return response()->json(
+                [
+                'status'       => '200',
+                'msg'          => 'Actualización Exitosacxcxcxcx',
+                'facturas'     => $facturas,
+                ],Response::HTTP_ACCEPTED);
 
               $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
                                                   'prefijo'=>$prefijo,'fechafactura'=>$fecha],
@@ -82,7 +90,7 @@ class CarteraController extends Controller
               ]);
 
            }
-            return response()->json(
+           return response()->json(
                 [
                 'status'       => '200',
                 'msg'          => 'Actualización Exitosa',
