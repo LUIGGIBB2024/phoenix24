@@ -43,6 +43,7 @@ class CarteraController extends Controller
 
               $clientes      = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
 
+              
               $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
               $clienteid     = !is_null($clientes)?$clientes->ClientesID:1;
 
