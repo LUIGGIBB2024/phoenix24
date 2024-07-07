@@ -23,7 +23,7 @@ class CarteraController extends Controller
             $contador = 0;
             foreach ($cartera as $dato)
             {
-              $nit          =   $dato['nit'];
+              $nit          =   !is_null($dato['nit'])?$dato['nit']:"";
               $sucursal     =   !is_null($dato['sucursal'])?$dato['sucursal']:"";
               $nrofactura   =   $dato['numerofactura'];
               $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
