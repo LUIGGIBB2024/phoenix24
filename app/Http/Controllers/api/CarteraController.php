@@ -148,8 +148,9 @@ class CarteraController extends Controller
 
     public function CarteraResumida(Request $request):JsonResponse
     {
+        $lapso = $request->lapso;
         $cartera = cartera::selectRaw("fechafactura")                  ->selectRaw("SUM(valorfactura) as total")
-                  ->where('lapso',"202407")
+                  ->where('lapso',$lapso)
                   ->groupBy('fechafactura')
                   ->get();
 
