@@ -49,22 +49,6 @@ class CarteraController extends Controller
               $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
               $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
 
-              if ($lapso == "202002")
-              {
-                return response()->json(
-                    [
-                    'status'       => '200',
-                    'msg'          => 'Actualización Exitosacxcxcxcx',
-                    'facturas'     => $facturas,
-                    'facturasID'   => $facturaid,
-                    'Nit'          => $nit,
-                    'tipodedocumento' => $tipodocto,
-                    'Nro Factura'  => $nrofactura,
-                    'Prefijo'      => $prefijo,
-                    'Fecha Factura' => $fecha,
-                    ],Response::HTTP_ACCEPTED);
-              }
-
               $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
                                                   'prefijo'=>$prefijo,'fechafactura'=>$fecha],
               [
