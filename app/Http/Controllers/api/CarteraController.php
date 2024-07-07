@@ -45,7 +45,7 @@ class CarteraController extends Controller
 
 
 
-              $facturaid     = !is_null($facturas)?$facturas->facturasid:1;
+              $facturaid     = !is_null($facturas)?$facturas->facturasID:1;
               $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
 
               return response()->json(
