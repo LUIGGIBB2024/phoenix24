@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\cartera;
+use App\Models\cliente;
 use App\Models\detalledepago;
 use App\Models\factura;
 use Illuminate\Http\Request;
@@ -40,8 +41,10 @@ class CarteraController extends Controller
               $facturas     = factura::where('numerodefactura',$nrofactura)->where('prefijo',$prefijo)
                                      ->where('tipodedocumento',$tipodocto)->where('fechafactura',$fecha)->first();
 
+              $clientes      = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
+
               $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
-              $clienteid     = !is_null($facturas)?$facturas->ClientesID:1;
+              $clienteid     = !is_null($clientes)?$clientes->ClientesID:1;
 
               $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
                                                   'prefijo'=>$prefijo,'fechafactura'=>$fecha],
@@ -149,7 +152,8 @@ class CarteraController extends Controller
     public function CarteraResumida(Request $request):JsonResponse
     {
         $lapso = $request->lapso;
-        $cartera = cartera::selectRaw("fechafactura")                  ->selectRaw("SUM(valorfactura) as total")
+        $cartera = cartera::selectRaw("fechafactura")
+                  ->selectRaw("SUM(valorfactura) as total")
                   ->where('lapso',$lapso)
                   ->groupBy('fechafactura')
                   ->get();
