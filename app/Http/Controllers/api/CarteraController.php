@@ -56,7 +56,12 @@ class CarteraController extends Controller
                     'status'       => '200',
                     'msg'          => 'Actualización Exitosacxcxcxcx',
                     'facturas'     => $facturas,
-                    'facturasID'    => $facturaid,
+                    'facturasID'   => $facturaid,
+                    'Nit'          => $nit,
+                    'tipodedocumento' => $tipodocto,
+                    'Nro Factura'  => $nrofactura,
+                    'Prefijo'      => $prefijo,
+                    'Fecha Factura' => $fecha,
                     ],Response::HTTP_ACCEPTED);
               }
 
