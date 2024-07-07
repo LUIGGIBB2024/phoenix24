@@ -43,9 +43,9 @@ class CarteraController extends Controller
 
               $clientes      = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
 
-              
-              $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
-              $clienteid     = !is_null($clientes)?$clientes->ClientesID:1;
+
+              $facturaid     = !is_null($facturas)?$facturas->facturasid:1;
+              $clienteid     = !is_null($clientes)?$clientes->clientesid:1;
 
               $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
                                                   'prefijo'=>$prefijo,'fechafactura'=>$fecha],
