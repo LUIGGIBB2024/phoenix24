@@ -22,4 +22,9 @@ class cartera extends Model
     public function getKeyName(){
         return "cuentasporcobrarID";
     }
+
+    public function detalledepagos()
+    {
+       return $this->hasMany('App\detalledepago');
+    }
 }
