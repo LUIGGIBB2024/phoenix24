@@ -156,7 +156,7 @@ class CarteraController extends Controller
     {
         $lapso = $request->lapso;
         $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
-                   ->selectRaw('sum(detalledepagoscxc.valor) as abono')
+                   ->selectRaw('sum(detalledepagoscxc.valor) as abono, 0.00 as saldo')
                    ->join("clientes",function($join)
                     {
                       $join->on("clientes.nit","=","cuentasporcobrar.nit")
