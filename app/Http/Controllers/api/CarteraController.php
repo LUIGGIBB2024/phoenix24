@@ -164,7 +164,7 @@ class CarteraController extends Controller
                     })
                   ->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID')
                   ->where('cuentasporcobrar.lapso',$lapso)
-                  //->where('detalledepagoscxc.lapso',$lapso)
+                  ->where('detalledepagoscxc.lapso',$lapso)
                   ->groupBy('clientes.nombrecompleto')
                   ->get();
 
