@@ -22,4 +22,9 @@ class detalledepago extends Model
         return "detallereccajasID";
     }
 
+    public function cuentasporcobrar()
+    {
+        return $this->belongsTo('App\cuentasporcobrar','FK_detalledepagoscxc_cuentasporcobrar','cuentasporcobrarID');
+    }
+
 }
