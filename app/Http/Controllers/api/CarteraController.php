@@ -159,7 +159,7 @@ class CarteraController extends Controller
                   ->selectRaw("SUM(cuentasporcobrar.valorfactura) as total")
                   ->join('clientes', 'clientes.nit', '=', 'cuentasporcobrar.nit')
                   ->join('clientes', 'clientes.sucursal', '=', 'cuentasporcobrar.sucursal')
-                  ->where('lapso',$lapso)
+                  ->where('cuentasporcobrar.lapso',$lapso)
                   ->groupBy('clientes.nombrecompleto')
                   ->get();
 
