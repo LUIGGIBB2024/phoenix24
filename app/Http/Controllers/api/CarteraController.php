@@ -155,8 +155,7 @@ class CarteraController extends Controller
     public function CarteraResumida(Request $request):JsonResponse
     {
         $lapso = $request->lapso;
-        $cartera = cartera::selectRaw("cuentasporcobrar.nit,cuentasporcobrar.sucursal,cuentasporcobrar.fechafactura,clientes.nombrecompleto")
-                  ->selectRaw("SUM(cuentasporcobrar.valorfactura) as total")
+        $cartera = cartera::selectRaw("cuentasporcobrar.nit,cuentasporcobrar.sucursal,cuentasporcobrar.fechafactura,clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
                   ->join('clientes', 'clientes.nit', '=', 'cuentasporcobrar.nit')
                   ->join('clientes', 'clientes.sucursal', '=', 'cuentasporcobrar.sucursal')
                   ->where('cuentasporcobrar.lapso',$lapso)
