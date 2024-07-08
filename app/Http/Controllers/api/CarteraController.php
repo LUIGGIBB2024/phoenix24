@@ -156,8 +156,8 @@ class CarteraController extends Controller
     {
         $lapso = $request->lapso;
         $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
-                  ->join('clientes', 'cuentasporcobrar.nit',"=",'clientes.nit')
-                  ->join('clientes', 'cuentasporcobrar.sucursal','=','clientes.sucursal')
+                  ->join('clientes ', 'cuentasporcobrar.nit',"=",'clientes.nit')
+                  ->join('clientes as b', 'cuentasporcobrar.sucursal','=','b.sucursal')
                   ->where('cuentasporcobrar.lapso',$lapso)
                   ->groupBy('clientes.nombrecompleto')
                   ->get();
