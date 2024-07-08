@@ -170,6 +170,8 @@ class CarteraController extends Controller
         foreach ($cartera as $dato)
         {
            $dato->abono =  is_null($dato->abono)?"0.00":$dato->abono;
+           $saldo  =  (float) $dato->total - (float)  $dato->abono;
+           $dato->saldo = $saldo;
         }
 
         return response()->json(
