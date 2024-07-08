@@ -167,6 +167,11 @@ class CarteraController extends Controller
                   ->groupBy('clientes.nombrecompleto')
                   ->get();
 
+        foreach ($cartera as $dato)
+        {
+           $dato->abono =  is_null($dato->abono)?"0.00":$dato->abono;
+        }
+
         return response()->json(
             [
             'status'       => '200',
