@@ -156,13 +156,13 @@ class CarteraController extends Controller
     {
         $lapso = $request->lapso;
         $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
-                   ->sum('detalledepagoscxc->valor')
+                   ->sum('detalledepagoscxc.valor')
                    ->join("clientes",function($join)
                     {
                       $join->on("clientes.nit","=","cuentasporcobrar.nit")
                            ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
                     })
-                    ->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID')
+                  ->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID')
                   ->where('cuentasporcobrar.lapso',$lapso)
                   ->groupBy('clientes.nombrecompleto')
                   ->get();
