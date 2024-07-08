@@ -166,7 +166,7 @@ class CarteraController extends Controller
                   ->where('cuentasporcobrar.lapso',$lapso)
                   //->where('detalledepagoscxc.lapso',$lapso)
                   ->groupBy('clientes.nombrecompleto')
-                  ->having('total <> abono')
+                  ->havingRaw('total <> abono')
                   ->get();
 
         foreach ($cartera as $dato)
