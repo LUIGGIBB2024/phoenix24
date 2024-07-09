@@ -25,6 +25,6 @@ class cartera extends Model
 
     public function detalledepagos()
     {
-       return $this->hasMany(detalledepago::class);
+       return $this->hasMany(detalledepago::class,'facturacxcID','cuentasporcobrarID');
     }
 }
