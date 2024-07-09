@@ -25,6 +25,6 @@ class cartera extends Model
 
     public function detalledepagos()
     {
-       return $this->hasMany('App\detalledepago');
+       return $this->hasMany(detalledepago::class);
     }
 }

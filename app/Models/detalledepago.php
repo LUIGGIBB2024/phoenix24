@@ -24,7 +24,7 @@ class detalledepago extends Model
 
     public function cuentasporcobrar()
     {
-        return $this->belongsTo('App\cuentasporcobrar','FK_detalledepagoscxc_cuentasporcobrar','cuentasporcobrarID');
+        return $this->belongsTo(cartera::class,'FK_detalledepagoscxc_cuentasporcobrar','cuentasporcobrarID');
     }
 
 }
