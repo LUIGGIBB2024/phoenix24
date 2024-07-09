@@ -159,8 +159,8 @@ class CarteraController extends Controller
                    ->selectRaw('sum(detalledepagoscxc.valor) as abono, 0.00 as saldo')
                    ->join("clientes",function($join)
                     {
-                      $join->on("clientes.nit","=","cuentasporcobrar.nit")
-                           ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
+                      $join->on("clientes.nit","=","cuentasporcobrar.nit");
+                          // ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
                     })
                   ->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID')
                   ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
