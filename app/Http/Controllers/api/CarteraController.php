@@ -154,7 +154,7 @@ class CarteraController extends Controller
 
     public function CarteraResumida(Request $request):JsonResponse
     {
-        $lapso = $request->lapso;
+        $fechacorte = $request->fechacorte;
         $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
                    ->selectRaw('sum(detalledepagoscxc.valor) as abono, 0.00 as saldo')
                    ->join("clientes",function($join)
@@ -163,7 +163,7 @@ class CarteraController extends Controller
                            ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
                     })
                   ->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID')
-                  ->where('cuentasporcobrar.lapso',$lapso)
+                  ->where('cuentasporcobrar.fechafactira','<=',$fechacorte)
                   ->groupBy('clientes.nombrecompleto')
                   ->havingRaw('total <> abono')
                   ->get();
