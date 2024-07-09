@@ -160,7 +160,7 @@ class CarteraController extends Controller
                    ->join("clientes",function($join)
                     {
                       $join->on("clientes.nit","=","cuentasporcobrar.nit");
-                          // ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
+                           ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
                     })
                   ->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcid','=','cuentasporcobrar.cuentasporcobrarid')
                   ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
