@@ -168,6 +168,7 @@ class CarteraController extends Controller
                   ->havingRaw('total <> abono')
                   ->get();
 
+        $totalcartera = 0;
         foreach ($cartera as $dato)
         {
            $dato->abono =  is_null($dato->abono)?"0.00":$dato->abono;
@@ -175,13 +176,15 @@ class CarteraController extends Controller
            $dato->total = (float) $dato->total;
            $dato->abono = (float) $dato->abono;
            $dato->saldo = $saldo;
+           $totalcartera += $saldo;
         }
 
         return response()->json(
             [
-            'status'       => '200',
-            'msg'          => 'Actualización Exitosa Cartera',
-            'total'        => $cartera,
+            'status'        => '200',
+            'msg'           => 'Actualización Exitosa Cartera',
+            'totalcartera'  => $totalcartera,
+            'detalle'       => $cartera,
             ],Response::HTTP_ACCEPTED);
 
     }
