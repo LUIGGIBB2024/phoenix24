@@ -154,7 +154,6 @@ class CarteraController extends Controller
 
     public function CarteraResumida(Request $request):JsonResponse
     {
-
         $fechacorte = $request->fechacorte;
         $pagos      = detalledepago::select('detalledepagoscxc.nit','detalledepagoscxc.sucursal')
                       ->sum('detalledepagoscxc.valor');
