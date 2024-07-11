@@ -158,7 +158,7 @@ class CarteraController extends Controller
         $fechacorte = $request->fechacorte;
         $pagos      = detalledepago::select('nit','sucursal')
                       ->sum('detalledepagoscxc.valor')
-                      ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
+                      //->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
                       ->groupBy('nit');
 
                       return response()->json(
