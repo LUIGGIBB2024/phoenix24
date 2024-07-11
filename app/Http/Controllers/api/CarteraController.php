@@ -157,6 +157,7 @@ class CarteraController extends Controller
         $fechacorte = $request->fechacorte;
         $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
                  ->selectRaw('sum(detalledepagoscxc.valor) as abono, 0.00 as saldo')
+                 ->sum('detalledepagoscxc.valor')
                  ->join("clientes",function($join)
                     {
                       $join->on("clientes.nit","=","cuentasporcobrar.nit")
