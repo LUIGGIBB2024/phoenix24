@@ -156,7 +156,9 @@ class CarteraController extends Controller
     {
         $fechacorte = $request->fechacorte;
 
-        $cartera = cartera::select(DB::raw('sum(valor) as abono'))
+        $cartera = cartera::select(
+            DB::raw('nit, sucursal'),
+            DB::raw('sum(valor) as abono'))
              ->join('detalledepagoscxc', 'cuentasporcobrar.cuentasporcobrarid', '=', 'detalledepagoscxc.facturacxcid')
              ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
              ->get();
