@@ -156,9 +156,9 @@ class CarteraController extends Controller
     {
         $fechacorte = $request->fechacorte;
         $pagos      = detalledepago::selectRaw(['detalledepagoscxc.nit','detalledepagoscxc.sucursal'])
-                      ->sum('detalledepagoscxc.valor')
-                      ->groupBy('nit','sucursal');
-                
+                      ->groupBy('nit','sucursal')
+                      ->sum('detalledepagoscxc.valor');
+
                       //->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
                      // ->groupBy('detalledepagoscxc.nit');
 
