@@ -155,6 +155,12 @@ class CarteraController extends Controller
     public function CarteraResumida(Request $request):JsonResponse
     {
         $fechacorte = $request->fechacorte;
+
+        $cartera = cartera::select(DB::raw('sum(valor) as abono'))
+             ->join('detalledepagoscxc', 'cuentasporcobrar.cuentasporcobrarid', '=', 'detalledepagoscxc.facturacxcid')
+             ->groupBy('users.id')
+             ->get();
+
         $pagos      = detalledepago::selectRaw(['detalledepagoscxc.nit','detalledepagoscxc.sucursal'])
                       ->groupBy('nit','sucursal')
                       ->sum('detalledepagoscxc.valor')
