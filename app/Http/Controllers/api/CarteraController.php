@@ -161,6 +161,13 @@ class CarteraController extends Controller
              ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
              ->get();
 
+        return response()->json(
+              [
+              'status'        => '200',
+              'msg'           => 'Actualización Cartea 2024',
+              'pagos'         => $cartera,
+             ],Response::HTTP_ACCEPTED);
+
         $pagos      = detalledepago::selectRaw(['detalledepagoscxc.nit','detalledepagoscxc.sucursal'])
                       ->groupBy('nit','sucursal')
                       ->sum('detalledepagoscxc.valor')
