@@ -159,7 +159,8 @@ class CarteraController extends Controller
         $cartera = cartera::select(
             DB::raw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal'),
             DB::raw('sum(cuentasporcobrar.valorfactura) as totalfacturas'),
-            DB::raw('sum(detalledepagoscxc.valor) as abonos'))
+            DB::raw('sum(detalledepagoscxc.valor) as abonos'),
+            DB::raw('0.00 saldo'))
             ->join("clientes",function($join)
                     {
                       $join->on("clientes.nit","=","cuentasporcobrar.nit")
@@ -172,11 +173,23 @@ class CarteraController extends Controller
              ->havingRaw('totalfacturas <> abonos')
              ->get();
 
+             $totalcartera = 0;
+             foreach ($cartera as $dato)
+             {
+                $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
+                $saldo  =  (float) $dato->totalfacturas - (float)  $dato->abonos;
+                $dato->total = (float) $dato->totalfacturas;
+                $dato->abono = (float) $dato->abonos;
+                $dato->saldo = $saldo;
+                $totalcartera += $saldo;
+             }
+
         return response()->json(
               [
               'status'        => '200',
               'msg'           => 'Actualización Cartea 2024',
-              'pagos'         => $cartera,
+              'totalcartera'  => $totalcartera,
+              'detalle'       => $cartera,
              ],Response::HTTP_ACCEPTED);
 
         $pagos      = detalledepago::selectRaw(['detalledepagoscxc.nit','detalledepagoscxc.sucursal'])
