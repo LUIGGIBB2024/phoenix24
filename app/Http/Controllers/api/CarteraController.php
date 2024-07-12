@@ -162,6 +162,7 @@ class CarteraController extends Controller
             DB::raw('sum(detalledepagoscxc.valor) as abonos'))
              ->join('detalledepagoscxc', 'cuentasporcobrar.cuentasporcobrarid', '=', 'detalledepagoscxc.facturacxcid')
              ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
+             ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
              ->get();
 
         return response()->json(
