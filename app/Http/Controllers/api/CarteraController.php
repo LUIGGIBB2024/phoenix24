@@ -158,7 +158,7 @@ class CarteraController extends Controller
 
         $cartera = cartera::select(DB::raw('sum(valor) as abono'))
              ->join('detalledepagoscxc', 'cuentasporcobrar.cuentasporcobrarid', '=', 'detalledepagoscxc.facturacxcid')
-             ->groupBy('users.id')
+             ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
              ->get();
 
         $pagos      = detalledepago::selectRaw(['detalledepagoscxc.nit','detalledepagoscxc.sucursal'])
