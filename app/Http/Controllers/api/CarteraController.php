@@ -168,6 +168,7 @@ class CarteraController extends Controller
              ->join('detalledepagoscxc', 'cuentasporcobrar.cuentasporcobrarid', '=', 'detalledepagoscxc.facturacxcid')
              ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
              ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
+             ->orderBy('clientes.nombrecompleto')
              ->get();
 
         return response()->json(
