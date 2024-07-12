@@ -178,8 +178,8 @@ class CarteraController extends Controller
              {
                 $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
                 $saldo  =  (float) $dato->totalfacturas - (float)  $dato->abonos;
-                $dato->total = (float) $dato->totalfacturas;
-                $dato->abono = (float) $dato->abonos;
+                $dato->totalfacturas = (float) $dato->totalfacturas;
+                $dato->abonos = (float) $dato->abonos;
                 $dato->saldo = $saldo;
                 $totalcartera += $saldo;
              }
