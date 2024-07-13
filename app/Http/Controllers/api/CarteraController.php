@@ -156,6 +156,19 @@ class CarteraController extends Controller
     {
         $fechacorte = $request->fechacorte;
 
+        $pagos = detalledepago::select(
+            DB::raw('detalledepagoscxc.nit, detalledepagoscxc.sucursal'),
+            DB::raw('sum(detalledepagoscxc.valor as abonos'))
+            ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal'])
+            ->get();
+
+            return response()->json(
+                [
+                'status'        => '200',
+                'msg'           => 'Actualización Pagos 2024',
+                'totalcartera'  => $pagos,
+               ],Response::HTTP_ACCEPTED);
+
         $cartera = cartera::select(
             DB::raw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal'),
             DB::raw('sum(cuentasporcobrar.valorfactura) as totalfacturas'),
