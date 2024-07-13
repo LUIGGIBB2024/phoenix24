@@ -154,10 +154,11 @@ class CarteraController extends Controller
 
     public function CarteraResumida(Request $request):JsonResponse
     {
+
         $fechacorte = $request->fechacorte;
 
         $pagos = detalledepago::selectRaw('detalledepagoscxc.nit, detalledepagoscxc.sucursal')
-                ->selectRaw('sum(detalledepagoscxc.valor as abonos')
+                ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
                 ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal'])
                 ->get();
 
@@ -167,6 +168,7 @@ class CarteraController extends Controller
                 'msg'           => 'Actualización Pagos 2024',
                 'totalcartera'  => $pagos,
                ],Response::HTTP_ACCEPTED);
+
 
         $cartera = cartera::select(
             DB::raw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal'),
