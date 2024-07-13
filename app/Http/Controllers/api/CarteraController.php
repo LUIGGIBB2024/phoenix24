@@ -159,6 +159,7 @@ class CarteraController extends Controller
         $cartera = cartera::select(
             DB::raw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal'),
             DB::raw('sum(cuentasporcobrar.valorfactura) as totalfacturas'),
+            DB::raw('sum(cuentasporcobrar->detalledepagoscxc.valor) as abonos'),
             DB::raw('0.00 saldo'))
             ->join("clientes",function($join)
                     {
