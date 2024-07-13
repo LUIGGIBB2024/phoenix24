@@ -156,11 +156,10 @@ class CarteraController extends Controller
     {
         $fechacorte = $request->fechacorte;
 
-        $pagos = detalledepago::select(
-            DB::raw('detalledepagoscxc.nit, detalledepagoscxc.sucursal'),
-            DB::raw('sum(detalledepagoscxc.valor as abonos'))
-            ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal'])
-            ->get();
+        $pagos = detalledepago::selectRaw('detalledepagoscxc.nit, detalledepagoscxc.sucursal')
+                ->selectRaw('sum(detalledepagoscxc.valor as abonos')
+                ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal'])
+                ->get();
 
             return response()->json(
                 [
