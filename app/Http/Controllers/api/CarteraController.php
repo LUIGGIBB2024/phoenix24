@@ -159,36 +159,14 @@ class CarteraController extends Controller
         $cartera = cartera::select(
             DB::raw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal'),
             DB::raw('sum(cuentasporcobrar.valorfactura) as totalfacturas'),
-            DB::raw('sum(cuentasporcobrar->detalledepagoscxc.valor) as abonos'),
+            DB::raw('select sum(dpg.valor) from detalledepagoscxc as dpg group by dpg.nit, dpg.nit
+                            where dpg.facturacxcid = cuentasporcobrar.cuentasporcobrarid as abonos'),
             DB::raw('0.00 saldo'))
             ->join("clientes",function($join)
                     {
                       $join->on("clientes.nit","=","cuentasporcobrar.nit")
                            ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
                     })
-             ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
-             ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
-             ->orderBy('clientes.nombrecompleto')
-             ->get();
-
-        return response()->json(
-                [
-                'status'        => '200',
-                'msg'           => 'Actualización Cartea 2024',
-                'detalle'       => $cartera,
-               ],Response::HTTP_ACCEPTED);
-
-        $cartera = cartera::select(
-            DB::raw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal'),
-            DB::raw('sum(cuentasporcobrar.valorfactura) as totalfacturas'),
-            DB::raw('sum(detalledepagoscxc.valor) as abonos'),
-            DB::raw('0.00 saldo'))
-            ->join("clientes",function($join)
-                    {
-                      $join->on("clientes.nit","=","cuentasporcobrar.nit")
-                           ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
-                    })
-             ->leftjoin('detalledepagoscxc', 'detalledepagoscxc.facturacxcid', '=', 'cuentasporcobrar.cuentasporcobrarid')
              ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
              ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
              ->orderBy('clientes.nombrecompleto')
