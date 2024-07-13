@@ -162,21 +162,13 @@ class CarteraController extends Controller
                 ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal'])
                 ->get();
 
-            return response()->json(
-                [
-                'status'        => '200',
-                'msg'           => 'Actualización Pagos 2024',
-                'totalcartera'  => $pagos,
-               ],Response::HTTP_ACCEPTED);
-
-
-        $cartera = cartera::select(
-            DB::raw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal'),
-            DB::raw('sum(cuentasporcobrar.valorfactura) as totalfacturas'),
-            DB::raw('select sum(dpg.valor) from detalledepagoscxc as dpg group by dpg.nit, dpg.nit
-                            where dpg.facturacxcid = cuentasporcobrar.cuentasporcobrarid as abonos'),
-            DB::raw('0.00 saldo'))
-            ->join("clientes",function($join)
+        $cartera = cartera::selectRaw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal')
+                ->selectRaw('sum(cuentasporcobrar.valor) as totalfacturas')
+                ->joinSub($pagos,'detalledepagoscxc',function($join)
+                  {
+                      $join->on('detalledepagoscxc.facturacxcid','=','cuentasporcobrar.cuentasporcobrarid');
+                  })
+                ->leftjoin("clientes",function($join)
                     {
                       $join->on("clientes.nit","=","cuentasporcobrar.nit")
                            ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
@@ -184,25 +176,26 @@ class CarteraController extends Controller
              ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
              ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
              ->orderBy('clientes.nombrecompleto')
-             ->havingRaw('totalfacturas <> abonos')
+             //->havingRaw('totalfacturas <> abonos')
              ->get();
 
+
              $totalcartera = 0;
-             foreach ($cartera as $dato)
-             {
-                $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
-                $saldo  =  (float) $dato->totalfacturas - (float)  $dato->abonos;
-                $dato->totalfacturas = (float) $dato->totalfacturas;
-                $dato->abonos = (float) $dato->abonos;
-                $dato->saldo = $saldo;
-                $totalcartera += $saldo;
-             }
+             //foreach ($cartera as $dato)
+             //{
+             //   $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
+             //   $saldo  =  (float) $dato->totalfacturas - (float)  $dato->abonos;
+             //   $dato->totalfacturas = (float) $dato->totalfacturas;
+             //   $dato->abonos = (float) $dato->abonos;
+             //   $dato->saldo = $saldo;
+             //   $totalcartera += $saldo;
+             //}
 
         return response()->json(
               [
               'status'        => '200',
               'msg'           => 'Actualización Cartea 2024',
-              'totalcartera'  => $totalcartera,
+              //'totalcartera'  => $totalcartera,
               'detalle'       => $cartera,
              ],Response::HTTP_ACCEPTED);
 
