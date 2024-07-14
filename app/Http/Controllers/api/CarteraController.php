@@ -161,15 +161,7 @@ class CarteraController extends Controller
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
                 ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal']);
 
-
-        //   return response()->json(
-        //           [
-        //           'status'        => '200',
-        //           'msg'           => 'Actualización Cartea 2024',
-        //           'pagos'       => $pagos,
-        //           ],Response::HTTP_ACCEPTED);
-
-          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as totalfacturas, dpagos.abonos")
+          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos")
             ->selectRaw("0.00 as Saldo")
             ->join("clientes",function($join)
                 {
@@ -183,102 +175,27 @@ class CarteraController extends Controller
                 })
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->groupBy('clientes.nombrecompleto')
-           ->havingRaw('totalfacturas <> abonos')
+           ->havingRaw('total <> abonos')
            ->get();
+
+           $totalcartera = 0;
+           foreach ($cartera as $dato)
+           {
+              $dato->abono =  is_null($dato->abonos)?"0.00":$dato->abonos;
+              $saldo         = (float) $dato->total - (float)  $dato->abonos;
+              $dato->total   = (float) $dato->total;
+              $dato->abonos  = (float) $dato->abonos;
+              $dato->saldo   = $saldo;
+              $totalcartera  += $saldo;
+           }
 
          return response()->json(
                   [
                   'status'        => '200',
                   'msg'           => 'Actualización Cartea 2024',
-                  'pagos'       => $cartera,
+                  'totalcartera'  => $totalcartera,
+                  'detalle'       => $cartera,
                   ],Response::HTTP_ACCEPTED);
-
-        $cartera = DB::table('cuentasporcobrar')->select('cuentasporcobrar.nit, cuentasporcobrar.sucursal')
-                ->select('cuentasporcobrar.valor as totalfacturas')
-                ->joinSub($pagos,'dpagos',function($join)
-                  {
-                      $join->on('cuentasporcobrar.nit','=','dpagos.nit')
-                           ->on('cuentasporcobrar.sucursal','=','dpagos.sucursal');
-                  })
-                // ->leftjoin("clientes",function($join)
-                //     {
-                //       $join->on("clientes.nit","=","cuentasporcobrar.nit")
-                //            ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
-                //     })
-                ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
-                ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
-                //->orderBy('clientes.nombrecompleto')
-                //->havingRaw('totalfacturas <> abonos')
-                ->get();
-
-
-             $totalcartera = 0;
-             //foreach ($cartera as $dato)
-             //{
-             //   $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
-             //   $saldo  =  (float) $dato->totalfacturas - (float)  $dato->abonos;
-             //   $dato->totalfacturas = (float) $dato->totalfacturas;
-             //   $dato->abonos = (float) $dato->abonos;
-             //   $dato->saldo = $saldo;
-             //   $totalcartera += $saldo;
-             //}
-
-        return response()->json(
-              [
-              'status'        => '200',
-              'msg'           => 'Actualización Cartea 2024',
-              //'totalcartera'  => $totalcartera,
-              'detalle'       => $cartera,
-             ],Response::HTTP_ACCEPTED);
-
-        $pagos      = detalledepago::selectRaw(['detalledepagoscxc.nit','detalledepagoscxc.sucursal'])
-                      ->groupBy('nit','sucursal')
-                      ->sum('detalledepagoscxc.valor')
-                      ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte);
-
-
-                      //->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
-                     // ->groupBy('detalledepagoscxc.nit');
-
-                      return response()->json(
-                        [
-                        'status'        => '200',
-                        'msg'           => 'Actualización Exitosa Pagos 222',
-                        'pagos'         => $pagos,
-                       ],Response::HTTP_ACCEPTED);
-
-
-        $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
-                 ->selectRaw('sum(detalledepagoscxc.valor) as abono, 0.00 as saldo')
-                 ->join("clientes",function($join)
-                    {
-                      $join->on("clientes.nit","=","cuentasporcobrar.nit")
-                           ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
-                    })
-                  ->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID')
-                  ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
-                  ->groupBy('clientes.nombrecompleto')
-                  ->havingRaw('total <> abono')
-                  ->get();
-
-        $totalcartera = 0;
-        foreach ($cartera as $dato)
-        {
-           $dato->abono =  is_null($dato->abono)?"0.00":$dato->abono;
-           $saldo  =  (float) $dato->total - (float)  $dato->abono;
-           $dato->total = (float) $dato->total;
-           $dato->abono = (float) $dato->abono;
-           $dato->saldo = $saldo;
-           $totalcartera += $saldo;
-        }
-
-        return response()->json(
-            [
-            'status'        => '200',
-            'msg'           => 'Actualización Exitosa Cartera',
-            'totalcartera'  => $totalcartera,
-            'detalle'       => $cartera,
-            ],Response::HTTP_ACCEPTED);
 
     }
 
