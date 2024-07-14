@@ -174,8 +174,8 @@ class CarteraController extends Controller
                 ->select('cuentasporcobrar.valor as totalfacturas')
                 ->joinSub($pagos,'dpagos',function($join)
                   {
-                      $join->on('dpagos.nit','=','cuentasporcobrar.nit')
-                           ->on('dpagos.sucursal','=','cuentasporcobrar.sucursal');
+                      $join->on('cuentasporcobrar.nit','=','dpagos.nit')
+                           ->on('cuentasporcobrar.sucursal','=','dpagos.sucursal');
                   })
                 // ->leftjoin("clientes",function($join)
                 //     {
