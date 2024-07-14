@@ -170,7 +170,7 @@ class CarteraController extends Controller
           //         ],Response::HTTP_ACCEPTED);
 
 
-        $cartera = cartera::select('cuentasporcobrar.nit, cuentasporcobrar.sucursal')
+        $cartera = DB::table('cuentasporcobrar')->select('cuentasporcobrar.nit, cuentasporcobrar.sucursal')
                 ->select('sum(cuentasporcobrar.valor) as totalfacturas')
                 ->joinSub($pagos,'dpagos',function($join)
                   {
