@@ -214,7 +214,7 @@ class CarteraController extends Controller
            ->selectRaw("cuentasporcobrar.numerodefactura,cuentasporcobrar.prefijo,cuentasporcobrar.tipodedocumento")
            ->selectRaw("DATEDIFF($fechacorte,cuentasporcobrar.fechadevencimiento) as Dias")
            ->selectRaw('cuentasporcobrar.cuentasporcobrarid')
-           ->selectRaw('cuentasporcobrar.valorfactura as total, pagos.abonos')
+           ->selectRaw('cuentasporcobrar.valorfactura as total, pagos.abonos as abonos')
            ->selectRaw("0.00 as saldo")
            ->join("clientes",function($join)
                 {
