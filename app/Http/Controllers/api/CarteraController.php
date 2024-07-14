@@ -162,12 +162,12 @@ class CarteraController extends Controller
                 ->groupBy(['detalledepagoscxc.facturacxcID'])
                 ->get();
 
-          // return response()->json(
-          //         [
-          //         'status'        => '200',
-          //         'msg'           => 'Actualización Cartea 2024',
-          //         'pagos'       => $pagos,
-          //         ],Response::HTTP_ACCEPTED);
+          return response()->json(
+                  [
+                  'status'        => '200',
+                  'msg'           => 'Actualización Cartea 2024',
+                  'pagos'       => $pagos,
+                  ],Response::HTTP_ACCEPTED);
 
 
         $cartera = DB::table('cuentasporcobrar')->select('cuentasporcobrar.nit, cuentasporcobrar.sucursal')
