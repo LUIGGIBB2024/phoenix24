@@ -200,6 +200,7 @@ class CarteraController extends Controller
 
     }
 
+
     public function CarteraDetallada(Request $request):JsonResponse
     {
 
@@ -221,14 +222,14 @@ class CarteraController extends Controller
                         $join->on("clientes.nit","=","cuentasporcobrar.nit")
                               ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
                       })
-                  ->leftjoinSub($pagos,'pagos',function($leftjoin)
+                  ->leftjoinSub($pagos,'pagos',function($join)
                       {
-                          $leftjoin->on('cuentasporcobrar.cuentasporcobrarid','=','pagos.facturacxcid');
+                          $join->on('cuentasporcobrar.cuentasporcobrarid','=','pagos.facturacxcid');
                       })
                 ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
                 ->groupBy('cuentasporcobrar.cuentasporcobrarid')
                 ->orderBy('clientes.nombrecompleto')
-                //->havingRaw('total <> abonos')
+                ->havingRaw('total <> abonos')
                 ->get();
 
           return response()->json(
