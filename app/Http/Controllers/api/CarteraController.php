@@ -162,7 +162,7 @@ class CarteraController extends Controller
                 ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal']);
 
           $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos")
-            ->selectRaw("0.00 as Saldo")
+            ->selectRaw("0.00 as saldo")
             ->join("clientes",function($join)
                 {
                   $join->on("clientes.nit","=","cuentasporcobrar.nit")
