@@ -214,7 +214,7 @@ class CarteraController extends Controller
 
           $cartera = cartera::selectRaw("clientes.nombrecompleto, cuentasporcobrar.fechafactura, cuentasporcobrar.fechadevencimiento")
            ->selectRaw("cuentasporcobrar.numerodefactura,cuentasporcobrar.prefijo,cuentasporcobrar.tipodedocumento")
-           ->selectRaw("timestampdiff(DAY," . "'cuentasporcobrar.fechadevencimiento'" .",'$fechacorte') Dias")
+           ->selectRaw("timestampdiff(DAY," . $fechacorte.",".$fechacorte.") Dias")
            ->selectRaw('cuentasporcobrar.valorfactura as total, dpagos.abonos')
            ->selectRaw("0.00 as saldo")
            ->join("clientes",function($join)
