@@ -228,8 +228,16 @@ class CarteraController extends Controller
                 ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
                 ->groupBy('cuentasporcobrar.cuentasporcobrarid')
                 ->orderBy('clientes.nombrecompleto')
-                ->havingRaw('total <> abonos')
+                //->havingRaw('total <> abonos')
                 ->get();
+
+          return response()->json(
+                  [
+                  'status'        => '200',
+                  'msg'           => 'Consulta de Cartera Existosa',
+                  'totalcartera'  => 0.00,
+                  'detalle'       => $cartera,
+                  ],Response::HTTP_ACCEPTED);
 
            $totalcartera = 0;
            foreach ($cartera as $dato)
