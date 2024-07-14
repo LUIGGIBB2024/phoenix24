@@ -157,7 +157,7 @@ class CarteraController extends Controller
 
         $fechacorte = $request->fechacorte;
 
-        $pagos = detalledepago::selectRaw('detalledepagoscxc.nit, detalledepagoscxc.sucursal,detalledepagoscxc.facturacxcid')
+        $pagos = detalledepago::selectRaw('detalledepagoscxc.nit, detalledepagoscxc.sucursal,detalledepagoscxc.facturacxcID')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
                 ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal'])
                 ->get();
@@ -174,7 +174,7 @@ class CarteraController extends Controller
                 ->select('sum(cuentasporcobrar.valor) as totalfacturas')
                 ->joinSub($pagos,'pagos',function($join)
                   {
-                      $join->on('pagos.facturacxcid','=','cuentasporcobrar.cuentasporcobrarid');
+                      $join->on('pagos.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID');
                   })
                 ->leftjoin("clientes",function($join)
                     {
