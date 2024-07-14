@@ -199,4 +199,59 @@ class CarteraController extends Controller
                   ],Response::HTTP_ACCEPTED);
 
     }
+
+    public function CarteraDetallada(Request $request):JsonResponse
+    {
+
+        $fechacorte = $request->fechacorte;
+
+        $pagos = detalledepago::select('nit', 'sucursal','numerodefactura','prefijo','tipodedocumento')
+                ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
+                ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
+                ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal','numerodefactura','prefijo','tipodedocumento']);
+
+                return response()->json(
+                    [
+                    'status'        => '200',
+                    'msg'           => 'Consulta de Cartera Existosa',
+                    'totalcartera'  => $pagos,
+                    ],Response::HTTP_ACCEPTED);
+
+          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos")
+            ->selectRaw("0.00 as saldo")
+            ->join("clientes",function($join)
+                {
+                  $join->on("clientes.nit","=","cuentasporcobrar.nit")
+                        ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
+                })
+             ->joinSub($pagos,'dpagos',function($join)
+                {
+                    $join->on('cuentasporcobrar.nit','=','dpagos.nit')
+                          ->on('cuentasporcobrar.sucursal','=','dpagos.sucursal');
+                })
+           ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
+           ->groupBy('clientes.nombrecompleto')
+           ->havingRaw('total <> abonos')
+           ->get();
+
+           $totalcartera = 0;
+           foreach ($cartera as $dato)
+           {
+              $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
+              $saldo         = (float) $dato->total - (float)  $dato->abonos;
+              $dato->total   = (float) $dato->total;
+              $dato->abonos  = (float) $dato->abonos;
+              $dato->saldo   = $saldo;
+              $totalcartera  += $saldo;
+           }
+
+         return response()->json(
+                  [
+                  'status'        => '200',
+                  'msg'           => 'Consulta de Cartera Existosa',
+                  'totalcartera'  => $totalcartera,
+                  'detalle'       => $cartera,
+                  ],Response::HTTP_ACCEPTED);
+
+    }
 }
