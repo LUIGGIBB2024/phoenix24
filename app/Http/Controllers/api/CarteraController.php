@@ -169,7 +169,7 @@ class CarteraController extends Controller
         //           'pagos'       => $pagos,
         //           ],Response::HTTP_ACCEPTED);
 
-          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
+          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos")
             ->join("clientes",function($join)
                 {
                   $join->on("clientes.nit","=","cuentasporcobrar.nit")
