@@ -52,6 +52,7 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     Route::post('process-cxc', [CarteraController::class,'ProcessCxc']);
     Route::post('process-pagoscxc', [CarteraController::class,'ProcessPagosCxc']);
     Route::get('cartera-resumida', [CarteraController::class,'CarteraResumida']);
+    Route::get('cartera-detallada', [CarteraController::class,'CarteraDetallada']);
 
     //Route::get('consult-documents', [AutorizacionesController::class,'ConsultDocuments']);
 
