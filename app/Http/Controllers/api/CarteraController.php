@@ -232,6 +232,7 @@ class CarteraController extends Controller
                 ->havingRaw('(total <> abonos || total <> is_null(abonos))')
                 ->get();
 
+                
            $totalcartera = 0;
            foreach ($cartera as $dato)
            {
