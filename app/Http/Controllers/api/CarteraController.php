@@ -211,25 +211,25 @@ class CarteraController extends Controller
                 ->groupBy(['facturacxcid']);
 
           $cartera = cartera::selectRaw("clientes.nombrecompleto, cuentasporcobrar.fechafactura, cuentasporcobrar.fechadevencimiento")
-           ->selectRaw("cuentasporcobrar.numerodefactura,cuentasporcobrar.prefijo,cuentasporcobrar.tipodedocumento")
-           ->selectRaw("DATEDIFF($fechacorte,cuentasporcobrar.fechadevencimiento) as Dias")
-           ->selectRaw('cuentasporcobrar.cuentasporcobrarid')
-           ->selectRaw('cuentasporcobrar.valorfactura as total, pagos.abonos as abonos')
-           ->selectRaw("0.00 as saldo")
-           ->join("clientes",function($join)
-                {
-                  $join->on("clientes.nit","=","cuentasporcobrar.nit")
-                        ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
-                })
-             ->leftjoinSub($pagos,'pagos',function($join)
-                {
-                    $join->on('cuentasporcobrar.cuentasporcobrarid','=','pagos.facturacxcid');
-                })
-           ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
-           ->groupBy('cuentasporcobrar.cuentasporcobrarid')
-           ->orderBy('clientes.nombrecompleto')
-           ->havingRaw('total <> abonos')
-           ->get();
+                ->selectRaw("cuentasporcobrar.numerodefactura,cuentasporcobrar.prefijo,cuentasporcobrar.tipodedocumento")
+                ->selectRaw("DATEDIFF($fechacorte,cuentasporcobrar.fechadevencimiento) as Dias")
+                ->selectRaw('cuentasporcobrar.cuentasporcobrarid')
+                ->selectRaw('cuentasporcobrar.valorfactura as total, pagos.abonos')
+                ->selectRaw("0.00 as saldo")
+                ->join("clientes",function($join)
+                      {
+                        $join->on("clientes.nit","=","cuentasporcobrar.nit")
+                              ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
+                      })
+                  ->leftjoinSub($pagos,'pagos',function($leftjoin)
+                      {
+                          $leftjoin->on('cuentasporcobrar.cuentasporcobrarid','=','pagos.facturacxcid');
+                      })
+                ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
+                ->groupBy('cuentasporcobrar.cuentasporcobrarid')
+                ->orderBy('clientes.nombrecompleto')
+                ->havingRaw('total <> abonos')
+                ->get();
 
            $totalcartera = 0;
            foreach ($cartera as $dato)
