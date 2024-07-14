@@ -210,11 +210,9 @@ class CarteraController extends Controller
                 ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
                 ->groupBy(['facturacxcid']);
 
-
-
           $cartera = cartera::selectRaw("clientes.nombrecompleto, cuentasporcobrar.fechafactura, cuentasporcobrar.fechadevencimiento")
            ->selectRaw("cuentasporcobrar.numerodefactura,cuentasporcobrar.prefijo,cuentasporcobrar.tipodedocumento")
-           ->selectRaw("DATEDIFF(".$fechacorte.",cuentasporcobrar.fechadevencimiento) as Dias")
+           ->selectRaw("DATEDIFF($fechacorte,cuentasporcobrar.fechadevencimiento) as Dias")
            ->selectRaw('cuentasporcobrar.valorfactura as total, dpagos.abonos')
            ->selectRaw("0.00 as saldo")
            ->join("clientes",function($join)
@@ -227,7 +225,8 @@ class CarteraController extends Controller
                     $join->on('cuentasporcobrar.cuentasporcobrarid','=','dpagos.facturacxcid');
                 })
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
-           ->groupBy('clientes.nombrecompleto')
+           ->groupBy('cuentasporcobrar.cuentasporcobrarid')
+           ->orderBy('clientes.nombrecompleto')
            ->havingRaw('total <> abonos')
            ->get();
 
