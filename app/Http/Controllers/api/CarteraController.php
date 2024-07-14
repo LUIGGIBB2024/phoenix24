@@ -170,20 +170,20 @@ class CarteraController extends Controller
           //         ],Response::HTTP_ACCEPTED);
 
 
-        $cartera = cartera::select('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal')
+        $cartera = cartera::select('cuentasporcobrar.nit, cuentasporcobrar.sucursal')
                 ->select('sum(cuentasporcobrar.valor) as totalfacturas')
                 ->joinSub($pagos,'dpagos',function($join)
                   {
                       $join->on('dpagos.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID');
                   })
-                ->leftjoin("clientes",function($join)
-                    {
-                      $join->on("clientes.nit","=","cuentasporcobrar.nit")
-                           ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
-                    })
+                // ->leftjoin("clientes",function($join)
+                //     {
+                //       $join->on("clientes.nit","=","cuentasporcobrar.nit")
+                //            ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
+                //     })
                 ->groupBy(['cuentasporcobrar.nit','cuentasporcobrar.sucursal'])
                 ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
-                ->orderBy('clientes.nombrecompleto')
+                //->orderBy('clientes.nombrecompleto')
                 //->havingRaw('totalfacturas <> abonos')
                 ->get();
 
