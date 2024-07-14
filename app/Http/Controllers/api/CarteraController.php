@@ -229,10 +229,11 @@ class CarteraController extends Controller
                 ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
                 ->groupBy('cuentasporcobrar.cuentasporcobrarid')
                 ->orderBy('clientes.nombrecompleto')
-                ->havingRaw('(total <> abonos || total <> is_null(abonos))')
+                ->havingRaw('total <> abonos')
+                ->havingRaw('abonos = Null')
                 ->get();
 
-                
+
            $totalcartera = 0;
            foreach ($cartera as $dato)
            {
