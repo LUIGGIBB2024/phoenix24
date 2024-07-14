@@ -38,6 +38,7 @@ class AutorizacionesController extends Controller
             ->where('documentosautorizados.estado01','=', 1)
             ->orderBy('documentosautorizados.fechadereporte','desc')
             ->get();
+            
 
             return response()->json(
                 [
