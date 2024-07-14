@@ -192,48 +192,10 @@ class CarteraController extends Controller
          return response()->json(
                   [
                   'status'        => '200',
-                  'msg'           => 'Actualización Cartea 2024',
+                  'msg'           => 'Consulta de Cartera Existosa',
                   'totalcartera'  => $totalcartera,
                   'detalle'       => $cartera,
                   ],Response::HTTP_ACCEPTED);
 
     }
-
-    public function CarteraResumida1(Request $request):JsonResponse
-    {
-        $fechacorte = $request->fechacorte;
-        $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
-                   ->selectRaw('sum(detalledepagoscxc.valor) as abono, 0.00 as saldo')
-                   ->join("clientes",function($join)
-                    {
-                      $join->on("clientes.nit","=","cuentasporcobrar.nit")
-                           ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
-                    })
-                  ->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcid','=','cuentasporcobrar.cuentasporcobrarid')
-                  ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
-                  ->groupBy('clientes.nombrecompleto')
-                  ->havingRaw('total <> abono')
-                  ->get();
-
-        $totalcartera = 0;
-        foreach ($cartera as $dato)
-        {
-           $dato->abono =  is_null($dato->abono)?"0.00":$dato->abono;
-           $saldo  =  (float) $dato->total - (float)  $dato->abono;
-           $dato->total = (float) $dato->total;
-           $dato->abono = (float) $dato->abono;
-           $dato->saldo = $saldo;
-           $totalcartera += $saldo;
-        }
-
-        return response()->json(
-            [
-            'status'        => '200',
-            'msg'           => 'Actualización Exitosa Cartera',
-            'totalcartera'  => $totalcartera,
-            'detalle'       => $cartera,
-            ],Response::HTTP_ACCEPTED);
-
-    }
-
 }
