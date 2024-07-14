@@ -169,6 +169,29 @@ class CarteraController extends Controller
           //         'pagos'       => $pagos,
           //         ],Response::HTTP_ACCEPTED);
 
+          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total")
+            ->join("clientes",function($join)
+                {
+                  $join->on("clientes.nit","=","cuentasporcobrar.nit")
+                        ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
+                })
+             ->joinSub($pagos,'dpagos',function($join)
+                {
+                    $join->on('cuentasporcobrar.nit','=','dpagos.nit')
+                          ->on('cuentasporcobrar.sucursal','=','dpagos.sucursal');
+                })
+           //->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID')
+           ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
+           ->groupBy('clientes.nombrecompleto')
+           ->havingRaw('total <> abono')
+           ->get();
+
+         return response()->json(
+                  [
+                  'status'        => '200',
+                  'msg'           => 'Actualización Cartea 2024',
+                  'pagos'       => $pagos,
+                  ],Response::HTTP_ACCEPTED);
 
         $cartera = DB::table('cuentasporcobrar')->select('cuentasporcobrar.nit, cuentasporcobrar.sucursal')
                 ->select('cuentasporcobrar.valor as totalfacturas')
