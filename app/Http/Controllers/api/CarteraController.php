@@ -159,6 +159,7 @@ class CarteraController extends Controller
 
         $pagos = detalledepago::select('nit', 'sucursal')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
+                ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
                 ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal']);
 
           $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos")
