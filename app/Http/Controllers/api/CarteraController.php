@@ -169,9 +169,9 @@ class CarteraController extends Controller
           //         'pagos'       => $pagos,
           //         ],Response::HTTP_ACCEPTED);
 
-          
-        $cartera = cartera::selectRaw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal')
-                ->selectRaw('sum(cuentasporcobrar.valor) as totalfacturas')
+
+        $cartera = cartera::select('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal')
+                ->select('sum(cuentasporcobrar.valor) as totalfacturas')
                 ->joinSub($pagos,'pagos',function($join)
                   {
                       $join->on('pagos.facturacxcid','=','cuentasporcobrar.cuentasporcobrarid');
