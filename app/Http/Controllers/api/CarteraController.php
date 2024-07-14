@@ -166,7 +166,7 @@ class CarteraController extends Controller
                   [
                   'status'        => '200',
                   'msg'           => 'Actualización Cartea 2024',
-                  'pagos'       => $totalcartera,
+                  'pagos'       => $pagos,
                   ],Response::HTTP_ACCEPTED);
 
         $cartera = cartera::selectRaw('clientes.nombrecompleto, cuentasporcobrar.nit, cuentasporcobrar.sucursal')
