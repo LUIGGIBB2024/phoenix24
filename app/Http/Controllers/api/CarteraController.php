@@ -172,9 +172,9 @@ class CarteraController extends Controller
 
         $cartera = DB::table('cuentasporcobrar')->select('cuentasporcobrar.nit, cuentasporcobrar.sucursal')
                 ->select('cuentasporcobrar.valor as totalfacturas')
-                ->joinSub($pagos,'dpagos',function($join)
+                ->joinSub($pagos,'dpagos',function($join1)
                   {
-                      $join->on('dpagos.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID');
+                      $join1->on('dpagos.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID');
                   })
                 // ->leftjoin("clientes",function($join)
                 //     {
