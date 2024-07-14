@@ -183,7 +183,7 @@ class CarteraController extends Controller
            //->leftjoin('detalledepagoscxc','detalledepagoscxc.facturacxcID','=','cuentasporcobrar.cuentasporcobrarID')
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->groupBy('clientes.nombrecompleto')
-           ->havingRaw('total <> abono')
+           //->havingRaw('total <> abono')
            ->get();
 
          return response()->json(
