@@ -190,7 +190,7 @@ class CarteraController extends Controller
                   [
                   'status'        => '200',
                   'msg'           => 'Actualización Cartea 2024',
-                  'pagos'       => $pagos,
+                  'pagos'       => $cartera,
                   ],Response::HTTP_ACCEPTED);
 
         $cartera = DB::table('cuentasporcobrar')->select('cuentasporcobrar.nit, cuentasporcobrar.sucursal')
