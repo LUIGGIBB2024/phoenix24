@@ -205,10 +205,10 @@ class CarteraController extends Controller
 
         $fechacorte = $request->fechacorte;
 
-        $pagos = detalledepago::select('nit', 'sucursal','numerodefactura','prefijo','tipodocumento')
+        $pagos = detalledepago::select('nit', 'sucursal','numerodefactura','prefijo','tipodocumento','facturacxcid')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
                 ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
-                ->groupBy(['nit', 'sucursal','numerodefactura','prefijo','tipodocumento'])
+                ->groupBy(['facturacxcid'])
                 ->get();
 
                 return response()->json(
