@@ -157,7 +157,7 @@ class CarteraController extends Controller
 
         $fechacorte = $request->fechacorte;
 
-        $pagos = DB::table('detalledepagoscxc')->select('nit', 'sucursal')
+        $pagos = detalledepago::select('nit', 'sucursal')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
                 ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal']);
 
@@ -169,7 +169,7 @@ class CarteraController extends Controller
         //           'pagos'       => $pagos,
         //           ],Response::HTTP_ACCEPTED);
 
-          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as totalgacturas, dpagos.abonos")
+          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as totalfacturas, dpagos.abonos")
             ->selectRaw("0.00 as Saldo")
             ->join("clientes",function($join)
                 {
@@ -183,7 +183,7 @@ class CarteraController extends Controller
                 })
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->groupBy('clientes.nombrecompleto')
-           ->havingRaw('total <> abono')
+           ->havingRaw('totalfacturas <> abono')
            ->get();
 
          return response()->json(
