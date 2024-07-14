@@ -208,27 +208,23 @@ class CarteraController extends Controller
         $pagos = detalledepago::select('nit', 'sucursal','numerodefactura','prefijo','tipodocumento','facturacxcid')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
                 ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
-                ->groupBy(['facturacxcid'])
-                ->get();
+                ->groupBy(['facturacxcid']);
 
-                return response()->json(
-                    [
-                    'status'        => '200',
-                    'msg'           => 'Consulta de Cartera Existosa',
-                    'totalcartera'  => $pagos,
-                    ],Response::HTTP_ACCEPTED);
 
-          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos")
-            ->selectRaw("0.00 as saldo")
-            ->join("clientes",function($join)
+
+          $cartera = cartera::selectRaw("clientes.nombrecompleto, cuentasporcobrar.fechafactura, cuentasporcobrar.fechadevencimiento,")
+           ->selectRaw("cuentasporcobrar.numerodefactura,cuentasporcobrar.prefijo,cuentasporcobrar.tipodedocumento")
+           ->selectRaw("cdate_diff(cuentasporcobrar.fechadevencimiento, cuentasporcobrar.fechafactura) dias")
+           ->selectRaw('cuentasporcobrar.valorfactura as total, dpagos.abonos')
+           ->selectRaw("0.00 as saldo")
+           ->join("clientes",function($join)
                 {
                   $join->on("clientes.nit","=","cuentasporcobrar.nit")
                         ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
                 })
              ->joinSub($pagos,'dpagos',function($join)
                 {
-                    $join->on('cuentasporcobrar.nit','=','dpagos.nit')
-                          ->on('cuentasporcobrar.sucursal','=','dpagos.sucursal');
+                    $join->on('cuentasporcobrar.cuentasporcobrarid','=','dpagos.facturacxcid');
                 })
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->groupBy('clientes.nombrecompleto')
