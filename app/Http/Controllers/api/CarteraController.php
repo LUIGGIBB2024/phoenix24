@@ -159,7 +159,7 @@ class CarteraController extends Controller
 
         $pagos = detalledepago::selectRaw('detalledepagoscxc.nit, detalledepagoscxc.sucursal,detalledepagoscxc.facturacxcID')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
-                ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal'])
+                ->groupBy(['detalledepagoscxc.facturacxcID'])
                 ->get();
 
           // return response()->json(
