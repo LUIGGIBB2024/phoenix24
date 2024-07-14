@@ -211,7 +211,7 @@ class CarteraController extends Controller
                 ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
                 ->groupBy(['facturacxcid']);
 
-          $cartera = cartera::selectRaw("clientes.nombrecompleto, cuentasporcobrar.fechafactura, cuentasporcobrar.fechadevencimiento")
+        $cartera = cartera::selectRaw("clientes.nombrecompleto, cuentasporcobrar.fechafactura, cuentasporcobrar.fechadevencimiento")
                 ->selectRaw("cuentasporcobrar.numerodefactura,cuentasporcobrar.prefijo,cuentasporcobrar.tipodedocumento")
                 ->selectRaw("DATEDIFF($fechacorte,'cuentasporcobrar.fechadevencimiento') as Dias")
                 ->selectRaw('cuentasporcobrar.cuentasporcobrarid')
