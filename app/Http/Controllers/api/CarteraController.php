@@ -183,7 +183,7 @@ class CarteraController extends Controller
                 })
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->groupBy('clientes.nombrecompleto')
-           ->havingRaw('totalfacturas <> abono')
+           ->havingRaw('totalfacturas <> abonos')
            ->get();
 
          return response()->json(
