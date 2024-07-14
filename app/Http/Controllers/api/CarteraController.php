@@ -230,7 +230,7 @@ class CarteraController extends Controller
                 ->groupBy('cuentasporcobrar.cuentasporcobrarid')
                 ->orderBy('clientes.nombrecompleto')
                 ->havingRaw('total <> abonos')
-                ->havingRaw('abonos = Null')
+                ->havingRaw('abonos is NULL')
                 ->get();
 
 
