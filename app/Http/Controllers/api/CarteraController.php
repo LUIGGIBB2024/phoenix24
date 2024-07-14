@@ -229,7 +229,7 @@ class CarteraController extends Controller
                 ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
                 ->groupBy('cuentasporcobrar.cuentasporcobrarid')
                 ->orderBy('clientes.nombrecompleto')
-                ->havingRaw('total <> abonos')
+                ->havingRaw('total <> abonos || is_null(abonos)')
                 ->get();
 
            $totalcartera = 0;
