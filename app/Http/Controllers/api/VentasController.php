@@ -6,6 +6,7 @@ use App\Models\centrodeoperacion;
 use App\Models\cliente;
 use App\Models\detalledefactura;
 use App\Models\detalledelista;
+use App\Models\detallederemision;
 use App\Models\documentosdeinventario;
 use App\Models\factura;
 use App\Models\movimientosdeinventario;
@@ -333,6 +334,91 @@ class VentasController extends Controller
                 //}
             }
         }
+
+        $contador = 0;
+        if (isset($request->detremision))
+        {
+             $detalles         = $request->detremision;
+             $xcuantos         = count($detalles);
+             $contador = 0;
+             $fechadesde = "";
+             $fechahasta = "";
+
+             foreach ($detalles as $detalle)
+             {
+                 $fechadcto      = $detalle['fechaderemision'];
+                 $contador++;
+                 $consecutivo    = $detalle['consecutivo'];
+                 $tipodcto       = !is_null($detalle['tipodocumento'])?$detalle['tipodocumento']:"";
+                 $nit            = !is_null($detalle['nit'])?$detalle['nit']:"";
+                 $producto       = !is_null($detalle['producto'])?$detalle['producto']:"";
+                 $bodega         = !is_null($detalle['bodega'])?$detalle['bodega']:"";
+                 $idregistro     = !is_null($detalle['idregistro'])?$detalle['idregistro']:0;
+                 $cantidad1      = $detalle['peso']>0?$detalle['peso']:0;
+                 $cantidad1      = $detalle['unidades']>0?$detalle['unidades']:$cantidad1;
+
+                 detallederemision::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodcto,'fechadocumento'=>$fechadcto, 'producto' => $producto,'bodega'=>$bodega,'idregistro'=>$idregistro],
+                 [
+                     //'numerofactura'         => $detalle['numerofactura'],
+                     //'prefijo'               => !is_null($detalle['prefijo'])?$detalle['prefijo']:""
+                     'lapso'                 => $detalle['lapso'],
+                     'nit'                   => $nit,
+                     'sucursal'              => !is_null($detalle['sucursal'])?$detalle['sucursal']:"",
+                     'fechadevencimiento'    => $fechadcto,
+                     //'tipodemovimiento'      => is_null($detalle['tipomvto'])?"":$detalle['tipomvto'],
+                     //'producto'              => $detalle['producto'],
+                     'descripcion'           => is_null($detalle['descripcion'])?"":$detalle['descripcion'],
+                     'producto2'             => "",
+                     //'bodega'                => $detalle['bodega'],
+                     'lote'                  => is_null($detalle['lote'])?"":$detalle['lote'],
+                     'cantidad'              => $detalle['cantidad'],
+                     'cantidad1'             => $cantidad1,
+                     'valor'                 => $detalle['valor'],
+                     'costopromedio'         => $detalle['costopromedio'],
+                     'ivaproducto'           => $detalle['ivaproducto'],
+                     'descuento1'            => $detalle['descuento1'],
+                     'descuento2'            => $detalle['descuento2'],
+                     'descuento3'            => $detalle['descuento3'],
+                     'valordescuento1'       => $detalle['vdescuento1'],
+                     'valordescuento2'       => $detalle['vdescuento2'],
+                     'valordescuento3'       => $detalle['vdescuento3'],
+                     'idregistro'            => $detalle['idregistro'],
+                     'tipodemovimiento'      => 1,
+                     'impoconsumo'           => $detalle['impoconsumo'],
+                     'concepto'              => $detalle['conceptoinv'],
+                     'cptoclase'             => $detalle['cptoclase'],
+                     'serial'                => is_null($detalle['serial'])?"":$detalle['serial'],
+                     'garantia'              => is_null($detalle['garantia'])?"":$detalle['garantia'],
+                     'tipodecliente'         => is_null($detalle['tipocliente'])?"":$detalle['tipocliente'],
+                     'rutadeventa'           => is_null($detalle['ruta'])?"":$detalle['ruta'],
+                     'zonadeventa'           => is_null($detalle['zona'])?"":$detalle['zona'],
+                     'centrooper'            => is_null($detalle['centrooper'])?"":$detalle['centrooper'],
+                     'proyecto'              => is_null($detalle['proyecto'])?"":$detalle['proyecto'],
+                     'sproyecto'             => is_null($detalle['sproyecto'])?"":$detalle['sproyecto'],
+                     'cuenta'                => "",
+                     'centro'                => "",
+                     'scentro'               => "",
+                     'propiedad'             => "",
+                     'vendedor'              => is_null($detalle['vendedor'])?"":$detalle['vendedor'],
+                     'tecnico'               => is_null($detalle['vendedor'])?"":$detalle['vendedor'],
+                     'placa'                 => is_null($detalle['vehiculo'])?"":$detalle['vehiculo'],
+                     'estado'                => is_null($detalle['estado'])?0:$detalle['estado'],
+                     'estado01'              => is_null($detalle['estado01'])?0:$detalle['estado01'],
+                     'estado02'              => is_null($detalle['estado02'])?0:$detalle['estado02'],
+                     'estado03'              => is_null($detalle['estado03'])?0:$detalle['estado03'],
+                     'usuario_created'       => $detalle['usuariocreated'],
+                     'usuario_updated'       => $detalle['usuarioupdated'],
+                 ]);
+                 // return response()->json(
+                 //     [
+                 //     'status'   => '200OK',
+                 //     'msg'      => 'Salida Pre Exitosa',
+                 //     'msg2'      => $contador,
+                 //     ],Response::HTTP_ACCEPTED);
+                 //}
+             }
+         }
+
 
         $contador = 0;
         if (isset($request->facturas))
