@@ -229,7 +229,8 @@ class CarteraController extends Controller
                   ->leftjoinSub($pagos,'pagos',function($join)
                       {
                           $join->on('cuentasporcobrar.cuentasporcobrarid','=','pagos.facturacxcid')
-                               ->on('cuentasporcobrar.nit','=','pagos.nit');
+                               ->on('cuentasporcobrar.nit','=','pagos.nit')
+                               ->on('cuentasporcobrar.tipodedocumento','=','pagos.tipodocumento');
                       })
                 ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
                 ->where('cuentasporcobrar.nit','=',$nit)
