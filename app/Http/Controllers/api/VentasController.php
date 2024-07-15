@@ -558,6 +558,12 @@ class VentasController extends Controller
                 $fechadcto      = $remision['fechaderemision'];
                 $centrooper     = !is_null($remision['centrooper'])?$remision['centrooper']:"";
 
+                $nit            = !is_Null($remision['nit'])?$remision['nit']:"";
+                $sucursal       = !is_Null($remision['sucursal'])?$remision['sucursal']:"";
+
+                $clientes       = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
+                $clientesID     = is_object($clientes)?$clientes->clientesID:1;
+
                 $reg_rem       = remision::updateOrCreate(['consecutivo'=>$consecutivo, 'tipodedocumento'=>$tipodcto, 'fechadocumento' => $fechadcto ,'centrooper' => $centrooper],
                 [
                      'lapso'                => $remision['lapso'],
@@ -602,6 +608,18 @@ class VentasController extends Controller
                      'usuario_created'      => $remision['usuariocreated'],
                     'usuario_updated'       => $remision['usuarioupdated'],
                 ]);
+                $consecutivo    = $remision['consecutivo'];
+                $fechadcto      = $remision['fechaderemision'];
+                $tipodcto       = $remision['tipodedocumento'];
+                $centrooper     = !is_null($remision['centrooper'])?$remision['centrooper']:"";
+                $RemisionID     = $remision->RemisionID;
+                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+                detallederemision::where('detallederemision.consecutivo',"=",$consecutivo)
+                ->where('detallederemision.fechadocumento',"=",$fechadcto)
+                ->where('detallederemision.tipodedocumento',"=",$tipodcto)
+                ->where('detallederemision.centrooper',"=",$centrooper)
+                ->update(['detallederemision.RemisionID' => $RemisionID, 'detallederemision.ClientesID' => $clientesID]);
+                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
            }
 
        }
