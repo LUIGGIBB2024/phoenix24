@@ -612,7 +612,7 @@ class VentasController extends Controller
                 $fechadcto      = $remision['fechaderemision'];
                 $tipodcto       = $remision['tipodocumento'];
                 $centrooper     = !is_null($remision['centrooper'])?$remision['centrooper']:"";
-                $RemisionID     = $remision->RemisionID;
+                $RemisionID     = $reg_rem->RemisionID;
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');
                 detallederemision::where('detallederemision.consecutivo',"=",$consecutivo)
                 ->where('detallederemision.fechadocumento',"=",$fechadcto)
