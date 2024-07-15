@@ -231,8 +231,8 @@ class CarteraController extends Controller
                           $join->on('cuentasporcobrar.cuentasporcobrarid','=','pagos.facturacxcid');
                       })
                 ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
-                ->where('detalledepagoscxc.nit','=',$nit)
-                ->where('detalledepagoscxc.sucursal','=',$sucursal)
+                ->where('cuentasporcobrar.nit','=',$nit)
+                ->where('cuentasporcobrar.sucursal','=',$sucursal)
                 ->groupBy('cuentasporcobrar.cuentasporcobrarid')
                 ->orderBy('clientes.nombrecompleto')
                 ->havingRaw('total <> abonos')
