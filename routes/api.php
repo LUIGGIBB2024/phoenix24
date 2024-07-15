@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\AutorizacionesController;
 use App\Http\Controllers\api\CarteraController;
+use App\Http\Controllers\api\CuentasxPagarController;
 use App\Http\Controllers\api\OnlyInvoiceController;
 use App\Http\Controllers\api\VentasController;
 use Illuminate\Http\Request;
@@ -53,6 +54,9 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     Route::post('process-pagoscxc', [CarteraController::class,'ProcessPagosCxc']);
     Route::get('cartera-resumida', [CarteraController::class,'CarteraResumida']);
     Route::get('cartera-detallada', [CarteraController::class,'CarteraDetallada']);
+
+    // Procesar Información de Cuentas por Pagar
+    Route::post('process-cxp', [CuentasxPagarController::class,'ProcessCxp']);
 
     //Route::get('consult-documents', [AutorizacionesController::class,'ConsultDocuments']);
 

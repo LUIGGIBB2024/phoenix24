@@ -163,7 +163,8 @@ class CarteraController extends Controller
                 ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal']);
 
           $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos")
-            ->selectRaw("0.00 as saldo")
+          ->selectRaw("cuentasporcobrar.nit,cuentasporcobrar.sucursal,cuentasporcobrar.cuentasporcobrarid")
+          ->selectRaw("0.00 as saldo")
             ->join("clientes",function($join)
                 {
                   $join->on("clientes.nit","=","cuentasporcobrar.nit")
@@ -197,7 +198,6 @@ class CarteraController extends Controller
                   'totalcartera'  => $totalcartera,
                   'detalle'       => $cartera,
                   ],Response::HTTP_ACCEPTED);
-
     }
 
 
@@ -217,6 +217,7 @@ class CarteraController extends Controller
 
         $cartera = cartera::selectRaw("clientes.nombrecompleto, cuentasporcobrar.fechafactura, cuentasporcobrar.fechadevencimiento")
                 ->selectRaw("cuentasporcobrar.numerodefactura,cuentasporcobrar.prefijo,cuentasporcobrar.tipodedocumento")
+                ->selectRaw("cuentasporcobrar.nit,cuentasporcobrar.sucursal,cuentasporcobrar.cuentasporcobrarid")
                 ->selectRaw("DATEDIFF('$fechacorte', cuentasporcobrar.fechadevencimiento) + 1 as Dias")
                 //->selectRaw("cuentasporcobrar.fechadevencimiento->diff($fechacorte) as Dias")
                 ->selectRaw('cuentasporcobrar.cuentasporcobrarid')
