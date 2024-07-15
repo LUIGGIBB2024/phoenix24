@@ -491,7 +491,7 @@ class VentasController extends Controller
                      'costodeventa'         => $remision['costodeventa'],
                      'valorotrodocumento'   => $remision['valorotrodocumento'],
                      'valordepago'          => $remision['valordelpago'],
-                     'impoconsumo'          => $remision['impoconsumo'],
+                     'impoconsumo'          => $remision['impuestoconsumo'],
                      'impuestoica'          => $remision['impuestoica'],
                      'flete'                => $remision['flete'],
                      'totaldocumento'       => $remision['totaldocumento'],
