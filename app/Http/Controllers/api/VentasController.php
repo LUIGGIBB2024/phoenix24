@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\enlacevisual_nv;
-
+use App\Models\remision;
 
 use function PHPUnit\Framework\isNull;
 
@@ -458,6 +458,65 @@ class VentasController extends Controller
                 ->update(['detalledefacturas.FacturasID' => $facturasID, 'detalledefacturas.ClientesID' => $clientesID]);
                 DB::statement('SET FOREIGN_KEY_CHECKS=1;');
             }
+       }
+
+       $contador = 0;
+       if (isset($request->remision))
+       {
+           $remisiones        = $request->remision;
+           foreach ($remisiones as $remision)
+           {
+                $contador++;
+                $consecutivo    = $remision['consecutivo'];
+                $tipodcto       = !is_null($remision['tipodocumento'])?$remision['tipodocumento']:"";
+                $fechadcto      = $remision['fechaderemision'];
+                $centrooper     = !is_null($remision['centrooper'])?$remision['centrooper']:"";
+
+                $reg_rem       = remision::updateOrCreate(['consecutivo'=>$consecutivo, 'tipodedocumento'=>$tipodcto, 'fechadocumento' => $fechadcto ,'centrooper' => $centrooper],
+                [
+                     'lapso'                => $remision['lapso'],
+                     'nit'                  => !is_null($remision['nit'])?$remision['nit']:"",
+                     'sucursal'             => !is_null($remision['sucursal'])?$remision['sucursal']:"",
+                     'nombreventa'          => !is_null($remision['nombreventa'])?$remision['nombreventa']:"",
+                     'horadocumento'        => !is_null($remision['horadocumento'])?$remision['horadocumento']:"",
+                     'npedido'              => $remision['npedido'],
+                     'proyecto'             => !is_null($remision['proyecto'])?$remision['proyecto']:"",
+                     'sproyecto'            => !is_null($remision['sproyecto'])?$remision['sproyecto']:"",
+                     'actividad'            => !is_null($remision['actividad'])?$remision['actividad']:"",
+                     'valor'                => $remision['valor'],
+                     'valoriva'             => $remision['valoriva'],
+                     'dsctosadicionales'    => $remision['dsctosadicionales'],
+                     'dsctosproductos'      => $remision['dsctosproductos'],
+                     'valoradicional'       => $remision['valoradicional'],
+                     'costodeventa'         => $remision['costodeventa'],
+                     'valorotrodocumento'   => $remision['valorotrodocumento'],
+                     'valordepago'          => $remision['valordelpago'],
+                     'impoconsumo'          => $remision['impoconsumo'],
+                     'impuestoica'          => $remision['impuestoica'],
+                     'flete'                => $remision['flete'],
+                     'totaldocumento'       => $remision['totaldocumento'],
+                     'listadeprecio'        => !is_null($remision['lista'])?$remision['lista']:"",
+                     'rutadeventa'          => !is_null($remision['ruta'])?$remision['ruta']:"",
+                     'zonadeventa'          => is_null($remision['zona'])?$remision['zona']:"",
+                     'vendedor'             => is_null($remision['vendedor'])?$remision['vendedor']:"",
+                     'tipodecliente'        => is_null($remision['tipocliente'])?$remision['tipocliente']:"",
+                     'caja'                 => "",
+                     'cajero'               => "",
+                     'mesa'                 => "",
+                     'mesero'               => "",
+                     'observaciones'        => !is_null($remision['observaciones'])?$remision['observaciones']:"",
+                     'placa'                => !is_null($remision['vehiculo'])?$remision['vehiculo']:"",
+                     'transportador'        => !is_null($remision['transportador'])?$remision['transportador']:"",
+                     'tipoderemision'       => $remision['tipoderemision'],
+                     'estado'               => $remision['estado'],
+                     'estado01'             => $remision['estado01'],
+                     'estado02'             => $remision['estado02'],
+                     'estado03'             => $remision['estado03'],
+                     'usuario_created'      => $remision['usuariocreated'],
+                    'usuario_updated'       => $remision['usuarioupdated'],
+                ]);
+           }
+
        }
 
        $contador = 0;
