@@ -508,6 +508,7 @@ class VentasController extends Controller
                      'placa'                => !is_null($remision['vehiculo'])?$remision['vehiculo']:"",
                      'transportador'        => !is_null($remision['transportador'])?$remision['transportador']:"",
                      'tipoderemision'       => $remision['tipoderemision'],
+                     'kilometraje'          => $remision['kilometraje'],
                      'estado'               => $remision['estado'],
                      'estado01'             => $remision['estado01'],
                      'estado02'             => $remision['estado02'],
