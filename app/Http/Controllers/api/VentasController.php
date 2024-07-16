@@ -1009,10 +1009,10 @@ class VentasController extends Controller
             ->leftjoin('vendedor', 'remision.vendedor', '=', 'vendedor.codigo')
             ->where('remision.estado','=',1)
             ->whereBetween('fechadocumento',[$fechad,$fechah])
-            ->whereBetween('horadocumento',[$horad,$horah])
-            ->Orderby('fechadocumento')
-            ->Orderby('prefijo')
-            ->Orderby('consecutivo');
+            ->whereBetween('horadocumento',[$horad,$horah]);
+            // ->Orderby('fechadocumento')
+            // ->Orderby('prefijo')
+            // ->Orderby('consecutivo');
             //->get();
 
         $ventas = factura::select(
@@ -1052,8 +1052,8 @@ class VentasController extends Controller
             ->where('facturas.estado','=',1)
             ->whereBetween('facturas.fechafactura',[$fechad,$fechah])
             ->whereBetween('facturas.horadefactura',[$horad,$horah])
-            // ->Orderby('facturas.fechafactura')
-            // ->Orderby('facturas.prefijo')
+            ->orderBy('facturas.fechafactura')
+            ->orderBy('facturas.prefijo')
             // ->Orderby('facturas.numerodefactura')
             ->get();
 
