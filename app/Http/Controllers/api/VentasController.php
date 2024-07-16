@@ -972,46 +972,7 @@ class VentasController extends Controller
         $horah   = $request->horahasta;
         $anop  = $request->año;
 
-        $ventas = factura::select(
-            DB::raw("fechafactura as fecha"),
-            DB::raw("fechavencimiento as vencimiento"),
-            DB::raw('numerodefactura as numerodefactura'),
-            DB::raw('tipodedocumento as tipodedocumento'),
-            DB::raw("prefijo as prefijo"),
-            DB::raw("horadefactura as horadefactura"),
-            DB::raw('nit as nit'),
-            DB::raw('facturas.sucursal as sucursal'),
-            DB::raw('nombreventa as nombreventa'),
-            DB::raw('habitacion as habitacion'),
-            DB::raw('centrooperativo.nombre as centrodeoperacion'),
-            DB::raw('vendedor.nombre as nombrevendedor'),
-            DB::raw('facturas.vendedor as vendedor'),
-            DB::raw('round(valorfactura,0) as valorfactura'),
-            DB::raw('round(descuentosproductos+descuentosadicionales,0) as descuentos'),
-            DB::raw('round(valoriva,0) as valoriva'),
-            DB::raw('round(valoradicional,0) as valoradicional'),
-            DB::raw('round(retefuente,0) as retefuente'),
-            DB::raw('round(reteiva,0) as reteiva'),
-            DB::raw('round(reteica,0) as reteica'),
-            DB::raw('round(totalfactura,0) as totalfactura'),
-            DB::raw('cufe as cufe'),
-            DB::raw('facturas.estado as estado'),
-            DB::raw('facturas.estado01 as estado01'),
-            DB::raw('facturas.estado02 as estado02'),
-            DB::raw('facturas.estado03 as estado03'),
-            DB::raw('facturasID as id'),
-            DB::raw("DATE_FORMAT(fechafactura,'%M %Y') as months"),
-            DB::raw("DATE_FORMAT(fechafactura,'%m') as mes"),
-            DB::raw("DATE_FORMAT(fechafactura,'%d') as day"))
-            ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
-            ->leftjoin('vendedor', 'facturas.vendedor', '=', 'vendedor.codigo')
-            ->where('facturas.estado','=',1)
-            ->whereBetween('fechafactura',[$fechad,$fechah])
-            ->whereBetween('horadefactura',[$horad,$horah])
-            ->Orderby('fechafactura')
-            ->Orderby('prefijo')
-            ->Orderby('numerodefactura');
-            //->get();
+                 //->get();
 
         $remisiones = remision::select(
             DB::raw("fechadocumento as fecha"),
@@ -1054,7 +1015,49 @@ class VentasController extends Controller
             ->Orderby('consecutivo');
             //->get();
 
-        $ventas->union($remisiones)->get();
+        $ventas = factura::select(
+            DB::raw("fechafactura as fecha"),
+            DB::raw("fechavencimiento as vencimiento"),
+            DB::raw('numerodefactura as numerodefactura'),
+            DB::raw('tipodedocumento as tipodedocumento'),
+            DB::raw("prefijo as prefijo"),
+            DB::raw("horadefactura as horadefactura"),
+            DB::raw('nit as nit'),
+            DB::raw('facturas.sucursal as sucursal'),
+            DB::raw('nombreventa as nombreventa'),
+            DB::raw('habitacion as habitacion'),
+            DB::raw('centrooperativo.nombre as centrodeoperacion'),
+            DB::raw('vendedor.nombre as nombrevendedor'),
+            DB::raw('facturas.vendedor as vendedor'),
+            DB::raw('round(valorfactura,0) as valorfactura'),
+            DB::raw('round(descuentosproductos+descuentosadicionales,0) as descuentos'),
+            DB::raw('round(valoriva,0) as valoriva'),
+            DB::raw('round(valoradicional,0) as valoradicional'),
+            DB::raw('round(retefuente,0) as retefuente'),
+            DB::raw('round(reteiva,0) as reteiva'),
+            DB::raw('round(reteica,0) as reteica'),
+            DB::raw('round(totalfactura,0) as totalfactura'),
+            DB::raw('cufe as cufe'),
+            DB::raw('facturas.estado as estado'),
+            DB::raw('facturas.estado01 as estado01'),
+            DB::raw('facturas.estado02 as estado02'),
+            DB::raw('facturas.estado03 as estado03'),
+            DB::raw('facturasID as id'),
+            DB::raw("DATE_FORMAT(fechafactura,'%M %Y') as months"),
+            DB::raw("DATE_FORMAT(fechafactura,'%m') as mes"),
+            DB::raw("DATE_FORMAT(fechafactura,'%d') as day"))
+            ->unioAll($remisiones)
+            ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
+            ->leftjoin('vendedor', 'facturas.vendedor', '=', 'vendedor.codigo')
+            ->where('facturas.estado','=',1)
+            ->whereBetween('fechafactura',[$fechad,$fechah])
+            ->whereBetween('horadefactura',[$horad,$horah])
+            ->Orderby('fechafactura')
+            ->Orderby('prefijo')
+            ->Orderby('numerodefactura')
+            ->get();
+
+        //$ventas->union($remisiones)->get();
 
         //$ventas = $remisiones;
 
