@@ -855,7 +855,7 @@ class VentasController extends Controller
              $descuento     = $dato['descuento'];
 
              $curproducto = DB::table('producto')->select('producto.porcentajeiva')
-            ->where('producto.codigo','=',$producto)->get();
+            ->where('producto.codigo','=',$producto)->first();
 
 
             if (is_null($curproducto->porcentajeiva))
