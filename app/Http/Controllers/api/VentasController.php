@@ -995,7 +995,7 @@ class VentasController extends Controller
             DB::raw('round(0,0) as retefuente'),
             DB::raw('round(0,0) as reteiva'),
             DB::raw('round(0,0) as reteica'),
-            DB::raw('round(totaldocumento,0) as totalfactura'),
+            DB::raw('round(totaldocumento,0) as totaldocumento'),
             DB::raw('"" as cufe'),
             DB::raw('remision.estado as estado'),
             DB::raw('remision.estado01 as estado01'),
@@ -1074,8 +1074,7 @@ class VentasController extends Controller
              'msg'      => 'Ventas Detalladas Diarias (' . $fechad .'='.$fechah.')',
              'fechadesde' => $fechad ." ". $horad,
              'fechahasta' => $fechah ." ". $horah,
-             //'grantotal' =>  $tot,
-             'grantotal' =>  0,
+             'grantotal' =>  $tot,
              'ventas'   => $ventas
             ],Response::HTTP_ACCEPTED);
     }
