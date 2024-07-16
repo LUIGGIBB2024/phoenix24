@@ -884,8 +884,8 @@ class VentasController extends Controller
                'centrooper'       => !is_null($dato['centrooper'])?$dato['centrooper']:"",
                'descuento'        => $descuento,
                'iva'              => $porcentaje,
-               'usuario_created'  => $centro['usuariocreated'],
-               'usuario_updated'  => $centro['usuarioupdated'],
+               'usuario_created'  => $dato['usuariocreated'],
+               'usuario_updated'  => $dato['usuarioupdated'],
             ]);
 
            }
