@@ -984,7 +984,7 @@ class VentasController extends Controller
             DB::raw('nit as nit'),
             DB::raw('remision.sucursal as sucursal'),
             DB::raw('nombreventa as nombreventa'),
-            DB::raw(' "REM" as habitacion'),
+            DB::raw(' "" as habitacion'),
             DB::raw('centrooperativo.nombre as centrodeoperacion'),
             DB::raw('vendedor.nombre as nombrevendedor'),
             DB::raw('remision.vendedor as vendedor'),
@@ -996,7 +996,7 @@ class VentasController extends Controller
             DB::raw('round(0,0) as reteiva'),
             DB::raw('round(0,0) as reteica'),
             DB::raw('round(totaldocumento,0) as totalfactura'),
-            DB::raw('"REM" as cufe'),
+            DB::raw('"" as cufe'),
             DB::raw('remision.estado as estado'),
             DB::raw('remision.estado01 as estado01'),
             DB::raw('remision.estado02 as estado02'),
@@ -1048,7 +1048,7 @@ class VentasController extends Controller
             DB::raw("DATE_FORMAT(fechafactura,'%d') as day"))
             ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
             ->leftjoin('vendedor', 'facturas.vendedor', '=', 'vendedor.codigo')
-            //->unionAll($remisiones)
+            ->unionAll($remisiones)
             ->where('facturas.estado','=',1)
             ->whereBetween('facturas.fechafactura',[$fechad,$fechah])
             ->whereBetween('facturas.horadefactura',[$horad,$horah])
