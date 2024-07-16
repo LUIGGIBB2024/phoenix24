@@ -1089,6 +1089,7 @@ class VentasController extends Controller
 
     public function DailyConsolidatedSales(Request $request):JsonResponse
     {
+
         $meses = array("Enero","Febrero","Marzo","Abríl","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         DB::statement("SET lc_time_names = 'es_Es';");
         $mes  = $request->mes;
