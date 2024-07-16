@@ -1028,7 +1028,7 @@ class VentasController extends Controller
             DB::raw('vendedor.nombre as nombrevendedor'),
             DB::raw('remision.vendedor as vendedor'),
             DB::raw('round(valor,0) as valorfactura'),
-            DB::raw('round(descuentosproductos+descuentosadicionales,0) as descuentos'),
+            DB::raw('round(dsctosproductos+dsctosadicionales,0) as descuentos'),
             DB::raw('round(valoriva,0) as valoriva'),
             DB::raw('round(valoradicional,0) as valoradicional'),
             DB::raw('round(0,0) as retefuente'),
