@@ -1104,12 +1104,12 @@ class VentasController extends Controller
             DB::raw("DATE_FORMAT(fechadocumento,'%w') as Iddia"),
             DB::raw("CASE DATE_FORMAT(fechadocumento,'%w') WHEN '0' THEN 'Domingo' WHEN '1' THEN 'Lunes'  WHEN '2' THEN 'Martes'  WHEN '3' THEN 'Miércoles'
                 WHEN '4' THEN 'Jueves'  WHEN '5' THEN 'Viernes' ELSE 'Sábado' END AS diadelasemana"),
-            DB::raw("remision.fechadocumento  as fechafactura"))
+            DB::raw("remision.fechadocumento  as fechadocumento"))
             ->leftjoin('centrooperativo', 'remision.centrooper', '=', 'centrooperativo.codigo')
             ->where('remision.estado','=',1)
-            ->whereMonth('fechafactura',$mes)
-            ->whereYear('fechafactura',$anop )
-            ->groupBy('centrodeoperacion','months','fechafactura');
+            ->whereMonth('fechadocumento',$mes)
+            ->whereYear('fechadocumento',$anop )
+            ->groupBy('centrodeoperacion','months','fechadocumento');
             //->get();
 
         $ventas = factura::select(
@@ -1121,13 +1121,13 @@ class VentasController extends Controller
             DB::raw("DATE_FORMAT(facturas.fechafactura,'%w') as Iddia"),
             DB::raw("CASE DATE_FORMAT(facturas.fechafactura,'%w') WHEN '0' THEN 'Domingo' WHEN '1' THEN 'Lunes'  WHEN '2' THEN 'Martes'  WHEN '3' THEN 'Miércoles'
                 WHEN '4' THEN 'Jueves'  WHEN '5' THEN 'Viernes' ELSE 'Sábado' END AS diadelasemana"),
-            DB::raw("facturas.fechafactura  as fechafactura2"))
+            DB::raw("facturas.fechafactura  as fechafactura"))
             ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
             ->where('facturas.estado','=',1)
-            ->whereMonth('fechafactura2',$mes)
-            ->whereYear('fechafactura2',$anop )
+            ->whereMonth('fechafactura',$mes)
+            ->whereYear('fechafactura',$anop )
             ->unionAll($remisiones)
-            ->groupBy('centrodeoperacion','months','fechafactura2')
+            ->groupBy('centrodeoperacion','months','fechafactura')
             ->get();
 
         $ventasjs =$ventas;
