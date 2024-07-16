@@ -1050,11 +1050,11 @@ class VentasController extends Controller
             ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
             ->leftjoin('vendedor', 'facturas.vendedor', '=', 'vendedor.codigo')
             ->where('facturas.estado','=',1)
-            ->whereBetween('fechafactura',[$fechad,$fechah])
-            ->whereBetween('horadefactura',[$horad,$horah])
-            ->Orderby('fechafactura')
-            ->Orderby('prefijo')
-            ->Orderby('numerodefactura')
+            ->whereBetween('facturas.fechafactura',[$fechad,$fechah])
+            ->whereBetween('facturas.horadefactura',[$horad,$horah])
+            ->Orderby('facturas.fechafactura')
+            ->Orderby('facturas.prefijo')
+            ->Orderby('facturas.numerodefactura')
             ->get();
 
         //$ventas->union($remisiones)->get();
