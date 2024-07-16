@@ -901,7 +901,6 @@ class VentasController extends Controller
 
     public function ConsolidatedSalesCenter(Request $request):JsonResponse
     {
-
         DB::statement("SET lc_time_names = 'es_Es';");
         $mes  = $request->mes;
         $anop  = $request->año;
@@ -1023,10 +1022,6 @@ class VentasController extends Controller
             ->where('remision.estado','=',1)
             ->whereBetween('fechadocumento',[$fechad,$fechah])
             ->whereBetween('horadocumento',[$horad,$horah]);
-            // ->Orderby('fechadocumento')
-            // ->Orderby('prefijo')
-            // ->Orderby('consecutivo');
-            //->get();
 
         $ventas = factura::select(
             DB::raw("facturas.fechafactura"),
@@ -1099,6 +1094,23 @@ class VentasController extends Controller
         $mes  = $request->mes;
         $anop  = $request->año;
 
+        $remisiones = remision::select(
+            DB::raw('centrooperativo.nombre as centrodeoperacion'),
+            DB::raw("sum(round(totaldocumento,0)) as totalventas"),
+            DB::raw("DATE_FORMAT(fechadocumento,'%M %Y') as months"),
+            DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
+            //DB::raw("dias[ intval(DATE_FORMAT(fechafactura,'%w'))] as diadelasemana"),
+            DB::raw("DATE_FORMAT(fechadocumento,'%w') as Iddia"),
+            DB::raw("CASE DATE_FORMAT(fechadocumento,'%w') WHEN '0' THEN 'Domingo' WHEN '1' THEN 'Lunes'  WHEN '2' THEN 'Martes'  WHEN '3' THEN 'Miércoles'
+                WHEN '4' THEN 'Jueves'  WHEN '5' THEN 'Viernes' ELSE 'Sábado' END AS diadelasemana"),
+            DB::raw("remision.fechadocumento  as fechafactura"))
+            ->leftjoin('centrooperativo', 'remision.centrooper', '=', 'centrooperativo.codigo')
+            ->where('remision.estado','=',1)
+            ->whereMonth('fechafactura',$mes)
+            ->whereYear('fechafactura',$anop )
+            ->groupBy('centrodeoperacion','months','fechafactura');
+            //->get();
+
         $ventas = factura::select(
             DB::raw('centrooperativo.nombre as centrodeoperacion'),
             DB::raw("sum(round(totalfactura,0)) as totalventas"),
@@ -1113,6 +1125,7 @@ class VentasController extends Controller
             ->where('facturas.estado','=',1)
             ->whereMonth('fechafactura',$mes)
             ->whereYear('fechafactura',$anop )
+            ->unionAll($remisiones)
             ->groupBy('centrodeoperacion','months','fechafactura')
             ->get();
 
