@@ -1053,7 +1053,7 @@ class VentasController extends Controller
             ->whereBetween('facturas.fechafactura',[$fechad,$fechah])
             ->whereBetween('facturas.horadefactura',[$horad,$horah])
             ->orderBy('fechafactura')
-            // ->orderBy('facturas.prefijo')
+            ->orderBy('prefijo')
             // ->Orderby('facturas.numerodefactura')
             ->get();
 
