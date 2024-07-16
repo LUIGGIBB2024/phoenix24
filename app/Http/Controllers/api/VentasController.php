@@ -1040,7 +1040,7 @@ class VentasController extends Controller
             DB::raw('remision.estado01 as estado01'),
             DB::raw('remision.estado02 as estado02'),
             DB::raw('remision.estado03 as estado03'),
-            DB::raw('facturasID as id'),
+            DB::raw('remisionID as id'),
             DB::raw("DATE_FORMAT(fechadocumento,'%M %Y') as months"),
             DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
             DB::raw("DATE_FORMAT(fechadocumento,'%d') as day"))
