@@ -1013,46 +1013,46 @@ class VentasController extends Controller
             ->Orderby('numerodefactura')
             ->get();
 
-        $remisiones = remision::select(
-            DB::raw("fechaderemision as fecha"),
-            DB::raw("fechaderemision as vencimiento"),
-            DB::raw('consecutivo as numerodefactura'),
-            DB::raw('tipodedocumento as tipodedocumento'),
-            DB::raw("'' as prefijo"),
-            DB::raw("horadocumento as horadefactura"),
-            DB::raw('nit as nit'),
-            DB::raw('remision.sucursal as sucursal'),
-            DB::raw('nombreventa as nombreventa'),
-            DB::raw(" '' as habitacion"),
-            DB::raw('centrooperativo.nombre as centrodeoperacion'),
-            DB::raw('vendedor.nombre as nombrevendedor'),
-            DB::raw('remision.vendedor as vendedor'),
-            DB::raw('round(valor,0) as valorfactura'),
-            DB::raw('round(descuentosproductos+descuentosadicionales,0) as descuentos'),
-            DB::raw('round(valoriva,0) as valoriva'),
-            DB::raw('round(valoradicional,0) as valoradicional'),
-            DB::raw('round(0,0) as retefuente'),
-            DB::raw('round(0,0) as reteiva'),
-            DB::raw('round(0,0) as reteica'),
-            DB::raw('round(totaldocumento,0) as totalfactura'),
-            DB::raw("'' as cufe"),
-            DB::raw('remision.estado as estado'),
-            DB::raw('remision.estado01 as estado01'),
-            DB::raw('remision.estado02 as estado02'),
-            DB::raw('remision.estado03 as estado03'),
-            DB::raw('facturasID as id'),
-            DB::raw("DATE_FORMAT(fechadocumento,'%M %Y') as months"),
-            DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
-            DB::raw("DATE_FORMAT(fechadocumento,'%d') as day"))
-            ->leftjoin('centrooperativo', 'remision.centrooper', '=', 'centrooperativo.codigo')
-            ->leftjoin('vendedor', 'remision.vendedor', '=', 'vendedor.codigo')
-            ->where('remision.estado','=',1)
-            ->whereBetween('fechadocumento',[$fechad,$fechah])
-            ->whereBetween('horadocumento',[$horad,$horah])
-            ->Orderby('fechadocumento')
-            ->Orderby('prefijo')
-            ->Orderby('consecutivo')
-            ->get();
+        // $remisiones = remision::select(
+        //     DB::raw("fechaderemision as fecha"),
+        //     DB::raw("fechaderemision as vencimiento"),
+        //     DB::raw('consecutivo as numerodefactura'),
+        //     DB::raw('tipodedocumento as tipodedocumento'),
+        //     DB::raw("'' as prefijo"),
+        //     DB::raw("horadocumento as horadefactura"),
+        //     DB::raw('nit as nit'),
+        //     DB::raw('remision.sucursal as sucursal'),
+        //     DB::raw('nombreventa as nombreventa'),
+        //     DB::raw(" '' as habitacion"),
+        //     DB::raw('centrooperativo.nombre as centrodeoperacion'),
+        //     DB::raw('vendedor.nombre as nombrevendedor'),
+        //     DB::raw('remision.vendedor as vendedor'),
+        //     DB::raw('round(valor,0) as valorfactura'),
+        //     DB::raw('round(descuentosproductos+descuentosadicionales,0) as descuentos'),
+        //     DB::raw('round(valoriva,0) as valoriva'),
+        //     DB::raw('round(valoradicional,0) as valoradicional'),
+        //     DB::raw('round(0,0) as retefuente'),
+        //     DB::raw('round(0,0) as reteiva'),
+        //     DB::raw('round(0,0) as reteica'),
+        //     DB::raw('round(totaldocumento,0) as totalfactura'),
+        //     DB::raw("'' as cufe"),
+        //     DB::raw('remision.estado as estado'),
+        //     DB::raw('remision.estado01 as estado01'),
+        //     DB::raw('remision.estado02 as estado02'),
+        //     DB::raw('remision.estado03 as estado03'),
+        //     DB::raw('facturasID as id'),
+        //     DB::raw("DATE_FORMAT(fechadocumento,'%M %Y') as months"),
+        //     DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
+        //     DB::raw("DATE_FORMAT(fechadocumento,'%d') as day"))
+        //     ->leftjoin('centrooperativo', 'remision.centrooper', '=', 'centrooperativo.codigo')
+        //     ->leftjoin('vendedor', 'remision.vendedor', '=', 'vendedor.codigo')
+        //     ->where('remision.estado','=',1)
+        //     ->whereBetween('fechadocumento',[$fechad,$fechah])
+        //     ->whereBetween('horadocumento',[$horad,$horah])
+        //     ->Orderby('fechadocumento')
+        //     ->Orderby('prefijo')
+        //     ->Orderby('consecutivo')
+        //     ->get();
 
         //$ventas->union($remisiones)->get();
 
