@@ -1020,7 +1020,7 @@ class VentasController extends Controller
             DB::raw("facturas.fechavencimiento as vencimiento"),
             DB::raw('facturas.numerodefactura as numerodefactura'),
             DB::raw('facturas.tipodedocumento as tipodedocumento'),
-            DB::raw("facturas.prefijo as prefijo"),
+            DB::raw("facturas.prefijo"),
             DB::raw("facturas.horadefactura as horadefactura"),
             DB::raw('facturas.nit as nit'),
             DB::raw('facturas.sucursal as sucursal'),
@@ -1053,7 +1053,7 @@ class VentasController extends Controller
             ->whereBetween('facturas.fechafactura',[$fechad,$fechah])
             ->whereBetween('facturas.horadefactura',[$horad,$horah])
             ->Orderby('facturas.fechafactura')
-            ->Orderby('prefijo')
+            ->Orderby('facturas.prefijo')
             ->Orderby('facturas.numerodefactura')
             ->get();
 
