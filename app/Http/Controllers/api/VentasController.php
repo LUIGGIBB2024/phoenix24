@@ -1010,8 +1010,8 @@ class VentasController extends Controller
             ->whereBetween('horadefactura',[$horad,$horah])
             ->Orderby('fechafactura')
             ->Orderby('prefijo')
-            ->Orderby('numerodefactura')
-            ->get();
+            ->Orderby('numerodefactura');
+            //->get();
 
         $remisiones = remision::select(
             DB::raw("fechadocumento as fecha"),
@@ -1051,8 +1051,8 @@ class VentasController extends Controller
             ->whereBetween('horadocumento',[$horad,$horah])
             ->Orderby('fechadocumento')
             ->Orderby('prefijo')
-            ->Orderby('consecutivo')
-            ->get();
+            ->Orderby('consecutivo');
+            //->get();
 
         $ventas->union($remisiones)->get();
 
