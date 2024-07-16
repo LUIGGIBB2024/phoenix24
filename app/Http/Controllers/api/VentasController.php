@@ -857,6 +857,9 @@ class VentasController extends Controller
              $curproducto = DB::table('producto')->select('producto.porcentajeiva')
             ->where('producto.codigo','=',$producto)->get();
 
+
+            if (is_null($curproducto->porcentajeiva))
+            {
             return response()->json(
                 [
                  'status'   => '200 OK Detalle de lista',
@@ -864,7 +867,7 @@ class VentasController extends Controller
                  'producto' => $producto,
                  'Curproducto' => $curproducto,
                 ],Response::HTTP_ACCEPTED);
-
+            }
 
             $porcentaje = is_null($curproducto)?0:$curproducto->porcentajeiva;
 
