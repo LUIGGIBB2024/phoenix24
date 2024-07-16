@@ -1056,7 +1056,7 @@ class VentasController extends Controller
 
         //$ventas->union($remisiones)->get();
 
-        $ventas = $remisiones;
+        //$ventas = $remisiones;
 
         $ventasjs =$ventas;
         $tot = 0.00;
