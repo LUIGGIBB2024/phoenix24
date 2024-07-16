@@ -1121,13 +1121,13 @@ class VentasController extends Controller
             DB::raw("DATE_FORMAT(facturas.fechafactura,'%w') as Iddia"),
             DB::raw("CASE DATE_FORMAT(facturas.fechafactura,'%w') WHEN '0' THEN 'Domingo' WHEN '1' THEN 'Lunes'  WHEN '2' THEN 'Martes'  WHEN '3' THEN 'Miércoles'
                 WHEN '4' THEN 'Jueves'  WHEN '5' THEN 'Viernes' ELSE 'Sábado' END AS diadelasemana"),
-            DB::raw("facturas.fechafactura  as fechafactura"))
+            DB::raw("facturas.fechafactura  as fechafactura2"))
             ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
             ->where('facturas.estado','=',1)
-            ->whereMonth('fechafactura',$mes)
-            ->whereYear('fechafactura',$anop )
+            ->whereMonth('fechafactura2',$mes)
+            ->whereYear('fechafactura2',$anop )
             ->unionAll($remisiones)
-            ->groupBy('centrodeoperacion','months','fechafactura')
+            ->groupBy('centrodeoperacion','months','fechafactura2')
             ->get();
 
         $ventasjs =$ventas;
