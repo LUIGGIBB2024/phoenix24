@@ -1046,9 +1046,9 @@ class VentasController extends Controller
             DB::raw("DATE_FORMAT(fechafactura,'%M %Y') as months"),
             DB::raw("DATE_FORMAT(fechafactura,'%m') as mes"),
             DB::raw("DATE_FORMAT(fechafactura,'%d') as day"))
-            ->unionAll($remisiones)
             ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
             ->leftjoin('vendedor', 'facturas.vendedor', '=', 'vendedor.codigo')
+            ->unionAll($remisiones)
             ->where('facturas.estado','=',1)
             ->whereBetween('facturas.fechafactura',[$fechad,$fechah])
             ->whereBetween('facturas.horadefactura',[$horad,$horah])
