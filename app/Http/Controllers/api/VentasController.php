@@ -1052,9 +1052,9 @@ class VentasController extends Controller
             ->where('facturas.estado','=',1)
             ->whereBetween('facturas.fechafactura',[$fechad,$fechah])
             ->whereBetween('facturas.horadefactura',[$horad,$horah])
-            ->Orderby('facturas.fechafactura')
-            ->Orderby('facturas.prefijo')
-            ->Orderby('facturas.numerodefactura')
+            // ->Orderby('facturas.fechafactura')
+            // ->Orderby('facturas.prefijo')
+            // ->Orderby('facturas.numerodefactura')
             ->get();
 
         //$ventas->union($remisiones)->get();
