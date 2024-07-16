@@ -1016,7 +1016,7 @@ class VentasController extends Controller
             //->get();
 
         $ventas = factura::select(
-            DB::raw("fechafactura as fecha"),
+            DB::raw("fechafactura"),
             DB::raw("fechavencimiento as vencimiento"),
             DB::raw('numerodefactura as numerodefactura'),
             DB::raw('tipodedocumento as tipodedocumento'),
