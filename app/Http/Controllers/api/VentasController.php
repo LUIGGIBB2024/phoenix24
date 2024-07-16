@@ -975,7 +975,7 @@ class VentasController extends Controller
                  //->get();
 
         $remisiones = remision::select(
-            DB::raw("fechadocumento as fecha"),
+            DB::raw("fechadocumento as fechafactura"),
             DB::raw("fechadocumento as vencimiento"),
             DB::raw('consecutivo as numerodefactura'),
             DB::raw('tipodedocumento as tipodedocumento'),
@@ -1052,7 +1052,7 @@ class VentasController extends Controller
             ->where('facturas.estado','=',1)
             ->whereBetween('facturas.fechafactura',[$fechad,$fechah])
             ->whereBetween('facturas.horadefactura',[$horad,$horah])
-            ->orderBy('facturas.fechafactura')
+            ->orderBy('fechafactura')
             // ->orderBy('facturas.prefijo')
             // ->Orderby('facturas.numerodefactura')
             ->get();
