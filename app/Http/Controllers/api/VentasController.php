@@ -1054,7 +1054,7 @@ class VentasController extends Controller
             ->Orderby('consecutivo')
             ->get();
 
-        //$ventas->union($remisiones)->get();
+        $ventas->union($remisiones)->get();
 
         //$ventas = $remisiones;
 
