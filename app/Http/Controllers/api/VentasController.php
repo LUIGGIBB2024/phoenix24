@@ -1074,7 +1074,8 @@ class VentasController extends Controller
              'msg'      => 'Ventas Detalladas Diarias (' . $fechad .'='.$fechah.')',
              'fechadesde' => $fechad ." ". $horad,
              'fechahasta' => $fechah ." ". $horah,
-             'grantotal' =>  $tot,
+             //'grantotal' =>  $tot,
+             'grantotal' =>  0,
              'ventas'   => $ventas
             ],Response::HTTP_ACCEPTED);
     }
