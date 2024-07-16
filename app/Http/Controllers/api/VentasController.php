@@ -1140,7 +1140,7 @@ class VentasController extends Controller
         return response()->json(
             [
              'status'           => '200',
-             'msg'              => 'Ventas Diarias Consolidadas Año ('. $anop .')',
+             'msg'              => 'Ventas Diarias Consolidadas Año !!! ('. $anop .')',
              'grantotal'        =>  $tot,
              'mesproceso'       =>  $mesproceso,
              'ventas'           => $ventasjs,
