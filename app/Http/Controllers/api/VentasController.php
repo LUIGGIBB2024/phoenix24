@@ -856,7 +856,8 @@ class VentasController extends Controller
 
              $curproducto = DB::table('producto')->select('producto.porcentajeiva')
             ->where('producto.codigo','=',$producto)->get();
-            $porcentaje = Empty($curproducto)?0:$curproducto->porcentajeiva;
+
+            $porcentaje = is_null($curproducto)?0:$curproducto->porcentajeiva;
 
             $valorneto  = round($valor * (1  + ($porcentaje/100)),0);
 
