@@ -1157,18 +1157,31 @@ class VentasController extends Controller
         //       'Grantotalconsolidado'      => $ventasConsolidadas,
         //      ],Response::HTTP_ACCEPTED);
 
-
-        $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo, $fecha,$diasemana) {
+        $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo) {
             $totalVentas = $grupo->sum(function ($item) {
                 return (int) $item['totalventas'];
             });
-            $diadelasemana = $item['diadelasemana'];
+
+            $diaDeLaSemana = $grupo->first()['diadelasemana'];
+
             return [
                 'totalventas' => (string) $totalVentas,
-                'fechafactura' => $fecha,
-                'diadelasemana' => $diadelasemana,
+                'fechafactura' => $grupo->first()['fechafactura'],
+                'diadelasemana' => $diaDeLaSemana
             ];
         })->values();
+
+
+        // $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo, $fecha) {
+        //     $totalVentas = $grupo->sum(function ($item) {
+        //         return (int) $item['totalventas'];
+        //     });
+
+        //     return [
+        //         'totalventas' => (string) $totalVentas,
+        //         'fechafactura' => $fecha,
+        //     ];
+        // })->values();
 
 
         // $_consolidado = $consolidado->groupBy('fechafacturan')->groupBy('fechafactura')->map(
