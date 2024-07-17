@@ -1130,6 +1130,15 @@ class VentasController extends Controller
             ->groupBy('centrodeoperacion','months','fechafactura')
             ->get();
 
+        $consolidado = $ventas->select('centrodeoperacion','fechafactura','totalventas')->groupBy(['centrodeoperacion','fechafactura'])->get();
+
+        return response()->json(
+            [
+             'status'           => '200',
+             'msg'              => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
+             'grantotal'        =>  $consolidado,
+            ],Response::HTTP_ACCEPTED);
+
         $ventasjs =$ventas;
         $tot = 0.00;
         foreach($ventas as $dato)
