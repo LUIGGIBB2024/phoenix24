@@ -1147,7 +1147,7 @@ class VentasController extends Controller
             function($grupo) {
                 return[
                     //'centrodeoperacion'     => $grupo->first()['centrodeoperacion'],
-                    'fechafactura'          => $grupo->first()['fechafactura'],
+                    'fechafactura'          => $grupo['fechafactura'],
                     'totalventas'           => $grupo->sum('totalventas'),
                 ];
 
