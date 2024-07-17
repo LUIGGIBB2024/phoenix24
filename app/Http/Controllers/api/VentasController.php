@@ -1163,11 +1163,13 @@ class VentasController extends Controller
             });
 
             $diaDeLaSemana = $grupo->first()['diadelasemana'];
+            $months        = $grupo->first()['months'];
 
             return [
                 'totalventas' => (string) $totalVentas,
                 'fechafactura' => $grupo->first()['fechafactura'],
-                'diadelasemana' => $diaDeLaSemana
+                'diadelasemana' => $diaDeLaSemana,
+                'months'        => $months
             ];
         })->values();
 
