@@ -1158,26 +1158,37 @@ class VentasController extends Controller
         //      ],Response::HTTP_ACCEPTED);
 
 
-
-        $_consolidado = $consolidado->groupBy('fechafacturan')->groupBy('fechafactura')->map(
-            function($grupo,$totalventas) {
-                $totalventas = $grupo->sum(function ($item)
-                            {
-                                 return (int) $item['totalventas'];
-                             });
-                return[
-                    //'centrodeoperacion'     => $grupo->first()['centrodeoperacion'],
-                    'fechafactura'          => $grupo->fechafactura,
-                    'totalventas'           => $totalventas,
-                ];
-
+        $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo, $fecha) {
+            $totalVentas = $grupo->sum(function ($item) {
+                return (int) $item['totalventas'];
             });
+
+            return [
+                'totalventas' => (string) $totalVentas,
+                'fechafactura' => $fecha
+            ];
+        })->values();
+
+
+        // $_consolidado = $consolidado->groupBy('fechafacturan')->groupBy('fechafactura')->map(
+        //     function($grupo,$totalventas) {
+        //         $totalventas = $grupo->sum(function ($item)
+        //                     {
+        //                          return (int) $item['totalventas'];
+        //                      });
+        //         return[
+        //             //'centrodeoperacion'     => $grupo->first()['centrodeoperacion'],
+        //             'fechafactura'          => $grupo->fechafactura,
+        //             'totalventas'           => $totalventas,
+        //         ];
+
+        //     });
 
         return response()->json(
             [
              'status'                    => '200',
              'msg'                       => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
-             'Grantotalconsolidado'      => $_consolidado,
+             'Grantotalconsolidado'      => $ventasConsolidadas,
             ],Response::HTTP_ACCEPTED);
 
         $ventasjs =$ventas;
