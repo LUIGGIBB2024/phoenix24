@@ -1139,7 +1139,7 @@ class VentasController extends Controller
             [
              'status'           => '200',
              'msg'              => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
-             'grantotal'        =>  $consolidado,
+             'grantotalconsolidado'        =>  $consolidado,
             ],Response::HTTP_ACCEPTED);
 
         $ventasjs =$ventas;
