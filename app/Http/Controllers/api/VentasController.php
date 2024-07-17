@@ -1024,15 +1024,15 @@ class VentasController extends Controller
             ->whereBetween('fechadocumento',[$fechad,$fechah])
             ->whereBetween('horadocumento',[$horad,$horah]);
 
-            return response()->json(
-                [
-                 'status'   => '200',
-                 'msg'      => 'Ventas Detalladas Diarias ... (' . $fechad .'='.$fechah.')',
-                 'fechadesde' => $fechad ." ". $horad,
-                 'fechahasta' => $fechah ." ". $horah,
-                 //'grantotal' =>  $tot,
-                 'ventas'   => $remisiones
-                ],Response::HTTP_ACCEPTED);
+            // return response()->json(
+            //     [
+            //      'status'   => '200',
+            //      'msg'      => 'Ventas Detalladas Diarias ... (' . $fechad .'='.$fechah.')',
+            //      'fechadesde' => $fechad ." ". $horad,
+            //      'fechahasta' => $fechah ." ". $horah,
+            //      //'grantotal' =>  $tot,
+            //      'ventas'   => $remisiones
+            //     ],Response::HTTP_ACCEPTED);
 
         $ventas = factura::select(
             DB::raw("facturas.fechafactura"),
