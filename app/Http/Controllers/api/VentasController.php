@@ -1134,13 +1134,23 @@ class VentasController extends Controller
 
         //$consolidado = $ventas->collect('centrodeoperacion','fechafactura')->sum('totalventas')->groupBy(['centrodeoperacion','fechafactura']);
         $consolidado = collect($ventas);
-        $consolidado->sum('totalventas');
+
+        $_consolidado = $consolidado->groupBy(['months','fechafactura'])->map(
+            function($grupo) {
+                return[
+                    'centrodeoperacion'     =>$grupo->centrodeoperacion,
+                    'fechafactura'          =>$grupo->fechafactura,
+                    'totalventas'           =>$grupo->sum('totalventas')
+                ];
+
+            });
+
 
         return response()->json(
             [
              'status'           => '200',
              'msg'              => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
-             'grantotalconsolidado'        =>  $consolidado,
+             'grantotalconsolidado'        =>   $_consolidado,
             ],Response::HTTP_ACCEPTED);
 
         $ventasjs =$ventas;
