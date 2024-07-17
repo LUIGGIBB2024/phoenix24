@@ -1131,7 +1131,7 @@ class VentasController extends Controller
             ->get();
 
 
-        $consolidado = $ventas->collect('centrodeoperacion','fechafactura','totalventas')->groupBy(['centrodeoperacion','fechafactura']);
+        $consolidado = $ventas->collect('centrodeoperacion','fechafactura','sum(totalventas) total')->groupBy(['centrodeoperacion','fechafactura']);
 
         return response()->json(
             [
