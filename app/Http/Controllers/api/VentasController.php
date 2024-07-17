@@ -1202,13 +1202,6 @@ class VentasController extends Controller
 
         //     });
 
-        return response()->json(
-            [
-             'status'                    => '200',
-             'msg'                       => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
-             'Grantotalconsolidado'      => $ventasConsolidadas,
-            ],Response::HTTP_ACCEPTED);
-
         $ventasjs =$ventas;
         $tot = 0.00;
         foreach($ventas as $dato)
@@ -1220,10 +1213,10 @@ class VentasController extends Controller
         return response()->json(
             [
              'status'           => '200',
-             'msg'              => 'Ventas Diarias Consolidadas Año !!! ('. $anop .')',
-             'grantotal'        =>  $tot,
-             'mesproceso'       =>  $mesproceso,
-             'ventas'           => $ventasjs,
+             'msg'              => 'Ventas Diarias Consolidadas Año ('. $anop .')',
+             'grantotal'        => $tot,
+             'mesproceso'       => $mesproceso,
+             'ventas'           => $ventasConsolidadas,
             ],Response::HTTP_ACCEPTED);
 
     }
