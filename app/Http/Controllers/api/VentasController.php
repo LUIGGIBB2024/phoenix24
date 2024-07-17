@@ -1130,7 +1130,8 @@ class VentasController extends Controller
             ->groupBy('centrodeoperacion','months','fechafactura')
             ->get();
 
-        $consolidado = $ventas->select('centrodeoperacion','fechafactura','totalventas')->groupBy(['centrodeoperacion','fechafactura'])->get();
+
+        $consolidado = $ventas->select('centrodeoperacion','fechafactura','totalventas')->groupBy(['centrodeoperacion','fechafactura']);
 
         return response()->json(
             [
