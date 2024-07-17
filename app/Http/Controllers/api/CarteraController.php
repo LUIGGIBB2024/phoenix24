@@ -37,7 +37,7 @@ class CarteraController extends Controller
               $centrooper   =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
               $cuenta       =   !is_null($dato['cuenta'])?$dato['cuenta']:"";
               $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
-              $scentro      =   !is_null($dato['centro'])?$dato['scentro']:"";
+              $scentro      =   !is_null($dato['scentro'])?$dato['scentro']:"";
 
               $facturas     = factura::where('numerodefactura',$nrofactura)->where('prefijo',$prefijo)
                                      ->where('tipodedocumento',$tipodocto)->where('fechafactura',$fecha)->first();
