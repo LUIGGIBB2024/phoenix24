@@ -1135,36 +1135,40 @@ class VentasController extends Controller
         //$consolidado = $ventas->collect('centrodeoperacion','fechafactura')->sum('totalventas')->groupBy(['centrodeoperacion','fechafactura']);
         $consolidado = collect($ventas);
 
-        $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo, $fecha) {
-            return $grupo->groupBy('centrodeoperacion')->map(function ($items, $centro) use ($fecha) {
-                $totalVentas = $items->sum(function ($item) {
-                    return (int) $item['totalventas'];
-                });
+        // $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo, $fecha) {
+        //     return $grupo->groupBy('centrodeoperacion')->map(function ($items, $centro) use ($fecha) {
+        //         $totalVentas = $items->sum(function ($item) {
+        //             return (int) $item['totalventas'];
+        //         });
 
-                return [
-                    'centrodeoperacion' => $centro,
-                    'totalventas' => (string) $totalVentas,
-                    'fechafactura' => $fecha
-                ];
-            })->values();
-        })->flatten(1);
-
-
-         return response()->json(
-             [
-              'status'                    => '200',
-              'msg'                       => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
-              'Grantotalconsolidado'      => $ventasConsolidadas,
-             ],Response::HTTP_ACCEPTED);
+        //         return [
+        //             'centrodeoperacion' => $centro,
+        //             'totalventas' => (string) $totalVentas,
+        //             'fechafactura' => $fecha
+        //         ];
+        //     })->values();
+        // })->flatten(1);
 
 
+        //  return response()->json(
+        //      [
+        //       'status'                    => '200',
+        //       'msg'                       => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
+        //       'Grantotalconsolidado'      => $ventasConsolidadas,
+        //      ],Response::HTTP_ACCEPTED);
 
-        $_consolidado = $consolidado->groupBy('centrodeoperacion')->groupBy('fechafactura')->map(
+
+
+        $_consolidado = $consolidado->groupBy('fechafacturan')->groupBy('fechafactura')->map(
             function($grupo) {
+                $totalventas = $grupo->sum(function ($item)
+                            {
+                                 return (int) $item['totalventas'];
+                             });
                 return[
                     //'centrodeoperacion'     => $grupo->first()['centrodeoperacion'],
                     'fechafactura'          => $grupo->fechafactura,
-                    'totalventas'           => $grupo->sum('totalventas'),
+                    'totalventas'           => $totalventas,
                 ];
 
             });
