@@ -1158,14 +1158,15 @@ class VentasController extends Controller
         //      ],Response::HTTP_ACCEPTED);
 
 
-        $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo, $fecha) {
+        $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo, $fecha,$diasemana) {
             $totalVentas = $grupo->sum(function ($item) {
                 return (int) $item['totalventas'];
             });
-
+            $diadelasemana = $item['diadelasemana'];
             return [
                 'totalventas' => (string) $totalVentas,
-                'fechafactura' => $fecha
+                'fechafactura' => $fecha,
+                'diadelasemana' => $diadelasemana,
             ];
         })->values();
 
