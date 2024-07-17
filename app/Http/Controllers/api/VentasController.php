@@ -1127,7 +1127,8 @@ class VentasController extends Controller
             ->whereMonth('fechafactura',$mes)
             ->whereYear('fechafactura',$anop )
             ->unionAll($remisiones)
-            ->groupBy('centrodeoperacion','months','fechafactura')
+            //->groupBy('centrodeoperacion','months','fechafactura')
+            ->groupBy('months','fechafactura')
             ->get();
 
 
