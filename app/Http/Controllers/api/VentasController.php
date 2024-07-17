@@ -1026,7 +1026,7 @@ class VentasController extends Controller
             return response()->json(
                 [
                  'status'   => '200',
-                 'msg'      => 'Ventas Detalladas Diarias (' . $fechad .'='.$fechah.')',
+                 'msg'      => 'Ventas Detalladas Diarias ... (' . $fechad .'='.$fechah.')',
                  'fechadesde' => $fechad ." ". $horad,
                  'fechahasta' => $fechah ." ". $horah,
                  //'grantotal' =>  $tot,
