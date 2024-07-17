@@ -1146,7 +1146,7 @@ class VentasController extends Controller
         $_consolidado = $consolidado->groupBy(['months','fechafactura'])->map(
             function($grupo) {
                 return[
-                    //'centrodeoperacion'     => $grupo['centrodeoperacion'],
+                    'centrodeoperacion'     => $grupo->first()['centrodeoperacion'],
                     'totalventas'           => $grupo->sum('totalventas'),
                 ];
 
