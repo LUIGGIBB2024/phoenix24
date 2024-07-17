@@ -1145,12 +1145,11 @@ class VentasController extends Controller
 
             });
 
-
         return response()->json(
             [
-             'status'           => '200',
-             'msg'              => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
-             'grantotalconsolidado'        =>   $_consolidado,
+             'status'                    => '200',
+             'msg'                       => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
+             'Grantotalconsolidado'      => $_consolidado,
             ],Response::HTTP_ACCEPTED);
 
         $ventasjs =$ventas;
