@@ -858,7 +858,8 @@ class VentasController extends Controller
             ->where('producto.codigo','=',$producto)->first();
 
 
-            if (is_null($curproducto->porcentajeiva))
+            //if (is_null($curproducto->porcentajeiva))
+            if (is_null($curproducto))
             {
             return response()->json(
                 [
