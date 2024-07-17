@@ -1160,7 +1160,7 @@ class VentasController extends Controller
 
 
         $_consolidado = $consolidado->groupBy('fechafacturan')->groupBy('fechafactura')->map(
-            function($grupo) {
+            function($grupo,$totalventas) {
                 $totalventas = $grupo->sum(function ($item)
                             {
                                  return (int) $item['totalventas'];
