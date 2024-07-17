@@ -859,16 +859,16 @@ class VentasController extends Controller
 
 
             //if (is_null($curproducto->porcentajeiva))
-            if (is_null($curproducto))
-            {
-            return response()->json(
-                [
-                 'status'   => '200 OK Detalle de lista',
-                 'msg'      => 'Actualización Exitosa',
-                 'producto' => $producto,
-                 'Curproducto' => $curproducto,
-                ],Response::HTTP_ACCEPTED);
-            }
+            // if (is_null($curproducto))
+            // {
+            // return response()->json(
+            //     [
+            //      'status'   => '200 OK Detalle de lista',
+            //      'msg'      => 'Actualización Exitosa',
+            //      'producto' => $producto,
+            //      'Curproducto' => $curproducto,
+            //     ],Response::HTTP_ACCEPTED);
+            // }
 
             $porcentaje = is_null($curproducto)?0:$curproducto->porcentajeiva;
 
