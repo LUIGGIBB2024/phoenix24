@@ -1168,12 +1168,13 @@ class VentasController extends Controller
             $iddia         = $grupo->first()['iddia'];
 
             return [
-                'totalventas'   => (string) $totalVentas,
-                'months'        => $months,
-                'mes'           => $mes,
-                'iddia'         => $iddia,
-                'diadelasemana' => $diaDeLaSemana,
-                'fechafactura'  => $grupo->first()['fechafactura'],
+                'centrodeoperacion'     => "",
+                'totalventas'           => (string) $totalVentas,
+                'months'                => $months,
+                'mes'                   => $mes,
+                'iddia'                 => $iddia,
+                'diadelasemana'         => $diaDeLaSemana,
+                'fechafactura'          => $grupo->first()['fechafactura'],
             ];
         })->values();
 
