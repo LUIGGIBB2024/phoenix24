@@ -978,7 +978,7 @@ class VentasController extends Controller
         $consolidado = collect($ventas);
 
         $ventasConsolidadas = $consolidado->groupBy(function ($item) {
-            return $item['centrodeoperacion'] . '|' . $item['fecha'] . '|' . $item['prefijo'];
+            return $item['fecha'] . '|' . $item['centrodeoperacion'] . '|' . $item['prefijo'];
         })->map(function ($grupo) {
             $totalVentas = $grupo->sum(function ($item) {
                 return (int) $item['totalventas'];
