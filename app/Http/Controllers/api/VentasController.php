@@ -956,7 +956,7 @@ class VentasController extends Controller
             ->where('remision.estado','=',1)
             ->whereBetween('fechadocumento',[$fechad,$fechah])
             ->whereBetween('horadocumento',[$horad,$horah])
-            ->groupBy('centrodeoperacion','months','day','prefijo');
+            ->groupBy('centrodeoperacion','fecha','prefijo');
            // ->get();
 
         $ventas = factura::select(
@@ -971,8 +971,32 @@ class VentasController extends Controller
             ->where('facturas.estado','=',1)
             ->whereBetween('fechafactura',[$fechad,$fechah])
             ->whereBetween('horadefactura',[$horad,$horah])
-            ->groupBy('centrodeoperacion','months','day','prefijo')
+            ->groupBy('centrodeoperacion','fecha','prefijo')
             ->get();
+
+            $consolidado = collect($ventas);
+
+            $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo) {
+                $totalVentas = $grupo->sum(function ($item) {
+                    return (int) $item['totalventas'];
+                });
+
+                $diaDeLaSemana = $grupo->first()['diadelasemana'];
+                $months        = $grupo->first()['months'];
+                $mes           = $grupo->first()['mes'];
+                $iddia         = $grupo->first()['iddia'];
+
+                return [
+                    'centrodeoperacion'     => "",
+                    'totalventas'           => (string) $totalVentas,
+                    'months'                => $months,
+                    'mes'                   => $mes,
+                    'iddia'                 => $iddia,
+                    'diadelasemana'         => $diaDeLaSemana,
+                    'fechafactura'          => $grupo->first()['fechafactura'],
+                ];
+            })->values();
+
 
         $ventasjs =$ventas;
         $tot = 0.00;
