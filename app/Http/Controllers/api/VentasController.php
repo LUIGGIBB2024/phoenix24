@@ -951,7 +951,7 @@ class VentasController extends Controller
             DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
             DB::raw("DATE_FORMAT(fechadocumento,'%d') as day"),
             DB::raw("fechadocumento as fecha"),
-            DB::raw("'' as prefijo"))
+            DB::raw("'REM' as prefijo"))
             ->leftjoin('centrooperativo', 'remision.centrooper', '=', 'centrooperativo.codigo')
             ->where('remision.estado','=',1)
             ->whereBetween('fechadocumento',[$fechad,$fechah])
