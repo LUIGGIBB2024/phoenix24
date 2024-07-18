@@ -975,7 +975,18 @@ class VentasController extends Controller
             ->groupBy('centrodeoperacion','fecha','prefijo')
             ->get();
 
-            //$consolidado = collect($ventas);
+        $consolidado = collect($ventas);
+
+        $ventasConsolidadas = $consolidado->groupBy(['fecha', 'centrodeoperacion'])->map(function ($grupo) {
+            $totalVentas = $grupo->sum(function ($item) {
+                return (int) $item['totalventas'];
+            });
+
+            $item = $grupo->first();
+            $item['totalventas'] = (string) $totalVentas;
+            $item['prefijo'] = $grupo->prefijo; // Set "REM" for all items as per the desired output
+            return $item;
+        })->values();
 
 
 
@@ -993,7 +1004,7 @@ class VentasController extends Controller
              'fechadesde' => $fechad ." ". $horad,
              'fechahasta' => $fechah ." ". $horah,
              'grantotal' =>  $tot,
-             'ventas'   => $ventas
+             'ventas'   => $ventasConsolidadas
             ],Response::HTTP_ACCEPTED);
     }
 
