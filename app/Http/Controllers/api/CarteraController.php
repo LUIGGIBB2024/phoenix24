@@ -202,7 +202,6 @@ class CarteraController extends Controller
 
     public function CarteraDetallada(Request $request):JsonResponse
     {
-
         $fechacorte = $request->fechacorte;
         $nit        = $request->nit;
         $sucursal   = $request->sucursal;
