@@ -911,7 +911,7 @@ class VentasController extends Controller
             DB::raw("sum(round(totaldocumento,0)) as totalventas"),
             DB::raw("DATE_FORMAT(fechadocumento,'%M %Y') as months"),
             DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
-            DB::raw("remision.prefijo as prefijo")        )
+            DB::raw("'REM' as prefijo")        )
             ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
             ->where('remision.estado','=',1)
             ->whereMonth('fechadocumento',$mes)
