@@ -912,7 +912,7 @@ class VentasController extends Controller
             DB::raw("DATE_FORMAT(fechadocumento,'%M %Y') as months"),
             DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
             DB::raw("'REM' as prefijo")        )
-            ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
+            ->leftjoin('centrooperativo', 'remision.centrooper', '=', 'centrooperativo.codigo')
             ->where('remision.estado','=',1)
             ->whereMonth('fechadocumento',$mes)
             ->whereYear('fechadcumento',$anop )
