@@ -943,6 +943,22 @@ class VentasController extends Controller
         $horad   = $request->horadesde;
         $horah   = $request->horahasta;
         $anop  = $request->año;
+
+        $remisiones = remision::select(
+            DB::raw('centrooperativo.nombre as centrodeoperacion'),
+            DB::raw('sum(round(totaldocumento,0)) as totalventas'),
+            DB::raw("DATE_FORMAT(fechadocumento,'%M %Y') as months"),
+            DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
+            DB::raw("DATE_FORMAT(fechadocumento,'%d') as day"),
+            DB::raw("fechadocumento as fecha"),
+            DB::raw("'' as prefijo"))
+            ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
+            ->where('remision.estado','=',1)
+            ->whereBetween('fechadocumento',[$fechad,$fechah])
+            ->whereBetween('horadocumento',[$horad,$horah])
+            ->groupBy('centrodeoperacion','months','day','prefijo');
+           // ->get();
+
         $ventas = factura::select(
             DB::raw('centrooperativo.nombre as centrodeoperacion'),
             DB::raw('sum(round(totalfactura,0)) as totalventas'),
@@ -985,8 +1001,6 @@ class VentasController extends Controller
         $horah   = $request->horahasta;
         $anop  = $request->año;
 
-                 //->get();
-
         $remisiones = remision::select(
             DB::raw("fechadocumento as fechafactura"),
             DB::raw("fechadocumento as vencimiento"),
@@ -1024,17 +1038,7 @@ class VentasController extends Controller
             ->whereBetween('fechadocumento',[$fechad,$fechah])
             ->whereBetween('horadocumento',[$horad,$horah]);
 
-            // return response()->json(
-            //     [
-            //      'status'   => '200',
-            //      'msg'      => 'Ventas Detalladas Diarias ... (' . $fechad .'='.$fechah.')',
-            //      'fechadesde' => $fechad ." ". $horad,
-            //      'fechahasta' => $fechah ." ". $horah,
-            //      //'grantotal' =>  $tot,
-            //      'ventas'   => $remisiones
-            //     ],Response::HTTP_ACCEPTED);
-
-        $ventas = factura::select(
+         $ventas = factura::select(
             DB::raw("facturas.fechafactura"),
             DB::raw("facturas.fechavencimiento as vencimiento"),
             DB::raw('facturas.numerodefactura as numerodefactura'),
@@ -1146,28 +1150,6 @@ class VentasController extends Controller
         //$consolidado = $ventas->collect('centrodeoperacion','fechafactura')->sum('totalventas')->groupBy(['centrodeoperacion','fechafactura']);
         $consolidado = collect($ventas);
 
-        // $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo, $fecha) {
-        //     return $grupo->groupBy('centrodeoperacion')->map(function ($items, $centro) use ($fecha) {
-        //         $totalVentas = $items->sum(function ($item) {
-        //             return (int) $item['totalventas'];
-        //         });
-
-        //         return [
-        //             'centrodeoperacion' => $centro,
-        //             'totalventas' => (string) $totalVentas,
-        //             'fechafactura' => $fecha
-        //         ];
-        //     })->values();
-        // })->flatten(1);
-
-
-        //  return response()->json(
-        //      [
-        //       'status'                    => '200',
-        //       'msg'                       => 'Ventas Diarias Consolidadas Año *** ('. $anop .')',
-        //       'Grantotalconsolidado'      => $ventasConsolidadas,
-        //      ],Response::HTTP_ACCEPTED);
-
         $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo) {
             $totalVentas = $grupo->sum(function ($item) {
                 return (int) $item['totalventas'];
@@ -1189,32 +1171,6 @@ class VentasController extends Controller
             ];
         })->values();
 
-
-        // $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo, $fecha) {
-        //     $totalVentas = $grupo->sum(function ($item) {
-        //         return (int) $item['totalventas'];
-        //     });
-
-        //     return [
-        //         'totalventas' => (string) $totalVentas,
-        //         'fechafactura' => $fecha,
-        //     ];
-        // })->values();
-
-
-        // $_consolidado = $consolidado->groupBy('fechafacturan')->groupBy('fechafactura')->map(
-        //     function($grupo,$totalventas) {
-        //         $totalventas = $grupo->sum(function ($item)
-        //                     {
-        //                          return (int) $item['totalventas'];
-        //                      });
-        //         return[
-        //             //'centrodeoperacion'     => $grupo->first()['centrodeoperacion'],
-        //             'fechafactura'          => $grupo->fechafactura,
-        //             'totalventas'           => $totalventas,
-        //         ];
-
-        //     });
 
         $ventasjs =$ventas;
         $tot = 0.00;
