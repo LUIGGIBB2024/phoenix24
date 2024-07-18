@@ -905,6 +905,19 @@ class VentasController extends Controller
         DB::statement("SET lc_time_names = 'es_Es';");
         $mes  = $request->mes;
         $anop  = $request->año;
+
+        $remisiones = remision::select(
+            DB::raw('centrooperativo.nombre as centrodeoperacion'),
+            DB::raw("sum(round(totaldocumento,0)) as totalventas"),
+            DB::raw("DATE_FORMAT(fechadocumento,'%M %Y') as months"),
+            DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
+            DB::raw("remision.prefijo as prefijo")        )
+            ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
+            ->where('remision.estado','=',1)
+            ->whereMonth('fechadocumento',$mes)
+            ->whereYear('fechadcumento',$anop )
+            ->groupBy('centrodeoperacion','months','prefijo');
+
         $ventas = factura::select(
             DB::raw('centrooperativo.nombre as centrodeoperacion'),
             DB::raw("sum(round(totalfactura,0)) as totalventas"),
@@ -912,6 +925,7 @@ class VentasController extends Controller
             DB::raw("DATE_FORMAT(fechafactura,'%m') as mes"),
             DB::raw("facturas.prefijo as prefijo")        )
             ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
+            ->unionAll($remisiones)
             ->where('facturas.estado','=',1)
             ->whereMonth('fechafactura',$mes)
             ->whereYear('fechafactura',$anop )
