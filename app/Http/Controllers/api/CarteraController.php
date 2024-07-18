@@ -195,7 +195,7 @@ class CarteraController extends Controller
                   'status'        => '200',
                   'msg'           => 'Consulta de Cartera Existosa',
                   'totalcartera'  => $totalcartera,
-                  'detalle'       => $cartera,
+                  'detalles'       => $cartera,
                   ],Response::HTTP_ACCEPTED);
     }
 
