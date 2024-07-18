@@ -977,14 +977,16 @@ class VentasController extends Controller
 
         $consolidado = collect($ventas);
 
-        $ventasConsolidadas = $consolidado->groupBy(['fecha', 'centrodeoperacion'])->map(function ($grupo) {
+        $ventasConsolidadas = $consolidado->groupBy(function ($item) {
+            return $item['centrodeoperacion'] . '|' . $item['fecha'] . '|' . $item['prefijo'];
+        })->map(function ($grupo) {
             $totalVentas = $grupo->sum(function ($item) {
                 return (int) $item['totalventas'];
             });
 
             $item = $grupo->first();
             $item['totalventas'] = (string) $totalVentas;
-            $item['prefijo'] = $grupo->prefijo; // Set "REM" for all items as per the desired output
+
             return $item;
         })->values();
 
