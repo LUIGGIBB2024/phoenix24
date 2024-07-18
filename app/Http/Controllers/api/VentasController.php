@@ -956,7 +956,7 @@ class VentasController extends Controller
             ->where('remision.estado','=',1)
             ->whereBetween('fechadocumento',[$fechad,$fechah])
             ->whereBetween('horadocumento',[$horad,$horah])
-            ->groupBy('centrodeoperacion','fecha','prefijo');
+            ->groupBy('fecha','centrodeoperacion','prefijo');
            // ->get();
 
         $ventas = factura::select(
@@ -972,7 +972,7 @@ class VentasController extends Controller
             ->where('facturas.estado','=',1)
             ->whereBetween('fechafactura',[$fechad,$fechah])
             ->whereBetween('horadefactura',[$horad,$horah])
-            ->groupBy('centrodeoperacion','fecha','prefijo')
+            ->groupBy('fecha','centrodeoperacion','prefijo')
             ->get();
 
         $consolidado = collect($ventas);
