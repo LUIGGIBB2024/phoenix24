@@ -968,34 +968,15 @@ class VentasController extends Controller
             DB::raw("fechafactura as fecha"),
             DB::raw("prefijo as prefijo"))
             ->leftjoin('centrooperativo', 'facturas.centrooper', '=', 'centrooperativo.codigo')
+            ->unionAll($remisiones)
             ->where('facturas.estado','=',1)
             ->whereBetween('fechafactura',[$fechad,$fechah])
             ->whereBetween('horadefactura',[$horad,$horah])
             ->groupBy('centrodeoperacion','fecha','prefijo')
             ->get();
 
-            $consolidado = collect($ventas);
+            //$consolidado = collect($ventas);
 
-            $ventasConsolidadas = $consolidado->groupBy('fechafactura')->map(function ($grupo) {
-                $totalVentas = $grupo->sum(function ($item) {
-                    return (int) $item['totalventas'];
-                });
-
-                $diaDeLaSemana = $grupo->first()['diadelasemana'];
-                $months        = $grupo->first()['months'];
-                $mes           = $grupo->first()['mes'];
-                $iddia         = $grupo->first()['iddia'];
-
-                return [
-                    'centrodeoperacion'     => "",
-                    'totalventas'           => (string) $totalVentas,
-                    'months'                => $months,
-                    'mes'                   => $mes,
-                    'iddia'                 => $iddia,
-                    'diadelasemana'         => $diaDeLaSemana,
-                    'fechafactura'          => $grupo->first()['fechafactura'],
-                ];
-            })->values();
 
 
         $ventasjs =$ventas;
