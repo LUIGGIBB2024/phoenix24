@@ -915,7 +915,7 @@ class VentasController extends Controller
             ->leftjoin('centrooperativo', 'remision.centrooper', '=', 'centrooperativo.codigo')
             ->where('remision.estado','=',1)
             ->whereMonth('fechadocumento',$mes)
-            ->whereYear('fechadcumento',$anop )
+            ->whereYear('fechadocumento',$anop )
             ->groupBy('centrodeoperacion','months','prefijo');
 
         $ventas = factura::select(
