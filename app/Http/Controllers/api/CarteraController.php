@@ -180,6 +180,7 @@ class CarteraController extends Controller
            ->get();
 
            $totalcartera = 0;
+           $totregistros = 0;
            foreach ($cartera as $dato)
            {
               $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
@@ -188,14 +189,16 @@ class CarteraController extends Controller
               $dato->abonos  = (float) $dato->abonos;
               $dato->saldo   = $saldo;
               $totalcartera  += $saldo;
+              $totregistros += 1;
            }
 
          return response()->json(
                   [
-                  'status'        => '200',
-                  'msg'           => 'Consulta de Cartera Existosa',
-                  'totalcartera'  => $totalcartera,
-                  'detalles'       => $cartera,
+                  'status'          => '200',
+                  'msg'             => 'Consulta de Cartera Existosa',
+                  'totalcartera'    => $totalcartera,
+                  'totalregistros'  => $totregistros,
+                  'detalles'        => $cartera,
                   ],Response::HTTP_ACCEPTED);
     }
 
