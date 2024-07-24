@@ -155,6 +155,7 @@ class CarteraController extends Controller
     {
 
         $fechacorte = $request->fechacorte;
+        $name       = $request->nombre;
 
         $pagos = detalledepago::select('nit', 'sucursal')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
@@ -175,6 +176,7 @@ class CarteraController extends Controller
                           ->on('cuentasporcobrar.sucursal','=','dpagos.sucursal');
                 })
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
+           ->where('clientes.nombrecompleto', 'like', '%' . $name . '%')
            ->groupBy('clientes.nombrecompleto')
            ->havingRaw('total <> abonos')
            ->get();
