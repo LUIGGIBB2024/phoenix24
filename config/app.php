@@ -120,7 +120,7 @@ return [
     */
 
     'key' => env('APP_KEY'),
-
+    'mix_url' => env('MIX_ASSET_URL', 'localhost'),
     'cipher' => 'AES-256-CBC',
 
     /*
