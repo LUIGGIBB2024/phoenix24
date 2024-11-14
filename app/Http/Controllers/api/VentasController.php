@@ -701,12 +701,12 @@ class VentasController extends Controller
                 'usuario_updated'           => $documento['usuarioupdated'],
             ]);
 
-            return response()->json(
-                [
-                 'status'   => '200OK',
-                 'msg'      => 'Grabé Registro dentro del FOR DctoInvt',
-                 'msg2'      => $contador
-                  ],Response::HTTP_BAD_REQUEST);
+            // return response()->json(
+            //     [
+            //      'status'   => '200OK',
+            //      'msg'      => 'Grabé Registro dentro del FOR DctoInvt',
+            //      'msg2'      => $contador
+            //       ],Response::HTTP_BAD_REQUEST);
 
         }
        }
