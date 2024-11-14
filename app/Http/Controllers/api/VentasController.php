@@ -642,12 +642,7 @@ class VentasController extends Controller
             $totaldcto      = $documento['valordcto'] + $documento['valoriva'] + $documento['valoradicional'] - $documento['valordescuento']
                               - $documento['valordescuentoadicional'] - $documento['valorrtefte'] - $documento['valorrteiva'] - $documento['valorrteica'];
             
-            return response()->json(
-               [
-                'status'   => '200OK',
-                'msg'      => 'Estoy dentro del FOR DctoInvt',
-                'msg2'      => $contador
-                 ],Response::HTTP_BAD_REQUEST);
+           
             documentosdeinventario::updateOrCreate(['consecutivo'=>$consecutivo, 'concepto'=>$concepto,
                               'cptoclase' => $cptoclase,'nit' => $nit,'sucursal'=>$sucursal,'fechademovimiento'=>$fecha],
             [
@@ -705,6 +700,13 @@ class VentasController extends Controller
                 'usuario_created'           => $documento['usuariocreated'],
                 'usuario_updated'           => $documento['usuarioupdated'],
             ]);
+
+            return response()->json(
+                [
+                 'status'   => '200OK',
+                 'msg'      => 'Grabé Registro dentro del FOR DctoInvt',
+                 'msg2'      => $contador
+                  ],Response::HTTP_BAD_REQUEST);
 
         }
        }
