@@ -1,7 +1,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
+@import 'tailwindcss/utilities'; 
 
 :root {
     --blue: #3490dc;
@@ -273,9 +272,9 @@
   button,
   [type=button],
   [type=reset],
-  [type=submit] {
+   [type=submit] {
     -webkit-appearance: button;
-  }
+  } 
 
   button:not(:disabled),
   [type=button]:not(:disabled),
@@ -10878,4 +10877,3 @@
       border-color: #dee2e6;
     }
   }
-
