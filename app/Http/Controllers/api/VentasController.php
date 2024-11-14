@@ -249,12 +249,6 @@ class VentasController extends Controller
        $contador = 0;
        if (isset($request->detalle))
        {
-         return response()->json(
-                  [
-                  'status'   => '200OK',
-                  'msg'      => 'Salida Pre Exitosa Detalle',          
-                  ],Response::HTTP_ACCEPTED);
-
             $detalles         = $request->detalle;
             $xcuantos         = count($detalles);
             $contador = 0;
@@ -263,6 +257,11 @@ class VentasController extends Controller
 
             foreach ($detalles as $detalle)
             {
+                return response()->json(
+                    [
+                    'status'   => '200OK',
+                    'msg'      => 'Entre al For Detalle',          
+                    ],Response::HTTP_ACCEPTED);
                 $fechadesde     =  $contador==0?$detalle['fechafactura']:$fechadesde;
                 $fechahasta     = $detalle['fechafactura'];
                 $contador++;
