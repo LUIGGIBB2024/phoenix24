@@ -631,6 +631,11 @@ class VentasController extends Controller
         $documentos     = $request->dctosinv;
         foreach ($documentos as $documento)
         {
+            return response()->json(
+                [
+                 'status'   => '200 OK',
+                 'msg'      => 'Estoy dentro del for Docinventarios',
+                ],Response::HTTP_ACCEPTED);
             $contador++;
             $consecutivo    = $documento['consecutivo'];
             $concepto       = $documento['concepto'];
