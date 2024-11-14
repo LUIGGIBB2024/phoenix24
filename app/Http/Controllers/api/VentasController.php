@@ -247,8 +247,8 @@ class VentasController extends Controller
                 } catch (\Exception $ex) {
                     return response()->json(
                         [
-                        'status'   => '4040404 OK',
-                        'msg'      => 'Error en el FOR',
+                        'status'   => '404 OK',
+                        'msg'      => 'Error Dctp Invt',
                         'error' => $ex,
                         ],Response::HTTP_BAD_REQUEST);    
                 } 
