@@ -271,11 +271,7 @@ class VentasController extends Controller
                 $cantidad1      = $detalle['peso']>0?$detalle['peso']:0;
                 $cantidad1      = $detalle['unidades']>0?$detalle['unidades']:$cantidad1;
                 $idlocal        = $detalle['idlocal'];
-                return response()->json(
-                    [
-                    'status'   => '200OK',
-                    'msg'      => 'Estoy antes de grabar',          
-                    ],Response::HTTP_ACCEPTED);
+                
                 detalledefactura::updateOrCreate(['numerodefactura'=>$numerofactura,'tipodedocumento'=>$tipodcto, 'prefijo'=>$prefijo, 'nit' => $nit,'producto' => $producto,'bodega'=>$bodega,'idlocal'=>$idlocal],
                 [
                     //'numerofactura'         => $detalle['numerofactura'],
@@ -328,6 +324,11 @@ class VentasController extends Controller
                     'usuario_created'       => $detalle['usuariocreated'],
                     'usuario_updated'       => $detalle['usuarioupdated'],
                 ]);
+                return response()->json(
+                    [
+                    'status'   => '200OK',
+                    'msg'      => 'Estoy Después de grabar',          
+                    ],Response::HTTP_ACCEPTED);
                 // return response()->json(
                 //     [
                 //     'status'   => '200OK',
