@@ -324,11 +324,7 @@ class VentasController extends Controller
                     'usuario_created'       => $detalle['usuariocreated'],
                     'usuario_updated'       => $detalle['usuarioupdated'],
                 ]);
-                return response()->json(
-                    [
-                    'status'   => '200OK',
-                    'msg'      => 'Estoy Después de grabar',          
-                    ],Response::HTTP_ACCEPTED);
+         
                 // return response()->json(
                 //     [
                 //     'status'   => '200OK',
