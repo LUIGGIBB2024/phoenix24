@@ -249,11 +249,11 @@ class VentasController extends Controller
        $contador = 0;
        if (isset($request->detalle))
        {
-        return response()->json(
-                 [
-                 'status'   => '200OK',
-                 'msg'      => 'Salida Pre Exitosa Detalle',          
-                 ],Response::HTTP_ACCEPTED);
+        // return response()->json(
+        //          [
+        //          'status'   => '200OK',
+        //          'msg'      => 'Salida Pre Exitosa Detalle',          
+        //          ],Response::HTTP_ACCEPTED);
 
             $detalles         = $request->detalle;
             $xcuantos         = count($detalles);
