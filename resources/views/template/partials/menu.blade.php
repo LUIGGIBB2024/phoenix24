@@ -75,7 +75,7 @@
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Configuración</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-cogs"></i><a href="maps-gmap.html">Tabla de Control</a></li>
+                        <li><i class="menu-icon fa fa-cogs"></i><a href="maps-gmap.html">Tabla de Control1</a></li>
                     </ul>
                 </li>
             </ul>
