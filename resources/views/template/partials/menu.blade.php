@@ -17,7 +17,7 @@
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cubes"></i>Inventarios</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-list-alt"></i><a href="{{url('inventarios/consultar')}}">Saldos por Productos</a></li>
+                        <li><i class="menu-icon fa fa-life-ring"></i><a href="{{url('inventarios/consultar')}}">Saldos por Productos</a></li>
                         <li><i class="menu-icon fa fa-list-alt"></i><a href="{{url('inventarios/consultar')}}">Saldos Totales</a></li>
                         <!--<li><i class="menu-icon fa fa-database"></i><a href="{{url('productos/consultar')}}">Actualizar Productos</a></li>-->
                         <li><i class="menu-icon fa fa-camera-retro"></i><a href="{{url('productos/consultar')}}">Productos (Fotos)</a></li>
