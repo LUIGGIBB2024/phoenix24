@@ -83,6 +83,7 @@ Route::get('/productos/editproductos/{id}',[ActualizarproductosController::class
 Route::put('/productos/actproductos/{id}',[ActualizarproductosController::class,'update'])->name('productos.update');
 
 Route::get('/inventarios/consultar',[InventariosController::class,'index'])->name('inventarios.consulta');
+Route::get('/inventarios/consultar_saldos',[InventariosController::class,'saldos'])->name('inventarios.saldos');
 Route::get('/inventarios/consultar_documentos',[InventariosController::class,'consultar_dctos'])->name('inventarios.consultar_documentos');
 Route::get('/inventarios/verdetalle_documentos/{id}/{valor}',[InventariosController::class,'verdetalle'])->name('dctosdeinventarios.verdetalle');
 
