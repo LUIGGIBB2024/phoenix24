@@ -203,5 +203,4 @@
           ).order([1, 'asc']).draw();
     });
     </script>
-
 @endsection
