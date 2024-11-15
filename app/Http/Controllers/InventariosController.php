@@ -41,6 +41,34 @@ class InventariosController extends Controller
       return view ('inventarios.index');
     }
 
+    public function saldos()
+    {
+        $anodeproceso = "";
+        $listaxdefecto = "";
+        $empresacontrol = enlacevisual_nv::find(1);
+        if ($empresacontrol !== null)
+        {
+            $anodeproceso = $empresacontrol->anofacturacion;
+            $listaxdefecto = $empresacontrol->listaxdefecto;
+        }
+
+        $productos = DB::table('saldosdeinventarios')->select('producto.productoID','producto.descripcion AS descripciondelproducto','producto.fechaultimacompra','saldosdeinventarios.producto','saldosdeinventarios.bodega','saldosdeinventarios.anodeproceso','saldosdeinventarios.cantidad',
+        'saldosdeinventarios.cantidad1','saldosdeinventarios.costopromedio','detalledelistas.valor','detalledelistas.iva','detallemiscelaneos.descripcion as descripciondelgrupo','detalledelistas.valorantesdeiva','detalledelistas.valorunifinal')
+                ->selectRaw('round(saldosdeinventarios.cantidad*saldosdeinventarios.costopromedio,0) AS productovalorizado')
+                ->where('saldosdeinventarios.cantidad','>',0)
+                ->where('detallemiscelaneos.codigoid','=','110')
+                ->where('saldosdeinventarios.anodeproceso','=',$anodeproceso)
+                ->where('detalledelistas.codigo','=',$listaxdefecto)
+                ->leftjoin('producto', 'saldosdeinventarios.producto', '=', 'producto.codigo')
+                ->leftjoin('detallemiscelaneos', 'producto.grupo', '=', 'detallemiscelaneos.codigo')
+                ->leftjoin('detalledelistas', 'saldosdeinventarios.producto', '=', 'detalledelistas.producto')
+                ->orderBy('saldosdeinventarios.bodega')
+                ->orderBy('producto.descripcion')
+                ->get();
+
+      return view ('inventarios.saldos');
+    }
+
     public function consultar_dctos()
     {
         $anodeproceso = "";
