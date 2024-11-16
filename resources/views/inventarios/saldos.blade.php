@@ -54,22 +54,35 @@
 @endsection
 
 @section('contenedor')
-<div class="app-page-title">
+{{--  <div class="app-page-title">
     {{-- <h4 class = "encab_pagina"> Información de Inventarios :: Total $:<span id="totalinventarios"></h4>--}}
-    <div class="page-title-wrapper">
+    {{--  <div class="page-title-wrapper">
         <div class="ibox-tools">
             <a href="{{'/dashboard'}}">
-                <button class="btn btn-warning btn-xs boton_regresar" type="button">
+                {{--  <button class="btn btn-warning btn-xs boton_regresar" type="button">
                     <i class="fas fa-arrow-circle-left"></i>
                     Regresar
-                </button>
+                </button>  
             </a>
         </div>
-    </div>
+    </div>  
     <h4 class ="color_infoencab"> Total Inventarios $:<span id="totalinventarios"></h4>
+</div>  --}}
+
+<div class="form-group">
+    <div class="row">
+         <div class="col-lg-12" >
+            <form method="GET" action="{{ route('productos.index') }}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="nombre" placeholder="Buscar producto por nombre" value="{{ request('nombre') }}">
+                    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                </div>
+            </form>
+         </div>
+    </div>
 </div>
 
-<div class="card" style="margin-top:-2.0em;" >
+{{--  <div class="card" style="margin-top:-2.0em;" >
     <div class="row">
          <div class="col-lg-12" >
               <div class="table-responsive">
@@ -95,7 +108,7 @@
               </div>
          </div>
     </div>
-</div>
+</div>  --}}
 @endsection
 
 @section('js')
@@ -203,5 +216,5 @@
           ).order([1, 'asc']).draw();
     });
     </script>
-    
+
 @endsection
