@@ -49,6 +49,7 @@ class VentasController extends Controller
                 'valorultimacompra'             => $dato['valorcompra'],
                 'valorventa'                    => $dato['valorventa'],
                 'costopromedio'                 => $dato['valorcosteo'],
+                'ultimocosto'                   => $dato['valorcompra'],
                 'fechaultimacompra'             => $dato['fechaultimacompra'],
                 'fechaultimacompra'             => $dato['fechaultimacompra'],
                 'unidadesxempaque'              => $dato['unidadxemb'],
