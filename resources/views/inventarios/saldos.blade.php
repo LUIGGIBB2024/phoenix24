@@ -53,7 +53,7 @@
 
          .parrafo
          {
-            color:rgb(36, 145, 26);
+            color:rgb(16, 79, 10);
             font-size: 11px;
             margin:0%;
             display: flex;
