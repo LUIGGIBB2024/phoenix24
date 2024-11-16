@@ -79,7 +79,7 @@
          .precio
          {
            color:white;
-           background-color: rgb(197, 13, 126);
+           background-color: rgb(210, 38, 144);
            width: 8em;
            text-align: center;
            margin-right: 0.5em;
@@ -88,7 +88,7 @@
          .precio2
          {
            color:white;
-           background-color: rgb(19, 95, 49);
+           background-color: rgb(17, 193, 88);
            width: 8em;
            text-align: center;
            margin-right: 0.5em;
@@ -97,6 +97,11 @@
          {
             font-size: .8em !important;
             margin: 0em 0em 0em !important;
+         }
+
+         .costo_especial
+         {
+            margin-top:2px;
          }
     </style>
 @endsection
@@ -122,7 +127,7 @@
          <div class="col-lg-12" >
             <form method="GET" action="{{ route('inventarios.saldos') }}">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="nombre" placeholder="Buscar producto por nombre" value="{{ request('nombre') }}">
+                    <input type="text" class="form-control text-uppercase" name="nombre" placeholder="Buscar producto por nombre" value="{{ request('nombre') }}">
                     <button class="btn btn-outline-secondary" type="submit">Buscar</button>
                 </div>
             </form>
@@ -141,11 +146,13 @@
                             {{--  <div></div>  --}}
                             <p class="card-text parrafo1"><strong>Existencia:</strong> <span class="precio rounded-pill font-weight-bold"> {{ number_format($producto->cantidad, 2) }}</span></p>                   
                         </div>
-                        <div class="input-group justify-content-between">
-                            <p class="card-text parrafo1"><strong>Costo  :</strong> $<span class="precio2 rounded-pill font-weight-bold">{{ number_format($producto->costopromedio, 0) }}</span></p>
-                            {{--  <div></div>  --}}
-                            <p class="card-text parrafo1"><strong>Costo Especial:</strong> <span class="precio2 rounded-pill font-weight-bold"> {{ number_format($producto->costopromedio, 2) }}</span></p>                   
-                        </div>
+                        @if (Auth::user()->tipodeusuario == 3)
+                            <div class="input-group justify-content-between costo_especial">
+                                <p class="card-text parrafo1"><strong>Costo  :</strong> $<span class="precio2 rounded-pill font-weight-bold">{{ number_format($producto->costopromedio, 0) }}</span></p>
+                                {{--  <div></div>  --}}
+                                <p class="card-text parrafo1"><strong>Costo Especial:</strong> <span class="precio2 rounded-pill font-weight-bold"> {{ number_format($producto->costoespecial, 2) }}</span></p>                   
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
