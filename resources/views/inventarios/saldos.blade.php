@@ -58,7 +58,7 @@
             margin:0%;
             display: flex;
             flex-direction:row;
-            font-weight: 200;
+            font-weight:bold;
          }
          .parrafo1
          {
