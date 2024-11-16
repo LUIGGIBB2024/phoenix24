@@ -59,7 +59,7 @@ class InventariosController extends Controller
                 ->where('detallemiscelaneos.codigoid','=','110')
                 ->where('saldosdeinventarios.anodeproceso','=',$anodeproceso)
                 ->where('detalledelistas.codigo','=',$listaxdefecto)
-                ->where('nombre', 'like', '%' . $request->input('nombre') . '%')
+                ->where('producto.descripcion', 'like', '%' . $request->input('nombre') . '%')
                 ->leftjoin('producto', 'saldosdeinventarios.producto', '=', 'producto.codigo')
                 ->leftjoin('detallemiscelaneos', 'producto.grupo', '=', 'detallemiscelaneos.codigo')
                 ->leftjoin('detalledelistas', 'saldosdeinventarios.producto', '=', 'detalledelistas.producto')
