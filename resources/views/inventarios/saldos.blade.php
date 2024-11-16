@@ -99,7 +99,7 @@
     <div class="row">
         @foreach ($productos as $producto)
             <div class="col-md-4">
-                <div class="card mb-4 card-personalizada p-3">
+                <div class="card mb-4 card-personalizada">
                     <div class="card-body">
                         <h5 class="card-title">{{ $producto->codigo}}</h5>
                         <p class="card-text parrafo">{{ $producto->descripciondelproducto}}</p>
