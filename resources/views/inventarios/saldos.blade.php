@@ -72,13 +72,27 @@
 <div class="form-group">
     <div class="row">
          <div class="col-lg-12" >
-            <form method="GET" action="{{ route('productos.index') }}">
+            <form method="GET" action="{{ route('inventarios.saldos') }}">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" name="nombre" placeholder="Buscar producto por nombre" value="{{ request('nombre') }}">
                     <button class="btn btn-outline-secondary" type="submit">Buscar</button>
                 </div>
             </form>
          </div>
+    </div>
+
+    <div class="row">
+        @foreach ($productos as $producto)
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $producto->codigo}}</h5>
+                        <p class="card-text">{{ $producto->descripciondelproducto }}</p>
+                        <p class="card-text"><strong>Precio:</strong> ${{ number_format($producto->cantidad, 2) }}</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
 

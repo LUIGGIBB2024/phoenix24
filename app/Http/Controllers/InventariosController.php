@@ -52,7 +52,7 @@ class InventariosController extends Controller
             $listaxdefecto = $empresacontrol->listaxdefecto;
         }
 
-        $productos = DB::table('saldosdeinventarios')->select('producto.productoID','producto.descripcion AS descripciondelproducto','producto.fechaultimacompra','saldosdeinventarios.producto','saldosdeinventarios.bodega','saldosdeinventarios.anodeproceso','saldosdeinventarios.cantidad',
+        $productos = DB::table('saldosdeinventarios')->select('producto.productoID','producto.descripcion AS descripciondelproducto','producto.fechaultimacompra','saldosdeinventarios.producto As codigo','saldosdeinventarios.bodega','saldosdeinventarios.anodeproceso','saldosdeinventarios.cantidad',
         'saldosdeinventarios.cantidad1','saldosdeinventarios.costopromedio','detalledelistas.valor','detalledelistas.iva','detallemiscelaneos.descripcion as descripciondelgrupo','detalledelistas.valorantesdeiva','detalledelistas.valorunifinal')
                 ->selectRaw('round(saldosdeinventarios.cantidad*saldosdeinventarios.costopromedio,0) AS productovalorizado')
                 ->where('saldosdeinventarios.cantidad','>',0)
@@ -66,7 +66,7 @@ class InventariosController extends Controller
                 ->orderBy('producto.descripcion')
                 ->get();
 
-      return view ('inventarios.saldos');
+      return view ('inventarios.saldos', compact('productos'));
     }
 
     public function consultar_dctos()
