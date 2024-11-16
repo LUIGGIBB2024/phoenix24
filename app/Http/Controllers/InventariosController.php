@@ -55,6 +55,7 @@ class InventariosController extends Controller
         $productos = DB::table('saldosdeinventarios')->select('producto.productoID','producto.descripcion AS descripciondelproducto','producto.fechaultimacompra','saldosdeinventarios.producto As codigo','saldosdeinventarios.bodega','saldosdeinventarios.anodeproceso','saldosdeinventarios.cantidad',
         'saldosdeinventarios.cantidad1','saldosdeinventarios.costopromedio','detalledelistas.valor','detalledelistas.iva','detallemiscelaneos.descripcion as descripciondelgrupo','detalledelistas.valorantesdeiva','detalledelistas.valorunifinal')
                 ->selectRaw('round(saldosdeinventarios.cantidad*saldosdeinventarios.costopromedio,0) AS productovalorizado')
+                ->selectRaw('round(saldosdeinventarios.costopromedio * (1+(producto.porcentajeiva/100)),0) AS costoespecial')
                 ->where('saldosdeinventarios.cantidad','>',0)
                 ->where('detallemiscelaneos.codigoid','=','110')
                 ->where('saldosdeinventarios.anodeproceso','=',$anodeproceso)
