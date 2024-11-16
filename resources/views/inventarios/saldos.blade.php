@@ -81,6 +81,7 @@
            width: 8em;
            text-align: right;
            margin-right: 0.5em;
+
          }
     </style>
 @endsection
@@ -121,9 +122,9 @@
                         <h5 class="card-title">{{ $producto->codigo}}      Bd:{{ $producto->bodega }}</h5>
                         <p class="card-text parrafo">{{ $producto->descripciondelproducto}}</p>
                         <div class="input-group justify-content-between">
-                            <p class="card-text parrafo1"><strong>Precio:</strong> $<span class="precio rounded-pill">{{ number_format($producto->valor, 0) }}</span></p>
+                            <p class="card-text parrafo1"><strong>Precio:</strong> $<span class="precio rounded-pill font-weight-bold">{{ number_format($producto->valor, 0) }}</span></p>
                             {{--  <div></div>  --}}
-                            <p class="card-text parrafo1"><strong>Existencia:</strong>{{ number_format($producto->cantidad, 2) }}</p>                   
+                            <p class="card-text parrafo1"><strong>Existencia:</strong> <span class="precio rounded-pill font-weight-bold"> {{ number_format($producto->cantidad, 2) }}</span></p>                   
                         </div>
                     </div>
                 </div>
