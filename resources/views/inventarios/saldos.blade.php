@@ -146,7 +146,7 @@
                             <span style="font-size:0.8em;">{{ number_format($producto->porcentajeiva, 0) }}</span>
                             <p class="card-text parrafo1"><strong>Existencia:</strong> <span class="precio rounded-pill font-weight-bold"> {{ number_format($producto->cantidad, 2) }}</span></p>                   
                         </div>
-                        @if (Auth::user()->tipodeusuario == 3)
+                        @if (Auth::user()->tipodeusuario == 1 || Auth::user()->tipodeusuario == 3)
                             <div class="input-group justify-content-between costo_especial">
                                 <p class="card-text parrafo1"><strong>Costo  :</strong> $<span class="precio2 rounded-pill font-weight-bold">{{ number_format($producto->ultimocosto, 0) }}</span></p>
                                 {{--  <div></div>  --}}
