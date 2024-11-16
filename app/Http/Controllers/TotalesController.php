@@ -20,7 +20,7 @@ class TotalesController extends Controller
        $ventas    = factura::where('estado', 1)->whereBetween('lapso', [$ano1,$ano2])->sum('totalfactura');
        $total      = $ventas + $ventasrem;
 
-       dd("Facturas:".$ventas."Remisiones:".$ventasrem."Soy total ventas:".$total);
+       //dd("Facturas:".$ventas."Remisiones:".$ventasrem."Soy total ventas:".$total);
 
        //$ventas  =
        return view ('cartera.verdetalle',compact('id','nombredelcliente','saldo'));

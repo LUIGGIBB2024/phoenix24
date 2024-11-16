@@ -4,6 +4,14 @@
     $totalcartera   = session('vs_totalcartera');
     $totalcxp       = session('vs_totalcxp');
     $anoproceso     = session('vs_anoproceso');
+    if (Auth::user()->tipodeusuario == 2)
+    {
+        $totalventas    = 0;
+        $totalpedidos   = 0;
+        $totalcartera   = 0;
+        $totalcxp       = 0;
+        $anoproceso     = 0;  
+    }
 @endphp
 <div class="content">
     <div class="animated fadeIn">

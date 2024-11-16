@@ -8,6 +8,7 @@ use App\Models\factura;
 use App\Models\Pedido;
 use App\Models\remision;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -86,11 +87,20 @@ class HomeController extends Controller
               saldo > 0 or saldo < 0";
         $cuentasxpagar = DB::select($s_InfoCxp);
         $totalcxp = (float) $cuentasxpagar[0]->saldo;
+
+        {
+         $totalventas = 0;
+         $totalpedidos = 0;
+         $totalcartera = 0;
+         $totalcxp = 0;
+        }
+
         session(['vs_totalventas' => $totalventas]);
         session(['vs_totalpedidos' => $totalpedidos]);
         session(['vs_totalcartera' => $totalcartera]);
         session(['vs_totalcxp' => $totalcxp]);
         session(['vs_anoproceso' => $anoproceso]);
+                
         return view ('home.home', compact('totalventas','totalpedidos','totalcartera','totalcxp','anoproceso'));
    }
 }
