@@ -53,7 +53,15 @@
 
          .parrafo
          {
-            color:blue;
+            color:rgb(36, 145, 26);
+            font-size: 11px;
+            margin:0%;
+            display: flex;
+            flex-direction:row;
+         }
+         .parrafo1
+         {
+            color:rgb(56, 12, 202);
             font-size: 11px;
             margin:0%;
             display: flex;
@@ -64,6 +72,15 @@
          {
            width: 23.5em;
            height: 9em;
+         }
+
+         .precio
+         {
+           color:white;
+           background-color: rgb(230, 20, 48);
+           width: 8em;
+           text-align: right;
+           margin-right: 0.5em;
          }
     </style>
 @endsection
@@ -101,12 +118,12 @@
             <div class="col-md-4">
                 <div class="card mb-4 card-personalizada">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $producto->codigo}}</h5>
+                        <h5 class="card-title">{{ $producto->codigo}}      Bd:{{ $producto->bodega }}</h5>
                         <p class="card-text parrafo">{{ $producto->descripciondelproducto}}</p>
                         <div class="input-group justify-content-between">
-                            <p class="card-text parrafo"><strong>Precio:</strong> ${{ number_format($producto->valor, 2) }}</p>
+                            <p class="card-text parrafo1"><strong>Precio:</strong> $<span class="precio rounded-pill">{{ number_format($producto->valor, 0) }}</span></p>
                             {{--  <div></div>  --}}
-                            <p class="card-text parrafo"><strong>Existencia:</strong>{{ number_format($producto->cantidad, 2) }}</p>                   
+                            <p class="card-text parrafo1"><strong>Existencia:</strong>{{ number_format($producto->cantidad, 2) }}</p>                   
                         </div>
                     </div>
                 </div>
