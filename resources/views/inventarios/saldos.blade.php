@@ -72,7 +72,7 @@
          
          .card-personalizada
          {
-           width: 23.5em;
+           width: 25.5em;
            height: 9em;
          }
 
@@ -136,19 +136,19 @@
 
     <div class="row">
         @foreach ($productos as $producto)
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="card mb-4 card-personalizada">
                     <div class="card-body">
                         <h6 class="card-title">{{ $producto->codigo}}      Bd:{{ $producto->bodega }}</h6>
                         <p class="card-text parrafo">{{ $producto->descripciondelproducto}}</p>
                         <div class="input-group justify-content-between">
                             <p class="card-text parrafo1"><strong>Precio:</strong> $<span class="precio rounded-pill font-weight-bold">{{ number_format($producto->valor, 0) }}</span></p>
-                            {{--  <div></div>  --}}
+                            <span style="font-size:0.8em;">{{ number_format($producto->porcentajeiva, 0) }}</span>
                             <p class="card-text parrafo1"><strong>Existencia:</strong> <span class="precio rounded-pill font-weight-bold"> {{ number_format($producto->cantidad, 2) }}</span></p>                   
                         </div>
                         @if (Auth::user()->tipodeusuario == 3)
                             <div class="input-group justify-content-between costo_especial">
-                                <p class="card-text parrafo1"><strong>Costo  :</strong> $<span class="precio2 rounded-pill font-weight-bold">{{ number_format($producto->costopromedio, 0) }}</span></p>
+                                <p class="card-text parrafo1"><strong>Costo  :</strong> $<span class="precio2 rounded-pill font-weight-bold">{{ number_format($producto->ultimocosto, 0) }}</span></p>
                                 {{--  <div></div>  --}}
                                 <p class="card-text parrafo1"><strong>Costo Especial:</strong> <span class="precio2 rounded-pill font-weight-bold"> {{ number_format($producto->costoespecial, 2) }}</span></p>                   
                             </div>
