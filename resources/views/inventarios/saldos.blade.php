@@ -54,7 +54,7 @@
          .parrafo
          {
             color:rgb(16, 79, 10);
-            font-size: 0.6em;
+            font-size: 0.65em;
             margin:0%;
             display: flex;
             flex-direction:row;
