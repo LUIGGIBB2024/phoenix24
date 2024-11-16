@@ -54,12 +54,13 @@
          .parrafo
          {
             color:rgb(16, 79, 10);
-            font-size: 12px;
+            font-size: 0.6em;
             margin:0%;
             display: flex;
             flex-direction:row;
             font-weight:bold;
          }
+
          .parrafo1
          {
             color:rgb(56, 12, 202);
@@ -68,7 +69,7 @@
             display: flex;
             flex-direction:row;
          }
-
+         
          .card-personalizada
          {
            width: 23.5em;
@@ -80,9 +81,22 @@
            color:white;
            background-color: rgb(197, 13, 126);
            width: 8em;
-           text-align: right;
+           text-align: center;
            margin-right: 0.5em;
+         }
 
+         .precio2
+         {
+           color:white;
+           background-color: rgb(19, 95, 49);
+           width: 8em;
+           text-align: center;
+           margin-right: 0.5em;
+         }
+         .card-title
+         {
+            font-size: .8em !important;
+            margin: 0em 0em 0em !important;
          }
     </style>
 @endsection
@@ -120,12 +134,17 @@
             <div class="col-md-4">
                 <div class="card mb-4 card-personalizada">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $producto->codigo}}      Bd:{{ $producto->bodega }}</h5>
+                        <h6 class="card-title">{{ $producto->codigo}}      Bd:{{ $producto->bodega }}</h6>
                         <p class="card-text parrafo">{{ $producto->descripciondelproducto}}</p>
                         <div class="input-group justify-content-between">
                             <p class="card-text parrafo1"><strong>Precio:</strong> $<span class="precio rounded-pill font-weight-bold">{{ number_format($producto->valor, 0) }}</span></p>
                             {{--  <div></div>  --}}
                             <p class="card-text parrafo1"><strong>Existencia:</strong> <span class="precio rounded-pill font-weight-bold"> {{ number_format($producto->cantidad, 2) }}</span></p>                   
+                        </div>
+                        <div class="input-group justify-content-between">
+                            <p class="card-text parrafo1"><strong>Costo  :</strong> $<span class="precio2 rounded-pill font-weight-bold">{{ number_format($producto->costopromedio, 0) }}</span></p>
+                            {{--  <div></div>  --}}
+                            <p class="card-text parrafo1"><strong>Costo Especial:</strong> <span class="precio2 rounded-pill font-weight-bold"> {{ number_format($producto->costopromedio, 2) }}</span></p>                   
                         </div>
                     </div>
                 </div>
