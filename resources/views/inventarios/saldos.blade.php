@@ -50,6 +50,21 @@
             color:rgb(48, 48, 189);
             font-size: 20px;
          }
+
+         .parrafo
+         {
+            color:blue;
+            font-size: 11px;
+            margin:0%;
+            display: flex;
+            flex-direction:row;
+         }
+
+         .card-personalizada
+         {
+           width: 23.5em;
+           height: 9em;
+         }
     </style>
 @endsection
 
@@ -84,11 +99,15 @@
     <div class="row">
         @foreach ($productos as $producto)
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card mb-4 card-personalizada">
                     <div class="card-body">
                         <h5 class="card-title">{{ $producto->codigo}}</h5>
-                        <p class="card-text">{{ $producto->descripciondelproducto }}</p>
-                        <p class="card-text"><strong>Precio:</strong> ${{ number_format($producto->cantidad, 2) }}</p>
+                        <p class="card-text parrafo">{{ $producto->descripciondelproducto}}</p>
+                        <div class="input-group justify-content-between">
+                            <p class="card-text parrafo"><strong>Precio:</strong> ${{ number_format($producto->valor, 2) }}</p>
+                            {{--  <div></div>  --}}
+                            <p class="card-text parrafo"><strong>Existencia:</strong>{{ number_format($producto->cantidad, 2) }}</p>                   
+                        </div>
                     </div>
                 </div>
             </div>
