@@ -77,7 +77,7 @@
          .precio
          {
            color:white;
-           background-color: rgb(230, 20, 48);
+           background-color: rgb(197, 13, 126);
            width: 8em;
            text-align: right;
            margin-right: 0.5em;
