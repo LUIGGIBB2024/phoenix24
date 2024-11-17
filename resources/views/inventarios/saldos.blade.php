@@ -107,6 +107,7 @@
          .page-title-wrapper
          {
             margin-top: 0.5em;
+            padding: 0.5em;
          }
     </style>
 @endsection
