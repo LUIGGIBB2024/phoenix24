@@ -53,7 +53,12 @@
 
         .header_home
         {
-            margin-top:-10em !important;
+            margin-top:-10em !important;            
+        }
+
+        .navbar
+        {
+            height: 20vh !important;
         }
 
         ._form
