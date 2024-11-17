@@ -41,6 +41,15 @@
             margin-top: 8.5em !important;
             font-size: .85 em;
         }
+        ._imagenlogin
+        {
+            height: 60%;
+        }
+
+        .header_home
+        {
+            margin-top:-10em !important;
+        }
       }
 
 
@@ -68,7 +77,7 @@
 
                 <div class="row d-flex align-items-center justify-content-center h-100">
                     <div class="col-md-8 col-lg-7 col-xl-6">
-                        <img src="{{asset('img/loginlateral.jpg')}}"
+                        <img class="_imagenlogin" src="{{asset('img/loginlateral.jpg')}}"
                         class="img-fluid w-100 h-75 rounded !important" alt="Phone image">
                     </div>
 
