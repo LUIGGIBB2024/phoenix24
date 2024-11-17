@@ -34,6 +34,15 @@
         color:blue;
       }
 
+      @media all and (max-width:450px)
+      {
+        .copyright
+        {
+            margin-top: 8.5em !important;
+            font-size: .85 em;
+        }
+      }
+
 
 </style>
 @endsection
@@ -110,17 +119,17 @@
 
                </div>
                <footer  id="footer_home">
-                <div class="container-fluid">
-                    <nav class="float-left">
-                        <div class="copyright float-right ">
-                            Derechos Reservados &copy;
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>, Design By CIS DE LA COSTA <i class="material-icons"></i>
-                            <a href="#" target="_blank"></a><a href="#" target="_blank"></a>
-                        </div>
-                    </nav>
-                </div>
+                    <div class="container-fluid">
+                        <nav class="float-left">
+                            <div class="copyright float-right">
+                                Derechos Reservados &copy;
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>, Design By CIS DE LA COSTA <i class="material-icons"></i>
+                                <a href="#" target="_blank"></a><a href="#" target="_blank"></a>
+                            </div>
+                        </nav>
+                    </div>
             </footer>
             </div>
 
