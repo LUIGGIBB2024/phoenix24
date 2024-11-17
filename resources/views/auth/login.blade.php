@@ -96,10 +96,10 @@
                         class="img-fluid w-100 h-75 rounded !important" alt="Phone image">
                     </div>
 
-                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 _form d-flex flex-column">
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 d-flex flex-column">
                         <label class="form-label titulo_login">Autenticación de Usuarios:</label>
 
-                        <form  method="POST" action="{{route('login')}}">
+                        <form class="_form" method="POST" action="{{route('login')}}">
                             @csrf
 
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
