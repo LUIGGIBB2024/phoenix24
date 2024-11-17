@@ -128,7 +128,7 @@
     <h4 class ="color_infoencab"> Total Inventarios $:<span id="totalinventarios"></h4>
 </div>  --}}
 
-<div class="page-title-wrapper p-1">
+<div class="page-title-wrapper p-2">
     <div class="ibox-tools">
         <a href="{{'/dashboard'}}">
             <button class="btn btn-warning btn-xs boton_regresar" type="button">
