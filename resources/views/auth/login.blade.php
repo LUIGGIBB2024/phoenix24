@@ -58,7 +58,7 @@
 
         .navbar
         {
-            height: 2em !important;
+            height: 10em !important;
         }
 
         ._form
