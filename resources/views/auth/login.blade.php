@@ -43,7 +43,7 @@
         }
         ._imagenlogin
         {
-            height: 60%;
+            height: 50%;
         }
 
         #footer_home
@@ -58,8 +58,8 @@
 
         ._form
         {
-            padding-left: 0.7em;
-            padding-right: 0.7em;
+            padding-left: 0.7em !important;
+            padding-right: 0.7em !important; 
         }
 
      
