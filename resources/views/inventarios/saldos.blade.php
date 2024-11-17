@@ -103,6 +103,11 @@
          {
             margin-top:2px;
          }
+
+         .page-title-wrapper
+         {
+            margin-top: 0.5em;
+         }
     </style>
 @endsection
 
