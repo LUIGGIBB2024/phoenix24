@@ -44,6 +44,7 @@
         ._imagenlogin
         {
             height: 50%;
+            margin-top: 5em;
         }
 
         #footer_home
@@ -53,7 +54,7 @@
 
         .header_home
         {
-            margin-top:-15em !important;            
+            margin-top:-10em !important;            
         }
 
         .navbar
