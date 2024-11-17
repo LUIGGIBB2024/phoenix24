@@ -46,10 +46,25 @@
             height: 60%;
         }
 
+        #footer_home
+        {
+            margin-top:-10em !important;
+        }
+
         .header_home
         {
             margin-top:-10em !important;
         }
+
+        ._form
+        {
+            padding-left: 0.7em;
+            padding-right: 0.7em;
+        }
+
+     
+
+    
       }
 
 
@@ -81,10 +96,10 @@
                         class="img-fluid w-100 h-75 rounded !important" alt="Phone image">
                     </div>
 
-                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 _form d-flex flex-column">
                         <label class="form-label titulo_login">Autenticación de Usuarios:</label>
 
-                        <form method="POST" action="{{route('login')}}">
+                        <form  method="POST" action="{{route('login')}}">
                             @csrf
 
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -120,7 +135,7 @@
                             </div>
 
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">Iniciar Sesión</button>
+                            <button type="submit" id="_form1" class="btn btn-primary btn-lg btn-block">Iniciar Sesión</button>
 
                         </form>
                     </div>
