@@ -53,7 +53,7 @@
 
         .header_home
         {
-            margin-top:-10em !important;            
+            margin-top:-15em !important;            
         }
 
         .navbar
