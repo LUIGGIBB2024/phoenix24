@@ -15,6 +15,7 @@ use App\Models\factura;
 use App\Models\Pedido;
 use App\Models\proveedor;
 use App\Models\recibosdecaja;
+use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\DB;
@@ -615,6 +616,20 @@ class DatatablesController extends Controller
            ->toJson();
         }
 
+
+     public function usuarios()
+      {
+          $usuarios = DB::table('users')->select('users.id as id','users.email as email','users.name as name','users.codigo as codigo',
+            'users.password as password','users.passwordmobil as passwordmobil','users.tipodeusuario as tipodeusuario')
+            ->selectRaw('CASE users.tipodeusuario WHEN 1 THEN "Administrador    "  WHEN 2 THEN "Ventas      " ELSE "Gerencia       " END AS tipousuario')
+            ->orderBy('id','asc')
+            ->get();           
+
+          return datatables()->of($usuarios)
+            ->addcolumn('btn','users.botonacciones')
+            ->rawcolumns(['btn'])
+            ->toJson();
+      }
 
 
 }
