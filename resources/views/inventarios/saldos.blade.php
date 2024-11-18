@@ -156,7 +156,7 @@
             <div class="col-md-12">
                 <div class="card mb-4 card-personalizada">
                     <div class="card-body">
-                        <h6 class="card-title">{{ $producto->codigo}}      Bd:{{ $producto->bodega }}</h6>
+                        <h6 class="card-title">{{ $producto->codigo}} {{" BD:" . $producto->bodega }}</h6>
                         <p class="card-text parrafo">{{ $producto->descripciondelproducto}}</p>
                         <div class="input-group justify-content-between">
                             <p class="card-text parrafo1"><strong>Precio:</strong> $<span class="precio rounded-pill font-weight-bold">{{ number_format($producto->valor, 0) }}</span></p>
