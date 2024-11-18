@@ -16,10 +16,12 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cubes"></i>Inventarios</a>
                                 <ul class="sub-menu children dropdown-menu">
                                     <li><i class="menu-icon fa fa-life-ring"></i><a href="{{url('inventarios/consultar_saldos')}}">Saldos por Productos</a></li>
-                                    <li><i class="menu-icon fa fa-list-alt"></i><a href="{{url('inventarios/consultar')}}">Consultar Saldos</a></li>
-                                    <!--<li><i class="menu-icon fa fa-database"></i><a href="{{url('productos/consultar')}}">Actualizar Productos</a></li>-->
-                                    <li><i class="menu-icon fa fa-camera-retro"></i><a href="{{url('productos/consultar')}}">Productos (Fotos)</a></li>
-                                    <li><i class="menu-icon fa fa-list"></i><a href="{{url('inventarios/consultar_documentos')}}">Documentos</a></li>
+                                    @if (Auth::user()->tipodeusuario == 3 || Auth::user()->tipodeusuario == 1)    
+                                        <li><i class="menu-icon fa fa-list-alt"></i><a href="{{url('inventarios/consultar')}}">Consultar Saldos</a></li>
+                                        <!--<li><i class="menu-icon fa fa-database"></i><a href="{{url('productos/consultar')}}">Actualizar Productos</a></li>-->
+                                        <li><i class="menu-icon fa fa-camera-retro"></i><a href="{{url('productos/consultar')}}">Productos (Fotos)</a></li>
+                                        <li><i class="menu-icon fa fa-list"></i><a href="{{url('inventarios/consultar_documentos')}}">Documentos</a></li>
+                                    @endif 
                                 </ul>
                             </li>
                             
