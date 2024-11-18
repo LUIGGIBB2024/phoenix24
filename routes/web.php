@@ -14,11 +14,12 @@ use App\Http\Controllers\InventariosController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\RecibosController;
 use App\Http\Controllers\TotalesController;
-
+use App\Http\Controllers\UserController;
 use App\Models\factura;
 use App\Models\enlacevisual_nv;
 use App\Models\Pedido;
 use App\Models\remision;
+use App\Models\User;
 use Hamcrest\Core\IsNull;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -119,6 +120,13 @@ Route::post('/contenidos/store',[ContenidoController::class,'store'])->name('con
 Route::get('/contenidos/edit/{id}',[ContenidoController::class,'edit'])->name('contenidos.edit');
 Route::put('/contenidos/update/{id}',[ContenidoController::class,'update'])->name('contenidos.update');
 Route::get('/contenidos/delete/{id}',[ContenidoController::class,'destroy'])->name('contenidos.delete');
+
+Route::get('/user',[UserController::class,'index'])->name('user.index');
+Route::get('/usuariosindex',[DatatablesController::class,'usuarios'])->name('usuarios.ajax');
+Route::post('/crear-usuarios',[UserController::class,'store'])->name('usuarios.store');
+Route::post('/actualizar-usuarios',[UserController::class,'actualizarUsuarios'])->name('usuarios.actualizar');
+Route::post('/obtener-usuarios',[UserController::class,'obtenerUsuarios'])->name('filtrar.usuarios.ajax');
+Route::post('/eliminar-usuarios',[UserController::class,'eliminar_usuarios'])->name('usuarios.eliminar');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $empresa = enlacevisual_nv::find(1);

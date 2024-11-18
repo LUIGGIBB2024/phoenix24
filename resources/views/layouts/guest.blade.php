@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -10,11 +11,9 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('resource/css/app.css') }}">
-
         <!-- Scripts -->
-        <script src="{{ mix('resource/js/app.js') }}" defer></script>
+        <link rel="stylesheet" href="{{ asset('resources/css/app.css') }}">
+        <script src="{{ asset('resources/js/app.js') }}" defer></script>
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">

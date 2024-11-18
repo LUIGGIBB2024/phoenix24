@@ -86,8 +86,8 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Configuración</a>
                                     <ul class="sub-menu children dropdown-menu">
                                         <li><i class="menu-icon fa fa-cogs"></i><a href="maps-gmap.html">Tabla de Control</a></li>
-                                        <li><i class="menu-icon fa fa-cogs"></i><a href="{{url('/register') }}">Usuarios (Registrar)</a></li>
-                                        <li><i class="menu-icon fa fa-cogs"></i><a href="{{url('/contenidos/imagenes') }}">Contenidos</a></li>
+                                        <li><i class="menu-icon fa fa-cogs"></i><a href="{{url('/user') }}">Usuarios (Registrar)</a></li>
+                                        {{--  <li><i class="menu-icon fa fa-cogs"></i><a href="{{url('/contenidos/imagenes') }}">Contenidos</a></li>  --}}
                                     </ul>
                                 </li>
                             @endif 
