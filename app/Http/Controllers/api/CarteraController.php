@@ -196,7 +196,7 @@ class CarteraController extends Controller
 
          return response()->json(
                   [
-                  'status'          => '200',
+                  'status'          => '200 ok',
                   'msg'             => 'Consulta de Cartera Existosa',
                   'totalcartera'    => $totalcartera,
                   'totalregistros'  => $totregistros,
