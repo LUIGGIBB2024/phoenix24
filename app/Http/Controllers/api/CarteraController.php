@@ -183,12 +183,24 @@ class CarteraController extends Controller
 
            $totalcartera = 0;
            $totregistros = 0;
+           
+          //  foreach ($cartera as $dato)
+          //  {
+          //     $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
+          //     $saldo         = (float) $dato->total - (float)  $dato->abonos;
+          //     $dato->total   = (float) $dato->total;
+          //     $dato->abonos  = (float) $dato->abonos;
+          //     $dato->saldo   = $saldo;
+          //     $totalcartera  += $saldo;
+          //     $totregistros += 1;
+          //  }
+
            foreach ($cartera as $dato)
            {
               $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
-              $saldo         = (float) $dato->total - (float)  $dato->abonos;
-              $dato->total   = (float) $dato->total;
-              $dato->abonos  = (float) $dato->abonos;
+              $saldo         =  $dato->total -  $dato->abonos;
+              $dato->total   =  $dato->total;
+              $dato->abonos  =  $dato->abonos;
               $dato->saldo   = $saldo;
               $totalcartera  += $saldo;
               $totregistros += 1;
