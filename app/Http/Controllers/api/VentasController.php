@@ -1037,7 +1037,7 @@ class VentasController extends Controller
                 })->values();
 
         $ventasjs =$ventas;
-        $tot = 0.00;
+        $tot = 0;
         foreach($ventas as $dato)
           {
             $tot = $tot + $dato->totalventas;
@@ -1049,7 +1049,7 @@ class VentasController extends Controller
              'msg'      => 'Ventas Diarias Consolidadas por Centros de operaciones (' . $fechad .'='.$fechah.')',
              'fechadesde' => $fechad ." ". $horad,
              'fechahasta' => $fechah ." ". $horah,
-             'grantotal' =>  $tot,
+             'grantotal' => (int) $tot,
              'ventas'   => $ventasConsolidadas
             ],Response::HTTP_ACCEPTED);
     }
