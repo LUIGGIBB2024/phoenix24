@@ -1031,7 +1031,7 @@ class VentasController extends Controller
                     });
 
                     $item = $grupo->first();
-                    $item['totalventas'] = (string) $totalVentas;
+                    $item['totalventas'] = (int) $totalVentas;
 
                     return $item;
                 })->values();
