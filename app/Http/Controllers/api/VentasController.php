@@ -1147,7 +1147,7 @@ class VentasController extends Controller
         //$ventas = $remisiones;
 
         $ventasjs =$ventas;
-        $tot = 0.00;
+        $tot = 0;
         foreach($ventas as $dato)
           {
             $tot = $tot + $dato->totalfactura;
@@ -1159,7 +1159,7 @@ class VentasController extends Controller
              'msg'      => 'Ventas Detalladas Diarias (' . $fechad .'='.$fechah.')',
              'fechadesde' => $fechad ." ". $horad,
              'fechahasta' => $fechah ." ". $horah,
-             'grantotal' =>  $tot,
+             'grantotal' =>  (int) $tot,
              'ventas'   => $ventas
             ],Response::HTTP_ACCEPTED);
     }
