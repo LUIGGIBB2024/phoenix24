@@ -1224,7 +1224,7 @@ class VentasController extends Controller
 
             return [
                 'centrodeoperacion'     => "",
-                'totalventas'           => (string) $totalVentas,
+                'totalventas'           => (int) $totalVentas,
                 'months'                => $months,
                 'mes'                   => $mes,
                 'iddia'                 => $iddia,
