@@ -85,11 +85,11 @@ class CarteraController extends Controller
               $Si_Entro = true;
 
            }
-          //  return response()->json(
-          //       [
-          //       'status'       => '200',
-          //       'msg'          => 'Actualización Exitosa - Pagos',
-          //       ],Response::HTTP_ACCEPTED);
+            return response()->json(
+                 [
+                 'status'       => '200',
+                 'msg'          => 'Actualización Exitosa - Pagos',
+                 ],Response::HTTP_ACCEPTED);
        }
 
        if (isset($request->datadtpgcxc))
@@ -147,22 +147,11 @@ class CarteraController extends Controller
 
            }
 
-          if ($Si_Entro)
-             {
-              return response()->json(
+            return response()->json(
                     [
                     'status'       => '200',
                     'msg'          => 'Actualización Exitosa - Cartera/Detalle de Pagos',
-                    ],Response::HTTP_ACCEPTED);
-              }
-          else
-          {
-            return response()->json(
-                  [
-                  'status'       => '400',
-                  'msg'          => 'Problemas - Caretera/Detalle de Pagos',
-                  ],Response::HTTP_BAD_REQUEST);
-            }
+                    ],Response::HTTP_ACCEPTED);         
 
        }
     }
