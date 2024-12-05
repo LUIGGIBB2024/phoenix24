@@ -17,6 +17,7 @@ class CarteraController extends Controller
 {
     public function ProcessCxc(Request $request):JsonResponse
     {
+        $Si_Entro = false;
         if (isset($request->datacxc))
         {
             $cartera   = $request->datacxc;
@@ -81,13 +82,14 @@ class CarteraController extends Controller
                 'usuario_created'   =>$dato['usuariocreated'],
                 'usuario_updated'   =>$dato['usuarioupdated'],
               ]);
+              $Si_Entro = true;
 
            }
-           return response()->json(
-                [
-                'status'       => '200',
-                'msg'          => 'Actualización Exitosa - Pagos',
-                ],Response::HTTP_ACCEPTED);
+          //  return response()->json(
+          //       [
+          //       'status'       => '200',
+          //       'msg'          => 'Actualización Exitosa - Pagos',
+          //       ],Response::HTTP_ACCEPTED);
        }
 
        if (isset($request->datadtpgcxc))
@@ -141,13 +143,27 @@ class CarteraController extends Controller
                 'usuario_updated'       =>$dato['usuarioupdated'],
               ]);
               DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+              $Si_Entro = true;
 
            }
-           return response()->json(
-                [
-                'status'       => '200',
-                'msg'          => 'Actualización Exitosa - Detalle de Pagos',
-                ],Response::HTTP_ACCEPTED);
+
+          if ($Si_Entro)
+             {
+              return response()->json(
+                    [
+                    'status'       => '200',
+                    'msg'          => 'Actualización Exitosa - Cartera/Detalle de Pagos',
+                    ],Response::HTTP_ACCEPTED);
+              }
+          else
+          {
+            return response()->json(
+                  [
+                  'status'       => '400',
+                  'msg'          => 'Problemas - Caretera/Detalle de Pagos',
+                  ],Response::HTTP_BAD_REQUEST);
+            }
+
        }
     }
 
