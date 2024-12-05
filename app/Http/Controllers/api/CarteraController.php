@@ -86,7 +86,7 @@ class CarteraController extends Controller
            return response()->json(
                 [
                 'status'       => '200',
-                'msg'          => 'Actualización Exitosa',
+                'msg'          => 'Actualización Exitosa - Detalle de Pagos',
                 ],Response::HTTP_ACCEPTED);
        }
 
