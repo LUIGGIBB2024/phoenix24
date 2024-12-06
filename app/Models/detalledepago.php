@@ -12,7 +12,7 @@ class detalledepago extends Model
 
     protected $fillable = [
       'consecutivo','fechadocumento','documentopago','nit','sucursal','proyecto','sproyecto','centrooper','actividad','lapso','cuenta','centro' ,'scentro','concepto',
-      'valor','numerodefactura','tipo', 'documento','prefijo','cuota','saldofactura','fechapagodeservicios','facturacxcid','recibodecajaID','notacreditoID',
+      'valor','numerodefactura','tipodocumento','tipo', 'documento','prefijo','cuota','saldofactura','fechapagodeservicios','facturacxcid','recibodecajaID','notacreditoID',
       'usuario_created','usuario_updated','fecha_created','fecha_updated'];
 
     protected $primaryKey = "detallereccajasid";
