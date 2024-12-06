@@ -197,7 +197,7 @@ class CarteraController extends Controller
               // $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
               // $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
 
-              $reg_pago = recibosdecaja::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'tipodedocumento'=>$documento,
+              $reg_pago = recibosdecaja::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'tipodocumento'=>$documento,
                                                   'fechadocumento'=>$$fecha],
               [
                 'lapso'             =>$lapso,
