@@ -225,7 +225,7 @@ class CarteraController extends Controller
               ]);
               if ($estado == 2)
                  {
-                  DB::table('detalledepagoscxc')->where(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'tipodocumento'=>$documento,
+                  DB::table('detalledepagoscxc')->where(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'documentopago'=>$documento,
                   'fechadocumento'=>$fecha])->delete();
                  }
            }
