@@ -157,7 +157,7 @@ class CarteraController extends Controller
 
        if (isset($request->datapagoscxc))
         {
-            $pagos       = $request->pagoscxc;
+            $pagos       = $request->datapagoscxc;
             $contador = 0;
             foreach ($pagos as $dato)
             {
