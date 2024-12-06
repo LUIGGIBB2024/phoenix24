@@ -1279,6 +1279,7 @@ class VentasController extends Controller
             ->where('producto.descripcion', 'like', '%' . $producto . '%')
             ->where('saldosdeinventarios.anodeproceso',$anop )
             ->where('detalledelistas.codigo',$lista)
+            ->having('saldosdeinventarios.cantidad as cantidad',">",0)
             ->orderBy('producto.descripcion')
             ->orderBy('saldosdeinventarios.bodega')
             ->get();
