@@ -118,6 +118,7 @@ class CarteraController extends Controller
               $facturas     =   cartera::where('numerodefactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
                                       ->where('nit',$nit)->first();
 
+                                      
               $facturaid     = !is_null($facturas)?$facturas->cuentasporcobrarID:1;
               //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
 
