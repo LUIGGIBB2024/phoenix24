@@ -223,8 +223,11 @@ class CarteraController extends Controller
                 'usuario_created'   =>$dato['usuariocreated'],
                 'usuario_updated'   =>$dato['usuarioupdated'],
               ]);
-              $Si_Entro = true;
-
+              if ($estado == 2)
+                 {
+                  DB::table('detalledepagoscxc')->where(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'tipodocumento'=>$documento,
+                  'fechadocumento'=>$fecha])->delete();
+                 }
            }
             return response()->json(
                  [
