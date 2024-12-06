@@ -125,6 +125,7 @@ class CarteraController extends Controller
               $reg_pgo = detalledepago::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
                          'concepto'=>$concepto,'numerodefactura'=>$nrofactura,'tipodocumento'=>$tipodocto,'prefijo'=>$prefijo],
               [
+                'tipodocumento'         =>$tipodocto,
                 'actividad'             =>$actividad,
                 'lapso'                 =>$lapso,
                 'valor'                 =>$dato['valorpago'],
