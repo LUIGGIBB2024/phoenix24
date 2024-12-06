@@ -190,7 +190,8 @@ class CarteraController extends Controller
               // $facturas     = factura::where('numerodefactura',$nrofactura)->where('prefijo',$prefijo)
               //                        ->where('tipodedocumento',$tipodocto)->where('fechafactura',$fecha)->first();
 
-              // $clientes     = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
+              $clientes         = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
+              $vendedor         = $clientes->vendedor;
 
               $contador++;
               // $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
