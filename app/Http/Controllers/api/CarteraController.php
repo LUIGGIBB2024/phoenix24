@@ -216,6 +216,10 @@ class CarteraController extends Controller
                 'scentro'           =>$scentro,
                 'tipodemovimiento'  =>0,
                 'vendedor'          =>$vendedor,
+                'estado'            =>$estado,
+                'estado1'           =>0,
+                'estado2'           =>0,
+                'estado3'           =>0,
                 'usuario_created'   =>$dato['usuariocreated'],
                 'usuario_updated'   =>$dato['usuarioupdated'],
               ]);
