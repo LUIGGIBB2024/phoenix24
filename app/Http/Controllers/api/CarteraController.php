@@ -155,7 +155,7 @@ class CarteraController extends Controller
                     ],Response::HTTP_ACCEPTED);      
        }
 
-       if (isset($request->pagoscxc))
+       if (isset($request->datapagoscxc))
         {
             $pagos       = $request->pagoscxc;
             $contador = 0;
@@ -198,7 +198,7 @@ class CarteraController extends Controller
               // $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
 
               $reg_pago = recibosdecaja::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'tipodocumento'=>$documento,
-                                                  'fechadocumento'=>$$fecha],
+                                                  'fechadocumento'=>$fecha],
               [
                 'lapso'             =>$lapso,
                 'valorefectivo'     =>$pagoenefectivo,
