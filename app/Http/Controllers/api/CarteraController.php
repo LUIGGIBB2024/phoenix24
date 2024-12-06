@@ -7,6 +7,7 @@ use App\Models\cartera;
 use App\Models\cliente;
 use App\Models\detalledepago;
 use App\Models\factura;
+use App\Models\recibosdecaja;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
@@ -151,8 +152,80 @@ class CarteraController extends Controller
                     [
                     'status'       => '200',
                     'msg'          => 'Actualización Exitosa - Cartera/Detalle de Pagos',
-                    ],Response::HTTP_ACCEPTED);         
+                    ],Response::HTTP_ACCEPTED);      
+       }
 
+       if (isset($request->pagoscxc))
+        {
+            $pagos       = $request->pagoscxc;
+            $contador = 0;
+            foreach ($pagos as $dato)
+            {
+              $nit              =   !is_null($dato['nit'])?$dato['nit']:"";
+              $sucursal         =   !is_null($dato['sucursal'])?$dato['sucursal']:"";
+              $consecutivo      =   $dato['consecutivo'];  
+              $documento        =   !is_null($dato['documento'])?$dato['documento']:"";
+              $fecha            =   $dato['fechadocumento'];
+              $lapso            =   $dato['lapso'];
+              $documento        =   !is_null($dato['documento'])?$dato['documento']:"";
+              $actividad        =   !is_null($dato['actividad'])?$dato['actividad']:"";
+              $centrooper       =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
+              $proyecto         =   "";
+              $sproyecto        =   "";
+              $cuenta           =   "";
+              $centro           =   "";
+              $scentro          =   "";
+              $pagoenefectivo   =   $dato['pagoenefectivo']; 
+              $pagoencheques    =   $dato['pagoencheques']; 
+              $pagootros	      =   $dato['pagootros']; 
+              $observaciones    =   trim($dato['observaciones1']) . " " .  trim($dato['observaciones2']); 
+              $tipopago	        =   $dato['tipopago']; 
+              $estado	          =   $dato['estado']; 
+              $tiporecibo	      =   $dato['tiporecibo']; 
+              $tipomvto         =   0; 
+              $cptointerface    =   !is_null($dato['cptointerface'])?$dato['cptointerface']:"";
+              $vendedor         =   !is_null($dato['vendedor'])?$dato['vendedor']:"";
+              $saldoactual	    =   $dato['saldoactual'];
+
+              // $facturas     = factura::where('numerodefactura',$nrofactura)->where('prefijo',$prefijo)
+              //                        ->where('tipodedocumento',$tipodocto)->where('fechafactura',$fecha)->first();
+
+              // $clientes     = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
+
+              $contador++;
+              // $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
+              // $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
+
+              $reg_pago = recibosdecaja::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'tipodedocumento'=>$documento,
+                                                  'fechadocumento'=>$$fecha],
+              [
+                'lapso'             =>$lapso,
+                'valorefectivo'     =>$pagoenefectivo,
+                'valorotro'         =>$pagoencheques,
+                'observaciones'     =>$observaciones,
+                'tipodepago'        =>$tipopago,
+                'tipoderecibo'      =>$tiporecibo,
+                'saldoactual'       =>$saldoactual,
+                'proyecto'          =>$proyecto,
+                'sproyecto'         =>"",
+                'centrooper'        =>$centrooper,
+                'actividad'         =>$centrooper,
+                'cuenta'            =>$cuenta,
+                'centro'            =>$centro,
+                'scentro'           =>$scentro,
+                'tipodemovimiento'  =>0,
+                'vendedor'          =>$vendedor,
+                'usuario_created'   =>$dato['usuariocreated'],
+                'usuario_updated'   =>$dato['usuarioupdated'],
+              ]);
+              $Si_Entro = true;
+
+           }
+            return response()->json(
+                 [
+                 'status'       => '200',
+                 'msg'          => 'Actualización Exitosa - Pagos',
+                 ],Response::HTTP_ACCEPTED);
        }
     }
 
