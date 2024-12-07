@@ -250,7 +250,7 @@ class CarteraController extends Controller
                 ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
                 ->groupBy(['detalledepagoscxc.nit', 'detalledepagoscxc.sucursal']);
 
-          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos")
+          $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos,  SUM(cuentasporcobrar.valorfactura) - dpagos.abonos as misaldo")
           ->selectRaw("cuentasporcobrar.nit,cuentasporcobrar.sucursal,cuentasporcobrar.cuentasporcobrarid")
           ->selectRaw("0.00 as saldo")
           ->join("clientes",function($join)
@@ -266,7 +266,7 @@ class CarteraController extends Controller
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->where('clientes.nombrecompleto', 'like', '%' . $name . '%')
            ->groupBy('clientes.nombrecompleto')
-           ->havingRaw('(abonos=0)')          
+           //->havingRaw('(abonos=0)')          
            ->get();
 
            $totalcartera = 0;
