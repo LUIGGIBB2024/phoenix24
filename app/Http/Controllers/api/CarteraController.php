@@ -258,7 +258,7 @@ class CarteraController extends Controller
                   $join->on("clientes.nit","=","cuentasporcobrar.nit")
                        ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
                 })
-          ->joinSub($pagos,'dpagos',function($join)
+          ->leftjoinSub($pagos,'dpagos',function($join)
                 {
                     $join->on('cuentasporcobrar.nit','=','dpagos.nit')
                          ->on('cuentasporcobrar.sucursal','=','dpagos.sucursal');
