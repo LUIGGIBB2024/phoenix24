@@ -256,17 +256,18 @@ class CarteraController extends Controller
           ->join("clientes",function($join)
                 {
                   $join->on("clientes.nit","=","cuentasporcobrar.nit")
-                        ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
+                       ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
                 })
-             ->joinSub($pagos,'dpagos',function($join)
+          ->joinSub($pagos,'dpagos',function($join)
                 {
                     $join->on('cuentasporcobrar.nit','=','dpagos.nit')
-                          ->on('cuentasporcobrar.sucursal','=','dpagos.sucursal');
+                         ->on('cuentasporcobrar.sucursal','=','dpagos.sucursal');
                 })
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->where('clientes.nombrecompleto', 'like', '%' . $name . '%')
            ->groupBy('clientes.nombrecompleto')
            ->havingRaw('total > abonos')
+           ->havingRaw('abonos',0)
            ->get();
 
            $totalcartera = 0;
