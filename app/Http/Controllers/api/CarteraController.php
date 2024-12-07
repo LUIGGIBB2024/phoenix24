@@ -266,7 +266,7 @@ class CarteraController extends Controller
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->where('clientes.nombrecompleto', 'like', '%' . $name . '%')
            ->groupBy('clientes.nombrecompleto')
-           //->havingRaw('(cast(total as int) - cast(abonos as int)) > 0')          
+           ->havingRaw('cast(misaldo as int) > 0')          
            ->get();
 
            $totalcartera = 0;
