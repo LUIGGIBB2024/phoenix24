@@ -267,7 +267,7 @@ class CarteraController extends Controller
            ->where('clientes.nombrecompleto', 'like', '%' . $name . '%')
            ->groupBy('clientes.nombrecompleto')
            ->havingRaw('total > abonos')
-           ->havingRaw('abonos',0)
+           ->havingRaw('abonos == 0')
            ->get();
 
            $totalcartera = 0;
