@@ -118,7 +118,7 @@ class CarteraController extends Controller
               $facturas     =   cartera::where('numerodefactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
                                       ->where('nit',$nit)->first();
 
-                                      
+
               $facturaid     = !is_null($facturas)?$facturas->cuentasporcobrarID:1;
               //$clienteid     = is_object($facturas)?$facturas->ClienteID:1;
 
@@ -253,7 +253,7 @@ class CarteraController extends Controller
           $cartera = cartera::selectRaw("clientes.nombrecompleto, SUM(cuentasporcobrar.valorfactura) as total, dpagos.abonos")
           ->selectRaw("cuentasporcobrar.nit,cuentasporcobrar.sucursal,cuentasporcobrar.cuentasporcobrarid")
           ->selectRaw("0.00 as saldo")
-            ->join("clientes",function($join)
+          ->lefjoin("clientes",function($join)
                 {
                   $join->on("clientes.nit","=","cuentasporcobrar.nit")
                         ->on("clientes.sucursal","=","cuentasporcobrar.sucursal");
