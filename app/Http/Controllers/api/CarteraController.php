@@ -266,7 +266,7 @@ class CarteraController extends Controller
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->where('cuentasporcobrar.estado','=',1)
            ->where('clientes.nombrecompleto', 'like', '%' . $name . '%')
-           ->groupBy('clientes.nombrecompleto')
+           ->groupBy('clientes.nombrecompleto','cuentasporcobrar.nit','cuentasporcobrar.sucursal')
            ->havingRaw('cast(misaldo as int) > 0')          
            ->get();
 
