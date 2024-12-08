@@ -116,7 +116,7 @@ class CarteraController extends Controller
               $scentro      =   !is_null($dato['scentro'])?$dato['sscentro']:"";
               $actividad    =   !is_null($dato['actividad'])?$dato['actividad']:"";
               $facturas     =   cartera::where('numerodefactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
-                                      ->where('nit',$nit)->first();
+                                      ->where('nit',$nit)->get();
 
 
               $facturaid     = !is_null($facturas)?$facturas->cuentasporcobrarID:1;
