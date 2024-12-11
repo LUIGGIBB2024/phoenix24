@@ -38,8 +38,10 @@ class CarteraController extends Controller
               $sproyecto    =   "";
               $centrooper   =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
               $banco        =   !is_null($dato['banco'])?$dato['banco']:"";
+              $idlocal      =   $dato['idregistro'];
               DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-              $reg_pago = otrospagosventa::updateOrCreate(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'fechadocumento'=>$fecha,'concepto'=>$concepto,'banco'=>$banco],                                                 
+              $reg_pago = otrospagosventa::updateOrCreate(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'fechadocumento'=>$fecha,
+                                                           'concepto'=>$concepto,'banco'=>$banco,'idlocal'=>$idlocal],                                                 
               [
                 'nrodocumento'      =>!is_null($dato['nrodocumento'])?$dato['nrodocumento']:"",
                 'lapso'             =>$dato['lapso'],                
