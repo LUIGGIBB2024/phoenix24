@@ -19,6 +19,81 @@ class CarteraController extends Controller
     public function ProcessCxc(Request $request):JsonResponse
     {
         $Si_Entro = false;
+        if (isset($request->dataotrospagos))
+        {
+            $cartera   = $request->datacxc;
+            $contador = 0;
+            foreach ($cartera as $dato)
+            {
+              $nit          =   !is_null($dato['nit'])?$dato['nit']:"";
+              $sucursal     =   !is_null($dato['sucursal'])?$dato['sucursal']:"";
+              $nrofactura   =   $dato['numerofactura'];
+              $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
+              $tipodocto    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:"";
+              $fecha        =   $dato['fechafactura'];
+              $lapso        =   $dato['lapso'];
+              $propiedad    =   !is_null($dato['propiedad'])?$dato['propiedad']:"";
+              $vendedor     =   !is_null($dato['vendedor'])?$dato['vendedor']:"";
+              $proyecto     =   !is_null($dato['proyecto'])?$dato['proyecto']:"";
+              $sproyecto    =   !is_null($dato['sproyecto'])?$dato['sproyecto']:"";
+              $centrooper   =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
+              $cuenta       =   !is_null($dato['cuenta'])?$dato['cuenta']:"";
+              $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
+              $scentro      =   !is_null($dato['scentro'])?$dato['scentro']:"";
+
+              $facturas     = factura::where('numerodefactura',$nrofactura)->where('prefijo',$prefijo)
+                                     ->where('tipodedocumento',$tipodocto)->where('fechafactura',$fecha)->first();
+
+              $clientes     = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
+
+              $contador++;
+              $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
+              $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
+
+              $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
+                                                  'prefijo'=>$prefijo,'fechafactura'=>$fecha],
+              [
+                'fechadevencimiento'=>$dato['fechavencimiento'],
+                'lapso'             =>$lapso,
+                'valorfactura'      =>$dato['valorfactura'],
+                'valorintereses'    =>$dato['valorintereses'],
+                'valorseguro'       =>$dato['valorseguro'],
+                'valorcuota'        =>$dato['valorcuota'],
+                'valordeterioro'    =>$dato['valordeterioro'],
+                'numerodecuota'     =>$dato['nrodecuotas'],
+                'tipodeprestamo'    =>$dato['tipodeprestamo'],
+                'porcentaje'        =>$dato['porcentaje'],
+                'tipodemovimiento'  =>$dato['tipomvto'],
+                'tipod'             =>$dato['tipod'],
+                'dia1'              =>$dato['dia1'],
+                'dia2'              =>$dato['dia2'],
+                'propiedad'         =>$propiedad,
+                'vendedor'          =>$vendedor,
+                'rutadeventa'       =>"",
+                'zonadeventa'       =>"",
+                'proyecto'          =>$proyecto,
+                'sproyecto'         =>$sproyecto,
+                'centrooper'        =>$centrooper,
+                'cuenta'            =>$cuenta,
+                'centro'            =>$centro,
+                'scentro'           =>$scentro,
+                'estado'            =>$dato['estado'],
+                'facturaid'         =>$facturaid,
+                'clientesid'        =>$clienteid,
+                'usuario_created'   =>$dato['usuariocreated'],
+                'usuario_updated'   =>$dato['usuarioupdated'],
+              ]);
+              $Si_Entro = true;
+
+           }
+            return response()->json(
+                 [
+                 'status'       => '200',
+                 'msg'          => 'Actualización Exitosa - Pagos',
+                 ],Response::HTTP_ACCEPTED);
+       }
+
+
         if (isset($request->datacxc))
         {
             $cartera   = $request->datacxc;

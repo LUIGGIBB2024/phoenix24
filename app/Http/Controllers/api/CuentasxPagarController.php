@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 
 class CuentasxPagarController extends Controller
 {
-    public function ProcessCxc(Request $request):JsonResponse
+    public function ProcessCxp(Request $request):JsonResponse
     {
         if (isset($request->datacxp))
         {
