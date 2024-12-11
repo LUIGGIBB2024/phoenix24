@@ -10,7 +10,7 @@ class otrospagosventa extends Model
     protected $table = "otrospagosventas";
     protected $fillable = [
         'consecutivo','tipodocumento','fechadocumento','lapso','nrodocumento','concepto','banco','fechadecheque','plaza','valor','proyecto','sproyecto','actividad','centrooper',
-        'usuario_created','usuario_updated','fecha_created','fecha_updated'];
+        'idlocal','usuario_created','usuario_updated','fecha_created','fecha_updated'];
 
     protected $primaryKey = "otrospagosventasid";
     public $timestamps = false;
