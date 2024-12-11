@@ -30,7 +30,7 @@ class CarteraController extends Controller
             $contador = 0;
             foreach ($otrospagos as $dato)
             {
-              $consecutivo   =  $dato['consecutivo'];
+              $consecutivo   =  $dato['consecutivopago'];
               $tipodocto    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:"";
               $fecha        =   $dato['fechadocumento'];
               $concepto     =   !is_null($dato['concepto'])?$dato['concepto']:"";
