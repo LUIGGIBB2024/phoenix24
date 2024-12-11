@@ -42,7 +42,7 @@ class CarteraController extends Controller
               $reg_pago = otrospagosventa::updateOrCreate(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'fechadocumento'=>$fecha,'concepto'=>$concepto],                                                 
               [
                 'nrodocumento'      =>!is_null($dato['nrodocumento'])?$dato['nrodocumento']:"",
-                'lapso'             =>$dato['nrodocumento'],
+                'lapso'             =>$dato['lapso'],
                 'banco'             =>!is_null($dato['banco'])?$dato['banco']:"",
                 'fechadecheque'     => $dato['fechacheque'],
                 'plaza'             =>!is_null($dato['plaza'])?$dato['plaza']:"",
