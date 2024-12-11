@@ -7,12 +7,17 @@ use App\Models\cartera;
 use App\Models\cliente;
 use App\Models\detalledepago;
 use App\Models\factura;
+use App\Models\otrospagosventa;
 use App\Models\recibosdecaja;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+
+// protected $fillable = [
+//   'consecutivo','tipodocumento','fechadocumento','lapso','nrodocumento','concepto','banco','fechadecheque','plaza','valor','proyecto','sproyecto','actividad','centrooper',
+//   'usuario_created','usuario_updated','fecha_created','fecha_updated'];
 
 class CarteraController extends Controller
 {
@@ -21,65 +26,30 @@ class CarteraController extends Controller
         $Si_Entro = false;
         if (isset($request->dataotrospagos))
         {
-            $cartera   = $request->datacxc;
+            $otrospagos   = $request->dataotrospagos;
             $contador = 0;
-            foreach ($cartera as $dato)
+            foreach ($otrospagos as $dato)
             {
-              $nit          =   !is_null($dato['nit'])?$dato['nit']:"";
-              $sucursal     =   !is_null($dato['sucursal'])?$dato['sucursal']:"";
-              $nrofactura   =   $dato['numerofactura'];
-              $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
+              $consecutivo   =  $dato['consecutivo'];
               $tipodocto    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:"";
-              $fecha        =   $dato['fechafactura'];
-              $lapso        =   $dato['lapso'];
-              $propiedad    =   !is_null($dato['propiedad'])?$dato['propiedad']:"";
-              $vendedor     =   !is_null($dato['vendedor'])?$dato['vendedor']:"";
+              $fecha        =   $dato['fechadocumento'];
+              $concepto     =   !is_null($dato['concepto'])?$dato['concepto']:"";
               $proyecto     =   !is_null($dato['proyecto'])?$dato['proyecto']:"";
-              $sproyecto    =   !is_null($dato['sproyecto'])?$dato['sproyecto']:"";
+              $sproyecto    =   "";
               $centrooper   =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
-              $cuenta       =   !is_null($dato['cuenta'])?$dato['cuenta']:"";
-              $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
-              $scentro      =   !is_null($dato['scentro'])?$dato['scentro']:"";
 
-              $facturas     = factura::where('numerodefactura',$nrofactura)->where('prefijo',$prefijo)
-                                     ->where('tipodedocumento',$tipodocto)->where('fechafactura',$fecha)->first();
-
-              $clientes     = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
-
-              $contador++;
-              $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
-              $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
-
-              $reg_cxc = cartera::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
-                                                  'prefijo'=>$prefijo,'fechafactura'=>$fecha],
+              $reg_pago = otrospagosventa::updateOrCreate(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'fechadocumento'=>$fecha,'concepto'=>$concepto],                                                 
               [
-                'fechadevencimiento'=>$dato['fechavencimiento'],
-                'lapso'             =>$lapso,
-                'valorfactura'      =>$dato['valorfactura'],
-                'valorintereses'    =>$dato['valorintereses'],
-                'valorseguro'       =>$dato['valorseguro'],
-                'valorcuota'        =>$dato['valorcuota'],
-                'valordeterioro'    =>$dato['valordeterioro'],
-                'numerodecuota'     =>$dato['nrodecuotas'],
-                'tipodeprestamo'    =>$dato['tipodeprestamo'],
-                'porcentaje'        =>$dato['porcentaje'],
-                'tipodemovimiento'  =>$dato['tipomvto'],
-                'tipod'             =>$dato['tipod'],
-                'dia1'              =>$dato['dia1'],
-                'dia2'              =>$dato['dia2'],
-                'propiedad'         =>$propiedad,
-                'vendedor'          =>$vendedor,
-                'rutadeventa'       =>"",
-                'zonadeventa'       =>"",
+                'nrodocumento'      =>!is_null($dato['nrodocumento'])?$dato['nrodocumento']:"",
+                'lapso'             =>$dato['nrodocumento'],
+                'banco'             =>!is_null($dato['banco'])?$dato['banco']:"",
+                'fechadecheque'     => $dato['fechacheque'],
+                'plaza'             =>!is_null($dato['plaza'])?$dato['plaza']:"",
+                'valor'             =>$dato['valor'],
                 'proyecto'          =>$proyecto,
                 'sproyecto'         =>$sproyecto,
                 'centrooper'        =>$centrooper,
-                'cuenta'            =>$cuenta,
-                'centro'            =>$centro,
-                'scentro'           =>$scentro,
-                'estado'            =>$dato['estado'],
-                'facturaid'         =>$facturaid,
-                'clientesid'        =>$clienteid,
+                'actividad'         =>"",
                 'usuario_created'   =>$dato['usuariocreated'],
                 'usuario_updated'   =>$dato['usuarioupdated'],
               ]);
@@ -89,7 +59,7 @@ class CarteraController extends Controller
             return response()->json(
                  [
                  'status'       => '200',
-                 'msg'          => 'Actualización Exitosa - Pagos',
+                 'msg'          => 'Actualización Exitosa - Otros Pagos',
                  ],Response::HTTP_ACCEPTED);
        }
 
