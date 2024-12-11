@@ -17,7 +17,7 @@ class otrospagosventa extends Model
 
     public function getKeyName()
     {
-        return "otrospagosventasID";
+        return "OtrosPagosVentasID";
     }
 }
-}
+
