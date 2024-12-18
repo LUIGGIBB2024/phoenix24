@@ -15,6 +15,14 @@ class CuentasxPagarController extends Controller
 {
     public function ProcessCxp(Request $request):JsonResponse
     {
+        if (isset($request->dataegresos))
+        {
+            return response()->json(
+                [
+                'status'       => '200',
+                'msg'          => 'Actualización Exitosa 200',
+                ],Response::HTTP_ACCEPTED); 
+        }
         if (isset($request->datacxp))
         {
             $cxp = $request->datacxp;
