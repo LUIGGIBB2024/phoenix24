@@ -30,7 +30,7 @@ class CuentasxPagarController extends Controller
 
               $proveedor    = proveedor::where('nit',$nit)->where('sucursal',$sucursal)->first();
 
-              $reg_cxp = cuentasporpagar::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
+              $reg_cxp = cuentasporpagar::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerofactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
               'prefijo'=>$prefijo],
               [
                     'fechafactura'          =>  $dato['fechafactura'],
