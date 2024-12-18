@@ -28,7 +28,8 @@ class CuentasxPagarController extends Controller
               $nrofactura   =   $dato['numerofactura'];
               $lapso        =   $dato['lapso'];
 
-              $proveedor    = proveedor::where('nit',$nit)->where('sucursal',$sucursal)->first();
+              $proveedor        = proveedor::where('nit',$nit)->where('sucursal',$sucursal)->first();
+              $proveedoresid    = !is_null($proveedor)?$proveedor->proveedoresID:1;
 
               $reg_cxp = cuentasporpagar::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerofactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
               'prefijo'=>$prefijo],
@@ -71,7 +72,7 @@ class CuentasxPagarController extends Controller
                     'estado01'              =>  $dato['estado01'],
                     'estado02'              =>  $dato['estado02'],
                     'estado03'              =>  $dato['estado03'],
-                    'proveedoresid'         =>  $proveedor->proveedoresid,
+                    'proveedoresid'         =>  $proveedoresid ,
                     'usuario_created'       =>  $dato['usuariocreated'],
                     'usuario_updated'       =>  $dato['usuarioupdated'],
               ]);
