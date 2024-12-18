@@ -23,7 +23,7 @@ class CuentasxPagarController extends Controller
             foreach ($pagos as $dato)
             {
                 $consecutivo =  $dato['consecutivo'];
-                $tipodocto   =  !is_null($dato['tipodedocumento'])?$dato['tipodedocumento']:"";
+                $tipodocto   =  !is_null($dato['documentodepago'])?$dato['documentodepago']:"";
                 $lapso       =  !is_null($dato['lapso'])?$dato['lapso']:"";
                 $reg_pagos   =  egreso::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodocto,'lapso'=>$lapso],
                 [
