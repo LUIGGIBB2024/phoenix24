@@ -33,7 +33,7 @@ class CuentasxPagarController extends Controller
                     'nombredeltercero'        =>  !is_null($dato['snombredeltercero'])?$dato['nombredeltercero']:"",
                     'tipodeegreso'            =>  $dato['estado01'],
                     'tipodepago'              =>  $dato['tipopago'],
-                    'nombredeltercero'        =>  !is_null($dato['snombredeltercero'])?$dato['nombredeltercero']:"",
+                    'nombredeltercero'        =>  !is_null($dato['nombredeltercero'])?$dato['nombredeltercero']:"",
                     'valorcxp'                =>  $dato['valorcxp'],
                     'otrospagos'              =>  $dato['valoradicional'],
                     'fechadelcheque'          =>  $dato['fechadelcheque'],
