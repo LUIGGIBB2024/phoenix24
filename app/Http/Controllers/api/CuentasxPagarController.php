@@ -24,7 +24,7 @@ class CuentasxPagarController extends Controller
               $nit          =   !is_null($dato['nit'])?$dato['nit']:"";
               $sucursal     =   !is_null($dato['sucursal'])?$dato['sucursal']:"";
               $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
-              $tipodocto    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:"";
+              $tipodocto    =   !is_null($dato['documento'])?$dato['documento']:"";
               $nrofactura   =   $dato['numerofactura'];
               $lapso        =   $dato['lapso'];
 
