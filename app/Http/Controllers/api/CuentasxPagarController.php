@@ -81,5 +81,6 @@ class CuentasxPagarController extends Controller
             'status'       => '200',
             'msg'          => 'Actualización Exitosa 200',
             ],Response::HTTP_ACCEPTED);
+       }
     }
 }
