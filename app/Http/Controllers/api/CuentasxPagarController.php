@@ -21,7 +21,7 @@ class CuentasxPagarController extends Controller
         return response()->json(
             [
             'status'       => '200',
-            'msg'          => 'Actualización Exitosa',
+            'msg'          => 'Actualización Exitosa 200',
             ],Response::HTTP_ACCEPTED);
     }
 }
