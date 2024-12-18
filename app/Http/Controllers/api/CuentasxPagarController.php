@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\cuentasporpagar;
+use App\Models\egreso;
 use App\Models\proveedor;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,12 +18,50 @@ class CuentasxPagarController extends Controller
     {
         if (isset($request->dataegresos))
         {
+            $pagos = $request->dataegresos;
+
+            foreach ($pagos as $dato)
+            {
+                $consecutivo =  $dato['consecutivo'];
+                $tipodocto   =  !is_null($dato['tipodedocumento'])?$dato['tipodedocumento']:"";
+                $lapso       =  !is_null($dato['lapso'])?$dato['lapso']:"";
+                $reg_pagos   =  egreso::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodocto,'lapso'=>$lapso],
+                [
+                    'fechadocumento'          =>  $dato['fechadocumento'],
+                    'nit'                     =>  !is_null($dato['nit'])?$dato['nit']:"",
+                    'sucursal'                =>  !is_null($dato['sucursal'])?$dato['sucursal']:"",
+                    'nombredeltercero'        =>  !is_null($dato['snombredeltercero'])?$dato['nombredeltercero']:"",
+                    'tipodeegreso'            =>  $dato['estado01'],
+                    'tipodepago'              =>  $dato['tipopago'],
+                    'nombredeltercero'        =>  !is_null($dato['snombredeltercero'])?$dato['nombredeltercero']:"",
+                    'valorcxp'                =>  $dato['valorcxp'],
+                    'otrospagos'              =>  $dato['valoradicional'],
+                    'fechadelcheque'          =>  $dato['fechadelcheque'],
+                    'fechadeentrega'          =>  $dato['fechadeentrega'],
+                    'banco'                   =>  !is_null($dato['banco'])?$dato['banco']:"",
+                    'numerodecheque'          =>  !is_null($dato['numerodecheque'])?$dato['numerodecheque']:"",
+                    'proyecto'                =>  !is_null($dato['proyecto'])?$dato['proyecto']:"",
+                    'sproyecto'               =>  !is_null($dato['sproyecto'])?$dato['sproyecto']:"",
+                    'centrooper'              =>  !is_null($dato['centrooper'])?$dato['centrooper']:"",
+                    'actividad'               =>  !is_null($dato['actividad'])?$dato['actividad']:"",
+                    'enlacectb'               =>  !is_null($dato['cptointerface'])?$dato['cptointerface']:"",
+                    'observaciones'           =>  !is_null($dato['observaciones'])?$dato['observaciones']:"",
+                    'estado'                  =>  $dato['estado'],
+                    'estado01'                =>  $dato['estado01'],
+                    'estado02'                =>  $dato['estado02'],
+                    'estado03'                =>  $dato['estado03'],
+                    'usuario_created'         =>  $dato['usuariocreated'],
+                    'usuario_updated'         =>  $dato['usuarioupdated'],
+                ]);
+            }
+
             return response()->json(
                 [
                 'status'       => '200',
                 'msg'          => 'Actualización Exitosa 200',
                 ],Response::HTTP_ACCEPTED); 
         }
+        
         if (isset($request->datacxp))
         {
             $cxp = $request->datacxp;
