@@ -13,8 +13,8 @@ class cuentasporpagar extends Model
     protected $fillable = [
         'numerofactura','prefijo','tipodedocumento','fechafactura','nit','sucursal','fechadevencimiento','proyecto','sproyecto','centrooper','actividad','lapso','cuenta','centro','scentro',
         'tipomvto','placa','propiedad','nitarrendatario','sucursalarrendatario','fechadepago','numeroegreso','tipoderegistro','dsctopp1','dsctopp2','dsctopp3','dsctopp4','dsctopp5','dia1pp',
-        'dia2pp','dia3pp','dia4pp','dia5pp','valordeterioro','estado','estado01','estado02','valorfactura',
-        'usuario_created','usuario_updated','fecha_created','fecha_updated'];
+        'dia2pp','dia3pp','dia4pp','dia5pp','valordeterioro','estado','estado01','estado02','valorfactura','cufe','codstatus','msgevento1','msgevento2','msgevento3','estado','estado01','estado02','estado03',
+        'proveedoresid','usuario_created','usuario_updated','fecha_created','fecha_updated'];
 
     protected $primaryKey = "cuentasporpagarid";
     public $timestamps = false;
