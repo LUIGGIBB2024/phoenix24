@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\cuentasporpagar;
+use App\Models\proveedor;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +28,7 @@ class CuentasxPagarController extends Controller
               $nrofactura   =   $dato['numerofactura'];
               $lapso        =   $dato['lapso'];
 
-              $proveedor    = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
+              $proveedor    = proveedor::where('nit',$nit)->where('sucursal',$sucursal)->first();
 
               $reg_cxp = cuentasporpagar::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'numerodefactura'=>$nrofactura,'tipodedocumento'=>$tipodocto,
               'prefijo'=>$prefijo],
