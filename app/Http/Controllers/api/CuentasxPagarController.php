@@ -125,6 +125,7 @@ class CuentasxPagarController extends Controller
                     'usuario_created'       =>  $dato['usuariocreated'],
                     'usuario_updated'       =>  $dato['usuarioupdated'],
               ]);
+            }
         }
 
         if (isset($request->datadtpgcxp))
@@ -192,6 +193,6 @@ class CuentasxPagarController extends Controller
             'status'       => '200',
             'msg'          => 'Actualización Exitosa 200',
             ],Response::HTTP_ACCEPTED);
-       }
     }
 }
+
