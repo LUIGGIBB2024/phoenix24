@@ -4,11 +4,13 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\cuentasporpagar;
+use App\Models\detalledepagocxp;
 use App\Models\egreso;
 use App\Models\proveedor;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -123,6 +125,66 @@ class CuentasxPagarController extends Controller
                     'usuario_created'       =>  $dato['usuariocreated'],
                     'usuario_updated'       =>  $dato['usuarioupdated'],
               ]);
+        }
+
+        if (isset($request->datadtpgcxp))
+        {
+            $detalle   = $request->datadtpgcxp;
+            foreach ($detalle as $dato)
+            {
+                $consecutivo  =   $dato['consecutivo'];
+                $fecha        =   $dato['fechadocumento'];
+                $doctopago    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:""; 
+                $nit          =   !is_null($dato['nit'])?$dato['nit']:"";
+                $sucursal     =   !is_null($dato['sucursal'])?$dato['sucursal']:"";
+                $concepto     =   !is_null($dato['conceptopago'])?$dato['conceptopago']:"";
+                $nrofactura   =   $dato['numerofactura'];
+                $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
+                $tipodocto    =   !is_null($dato['documentofactura'])?$dato['documentofactura']:"";
+                $lapso        =   $dato['lapso'];
+
+                $proyecto     =   !is_null($dato['proyecto'])?$dato['proyecto']:"";
+                $sproyecto    =   !is_null($dato['sproyecto'])?$dato['sproyecto']:"";
+                $centrooper   =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
+                $cuenta       =   !is_null($dato['cuenta'])?$dato['cuenta']:"";
+                $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
+                $scentro      =   !is_null($dato['scentro'])?$dato['scentro']:"";
+
+                $facturas     =   cuentasporpagar::where('numerodefactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
+                ->where('nit',$nit)->first();
+
+                //egreso::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodocto,'lapso'=>$lapso,'fechadocumento'=>$fechadcto]
+                $egreso     =   egreso::where('consecutivo',$consecutivo)->where('tipodedocumento',$doctopago)->where('lapso',$lapso)->where('fechadocumento',$fecha)->first();
+
+                $facturaid     = !is_null($facturas)?$facturas->cuentasporpagarID:1;
+                $egresoid      = !is_null($egreso)?$egreso->egresosID:1;
+
+                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+                $reg_pgo = detalledepagocxp::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
+                         'conceptodepago'=>$concepto,'numerodefactura'=>$nrofactura,'documentofactura'=>$tipodocto,'prefijo'=>$prefijo],
+                [                          
+                    'lapso'                 =>$lapso,
+                    'valordelpago'          =>$dato['valorpago'],
+                    'cuota'                 =>$dato['cuota'],
+                    'proyecto'              =>$proyecto,
+                    'sproyecto'             =>$sproyecto,
+                    'centrooper'            =>$centrooper,
+                    'cuenta'                =>$cuenta,
+                    'centro'                =>$centro,
+                    'scentro'               =>$scentro,     
+                    'actividad'             =>!is_null($dato['actividad'])?$dato['actividad']:"",               
+                    'facturacxpid'          =>$facturaid,
+                    'egresosid'             =>$egresoid,       
+                    'estado'                =>$dato['estado'], 
+                    'estado01'              =>0, 
+                    'estado02'              =>0, 
+                    'estado03'              =>0, 
+                    'usuario_created'       =>$dato['usuariocreated'],
+                    'usuario_updated'       =>$dato['usuarioupdated'],
+                ]);
+                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+            }
         }
 
         return response()->json(
