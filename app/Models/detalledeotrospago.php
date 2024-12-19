@@ -13,7 +13,7 @@ class detalledeotrospago extends Model
     protected $fillable = [
      'consecutivo','tipodocumento','fechadocumento','lapso','nit','conceptodepago','sucursal','cuenta','centro','scentro','tipodemovimiento',
      'placa','valordelpago','nittercero','sucursaltercero','observaciones','numerorecibodecaja','docrecibodecaja','nitarrendatario',
-     'sucursalarrendatario','propiedad','estado','estado01','estado02','proyecto','sproyecto','centrooper','actividad','egresosid','facturacxpid',
+     'sucursalarrendatario','propiedad','estado','estado01','estado02','proyecto','sproyecto','centrooper','actividad',
      'usuario_created','usuario_updated','fecha_created','fecha_updated'];
 
     protected $primaryKey = "detalledeotrospagosid";
