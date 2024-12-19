@@ -12,7 +12,7 @@ class detalledepagocxp extends Model
 
     protected $fillable = [
       'consecutivo','fechadocumento','documentopago','nit','sucursal','proyecto','sproyecto','centrooper','	actividad','lapso','cuenta','centro','scentro',
-      'tipodemovimiento','numerodefactura','prefijo','documentofactura','conceptodepago','valordelpago','cuota','estado','estado01','estado02','EgresosID',
+      'tipodemovimiento','numerodefactura','prefijo','documentofactura','conceptodepago','valordelpago','cuota','estado','estado01','estado02','egresosID',
       'facturacxpID','usuario_created','usuario_updated','fecha_created','fecha_updated'];
 
     protected $primaryKey = "detalledepagoscxpid";
