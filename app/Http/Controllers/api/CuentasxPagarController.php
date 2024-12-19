@@ -143,7 +143,6 @@ class CuentasxPagarController extends Controller
                 $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
                 $tipodocto    =   !is_null($dato['documentofactura'])?$dato['documentofactura']:"";
                 $lapso        =   $dato['lapso'];
-
                 $proyecto     =   !is_null($dato['proyecto'])?$dato['proyecto']:"";
                 $sproyecto    =   !is_null($dato['sproyecto'])?$dato['sproyecto']:"";
                 $centrooper   =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
