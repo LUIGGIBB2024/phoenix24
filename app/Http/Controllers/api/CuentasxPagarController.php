@@ -151,7 +151,7 @@ class CuentasxPagarController extends Controller
                 $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
                 $scentro      =   !is_null($dato['scentro'])?$dato['scentro']:"";
 
-                $facturas     =   cuentasporpagar::where('numerodefactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
+                $facturas     =   cuentasporpagar::where('numerofactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
                 ->where('nit',$nit)->first();
 
                 //egreso::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodocto,'lapso'=>$lapso,'fechadocumento'=>$fechadcto]
