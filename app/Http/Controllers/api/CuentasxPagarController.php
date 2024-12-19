@@ -133,12 +133,7 @@ class CuentasxPagarController extends Controller
             $detalle   = $request->datadtpgcxp;
             foreach ($detalle as $dato)
             {
-                return response()->json(
-                    [
-                    'status'       => '200',
-                    'msg'          => 'Actualización Exitosa 200 CXP - Entre inicio',
-                    ],Response::HTTP_ACCEPTED);
-
+        
                 $consecutivo  =   $dato['consecutivo'];
                 $fecha        =   $dato['fechadocumento'];
                 $doctopago    =   !is_null($dato['tipodocumento'])?$dato['tipodocumento']:""; 
