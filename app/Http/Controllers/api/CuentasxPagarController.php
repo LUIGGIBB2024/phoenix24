@@ -143,6 +143,7 @@ class CuentasxPagarController extends Controller
                 $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
                 $tipodocto    =   !is_null($dato['documentofactura'])?$dato['documentofactura']:"";
                 $lapso        =   $dato['lapso'];
+
                 $proyecto     =   !is_null($dato['proyecto'])?$dato['proyecto']:"";
                 $sproyecto    =   !is_null($dato['sproyecto'])?$dato['sproyecto']:"";
                 $centrooper   =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
@@ -150,22 +151,22 @@ class CuentasxPagarController extends Controller
                 $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
                 $scentro      =   !is_null($dato['scentro'])?$dato['scentro']:"";
 
-                $factura      =   cuentasporpagar::where('numerofactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
+                $facturas     =   cuentasporpagar::where('numerofactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
                 ->where('nit',$nit)->first();
 
                 //egreso::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodocto,'lapso'=>$lapso,'fechadocumento'=>$fechadcto]
                 $egreso     =   egreso::where('consecutivo',$consecutivo)->where('tipodedocumento',$doctopago)->where('lapso',$lapso)->where('fechadocumento',$fecha)->first();
 
-                $facturaid     = !is_null($factura)?$factura->cuentasporpagarID:1;
+                $facturaid     = !is_null($facturas)?$facturas->cuentasporpagarID:1;
                 $egresoid      = !is_null($egreso)?$egreso->egresosID:1;
 
-                return response()->json(
-                    [
-                    'status'       => '200',
-                    'msg'          => 'Actualización Exitosa 300',
-                    'factura'      => $facturaid,
-                    'egreso'       => $egresoid,
-                    ],Response::HTTP_ACCEPTED);
+                // return response()->json(
+                //     [
+                //     'status'       => '200',
+                //     'msg'          => 'Actualización Exitosa 300',
+                //     'factura'      => $facturaid,
+                //     'egreso'       => $egresoid,
+                //     ],Response::HTTP_ACCEPTED);
 
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');
                 $reg_pgo = detalledepagocxp::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
