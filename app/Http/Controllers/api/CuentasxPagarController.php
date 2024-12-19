@@ -160,6 +160,14 @@ class CuentasxPagarController extends Controller
                 $facturaid     = !is_null($facturas)?$facturas->cuentasporpagarID:1;
                 $egresoid      = !is_null($egreso)?$egreso->egresosID:1;
 
+                return response()->json(
+                    [
+                    'status'       => '200',
+                    'msg'          => 'Actualización Exitosa 300',
+                    'factura'      => $facturaid,
+                    'egreso'       => $egresoid,
+                    ],Response::HTTP_ACCEPTED);
+
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');
                 $reg_pgo = detalledepagocxp::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'documentopago'=>$doctopago,'nit'=>$nit,'sucursal'=>$sucursal,
                          'conceptodepago'=>$concepto,'numerodefactura'=>$nrofactura,'documentofactura'=>$tipodocto,'prefijo'=>$prefijo],
