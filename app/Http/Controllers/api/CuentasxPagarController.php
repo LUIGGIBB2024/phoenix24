@@ -81,10 +81,10 @@ class CuentasxPagarController extends Controller
                 $centro         =  !is_null($dato['centro'])?$dato['centro']:"";
                 $centrooper     =  !is_null($dato['centrooper'])?$dato['centrooper']:"";
 
-                $egreso         =  egreso::where('consecutivo',$consecutivo)->where('tipodedocumento',$tipodocto)->where('lapso',$lapso)->where('fechadocumento',$fecha)->first();
+                $dcto_egreso         =  egreso::where('consecutivo',$consecutivo)->where('tipodedocumento',$tipodocto)->where('lapso',$lapso)->where('fechadocumento',$fecha)->first();
                 
-                $nitegr         =  !is_null($egreso->nit)?$egreso->nit:""; 
-                $sucursal       =  !is_null($egreso->sucursal)?$egreso->sucursal:"";
+                $nitegr         =  !is_null($dcto_egreso->nit)?$dcto_egreso->nit:""; 
+                $sucursal       =  !is_null($dcto_egreso->sucursal)?$dcto_egreso->sucursal:"";
 
                 $reg_otros = detalledeotrospago::updateOrCreate(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'centrooper'=>$centrooper,'conceptodepago'=>$concepto,'fechadocumento'=>$fecha,
                              'nittercero'=>$nitter,'sucursaltercero'=>$sucursal,'cuenta'=>$cuenta,'centro'=>$centro],
@@ -109,7 +109,7 @@ class CuentasxPagarController extends Controller
                     'estado01'              => $dato['estado01'],
                     'estado02'              => $dato['estado02'],
                     'estado03'              => $dato['estado03'],
-                    'egresosid'             => $egreso->egresosID,
+                    'egresosid'             => $dcto_egreso->egresosID,
                     'usuario_created'       => $dato['usuariocreated'],
                     'usuario_updated'       => $dato['usuarioupdated'],                    
                 ]);
