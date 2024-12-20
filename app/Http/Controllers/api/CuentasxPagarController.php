@@ -71,7 +71,7 @@ class CuentasxPagarController extends Controller
 
             foreach ($otrospagos as $dato)
             {
-                $consecutivo    =  $dato['consecutivo'];
+                $consecutivo    =  $dato['egreso'];
                 $tipodocto      =  !is_null($dato['dctoegreso'])?$dato['dctoegreso']:"";
                 $concepto       =  !is_null($dato['tipomvto'])?$dato['tipomvto']:"";
                 $fecha          =  $dato['fechamvto'];
