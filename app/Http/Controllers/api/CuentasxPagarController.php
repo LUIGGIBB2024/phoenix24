@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\cuentasporpagar;
+use App\Models\detalledeotrospago;
 use App\Models\detalledepagocxp;
 use App\Models\egreso;
 use App\Models\proveedor;
@@ -63,6 +64,59 @@ class CuentasxPagarController extends Controller
                 'msg'          => 'Actualización Exitosa 200',
                 ],Response::HTTP_ACCEPTED); 
         }
+
+        if (isset($request->dataotrospagos))
+        {
+            $otrospagos = $request->dataotrospagos;
+
+            foreach ($otrospagos as $dato)
+            {
+                $consecutivo    =  $dato['consecutivo'];
+                $tipodocto      =  !is_null($dato['dctoegreso'])?$dato['dctoegreso']:"";
+                $concepto       =  !is_null($dato['tipomvto'])?$dato['tipomvto']:"";
+                $fecha          =  $dato['fechamvto'];
+                $nitter         =  !is_null($dato['nit'])?$dato['nit']:"";
+                $lapso          =  $dato['lapso'];
+                $cuenta         =  !is_null($dato['cuenta'])?$dato['cuenta']:"";
+                $centro         =  !is_null($dato['centro'])?$dato['centro']:"";
+                $centrooper     =  !is_null($dato['centrooper'])?$dato['centrooper']:"";
+
+                $egreso         =  egreso::where('consecutivo',$consecutivo)->where('tipodedocumento',$tipodocto)->where('lapso',$lapso)->where('fechadocumento',$fecha)->first();
+                
+                $nitegr         =  !is_null($egreso->nit)?$egreso->nit:""; 
+                $sucursal       =  !is_null($egreso->sucursal)?$egreso->sucursal:"";
+
+                $reg_otros = detalledeotrospago::updateOrCreate(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'centrooper'=>$centrooper,'conceptodepago'=>$concepto,'fechadocumento'=>$fecha,
+                             'nittercero'=>$nitter,'sucursaltercero'=>$sucursal,'cuenta'=>$cuenta,'centro'=>$centro],
+                [
+                    'lapso'                 => $lapso,
+                    'nit'                   => $nitegr,
+                    'sucursal'              => $sucursal,
+                    'scentro'               => "",
+                    'tipodemovimiento'      => "0",
+                    'placa'                 => !is_null($dato['vehiculo'])?$dato['vehiculo']:"",
+                    'valordelpago'          => $dato['valor'],
+                    'observaciones'         => !is_null($dato['texto'])?$dato['texto']:"",
+                    'numerorecibodecaja'    => $dato['recibo'],
+                    'docrecibodecaja'       => "",
+                    'nitarrendatario'       => "",
+                    'sucursalarrendatario'  => "",
+                    'propiedad'             => !is_null($dato['propiedad'])?$dato['propiedad']:"",
+                    'proyecto'              => !is_null($dato['proyecto'])?$dato['proyecto']:"",
+                    'sproyecto'             => !is_null($dato['sproyecto'])?$dato['sproyecto']:"",
+                    'actividad'             => !is_null($dato['actividad'])?$dato['actividad']:"",
+                    'estado'                => $dato['estado'],
+                    'estado01'              => $dato['estado01'],
+                    'estado02'              => $dato['estado02'],
+                    'estado03'              => $dato['estado03'],
+                    'egresosid'             => $egreso->egresosID,
+                    'usuario_created'       => $dato['usuariocreated'],
+                    'usuario_updated'       => $dato['usuarioupdated'],                    
+                ]);
+            }
+
+        }
+
         
         if (isset($request->datacxp))
         {
@@ -144,14 +198,12 @@ class CuentasxPagarController extends Controller
                 $prefijo      =   !is_null($dato['prefijo'])?$dato['prefijo']:"";
                 $tipodocto    =   !is_null($dato['documentofactura'])?$dato['documentofactura']:"";
                 $lapso        =   $dato['lapso'];
-
                 $proyecto     =   !is_null($dato['proyecto'])?$dato['proyecto']:"";
                 $sproyecto    =   !is_null($dato['sproyecto'])?$dato['sproyecto']:"";
                 $centrooper   =   !is_null($dato['centrooper'])?$dato['centrooper']:"";
                 $cuenta       =   !is_null($dato['cuenta'])?$dato['cuenta']:"";
                 $centro       =   !is_null($dato['centro'])?$dato['centro']:"";
                 $scentro      =   !is_null($dato['scentro'])?$dato['scentro']:"";
-
                 $facturas     =   cuentasporpagar::where('numerofactura',$nrofactura)->where('tipodedocumento',$tipodocto)->where('prefijo',$prefijo)
                 ->where('nit',$nit)->first();
 
