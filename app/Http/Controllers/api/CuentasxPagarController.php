@@ -29,7 +29,9 @@ class CuentasxPagarController extends Controller
                 $tipodocto   =  !is_null($dato['documentodepago'])?$dato['documentodepago']:"";
                 $lapso       =  !is_null($dato['lapso'])?$dato['lapso']:"";
                 $fechadcto   =  $dato['fechadocumento'];
-                $reg_pagos   =  egreso::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodocto,'lapso'=>$lapso,'fechadocumento'=>$fechadcto],
+                $nit         =  !is_null($dato['nit'])?$dato['nit']:"";
+                $sucursal    =  !is_null($dato['sucursal'])?$dato['sucursal']:"";
+                $reg_pagos   =  egreso::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodocto,'lapso'=>$lapso,'fechadocumento'=>$fechadcto,'nit'=>$nit,'sucursal'=>$sucursal],
                 [
                    
                     'nit'                     =>  !is_null($dato['nit'])?$dato['nit']:"",
