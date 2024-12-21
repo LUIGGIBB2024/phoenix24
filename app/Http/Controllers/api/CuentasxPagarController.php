@@ -94,7 +94,7 @@ class CuentasxPagarController extends Controller
                 //     'fecha'        =>  $fecha,
                 //     ],Response::HTTP_ACCEPTED);
                 
-                if (!is_object($dcto_egreso->nit))
+                if (!is_object($dcto_egreso))
                     {
                         $nitegr         =  "NONIT";
                         $sucursal       =  "NOSUCIT";
