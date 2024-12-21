@@ -88,6 +88,16 @@ class CuentasxPagarController extends Controller
                 $nitegr         =  !is_null($dcto_egreso->nit)?$dcto_egreso->nit:""; 
                 $sucursal       =  !is_null($dcto_egreso->sucursal)?$dcto_egreso->sucursal:"";
 
+                return response()->json(
+                    [
+                    'status'       => '400',
+                    'msg'          => 'Actualización Exitosa 200 CXP',
+                    'consecutivo'  =>  $consecutivo,  
+                    'documento'    =>  $tipodocto, 
+                    'fecha'        =>  $fecha,
+                    ],Response::HTTP_ACCEPTED);
+
+
                 $reg_otros = detalledeotrospago::updateOrCreate(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'centrooper'=>$centrooper,'conceptodepago'=>$concepto,'fechadocumento'=>$fecha,
                              'nittercero'=>$nitter,'sucursaltercero'=>$sucursal,'cuenta'=>$cuenta,'centro'=>$centro],
                 [
