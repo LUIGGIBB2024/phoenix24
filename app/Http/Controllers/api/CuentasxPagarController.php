@@ -93,7 +93,7 @@ class CuentasxPagarController extends Controller
                 //     'documento'    =>  $tipodocto, 
                 //     'fecha'        =>  $fecha,
                 //     ],Response::HTTP_ACCEPTED);
-                
+                $egresosid = 1;
                 if (!is_object($dcto_egreso))
                     {
                         $nitegr         =  "NONIT";
@@ -103,6 +103,7 @@ class CuentasxPagarController extends Controller
                 {
                     $nitegr         =  !is_null($dcto_egreso->nit)?$dcto_egreso->nit:""; 
                     $sucursal       =  !is_null($dcto_egreso->sucursal)?$dcto_egreso->sucursal:"";
+                    $egresosid      =  $dcto_egreso->egresosID;
 
                 }
 
@@ -134,7 +135,7 @@ class CuentasxPagarController extends Controller
                     'estado01'              => $dato['estado01'],
                     'estado02'              => $dato['estado02'],
                     'estado03'              => $dato['estado03'],
-                    'egresosid'             => $dcto_egreso->egresosID,
+                    'egresosid'             => $egresosid,
                     'usuario_created'       => $dato['usuariocreated'],
                     'usuario_updated'       => $dato['usuarioupdated'],                    
                 ]);
