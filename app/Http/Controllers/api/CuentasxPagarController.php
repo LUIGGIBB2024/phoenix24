@@ -85,9 +85,6 @@ class CuentasxPagarController extends Controller
 
                 $dcto_egreso         =  egreso::where('consecutivo',$consecutivo)->where('tipodedocumento',$tipodocto)->where('lapso',$lapso)->where('fechadocumento',$fecha)->first();
                 
-                $nitegr         =  !is_null($dcto_egreso->nit)?$dcto_egreso->nit:""; 
-                $sucursal       =  !is_null($dcto_egreso->sucursal)?$dcto_egreso->sucursal:"";
-
                 return response()->json(
                     [
                     'status'       => '400',
@@ -96,6 +93,11 @@ class CuentasxPagarController extends Controller
                     'documento'    =>  $tipodocto, 
                     'fecha'        =>  $fecha,
                     ],Response::HTTP_ACCEPTED);
+
+                $nitegr         =  !is_null($dcto_egreso->nit)?$dcto_egreso->nit:""; 
+                $sucursal       =  !is_null($dcto_egreso->sucursal)?$dcto_egreso->sucursal:"";
+
+                
 
 
                 $reg_otros = detalledeotrospago::updateOrCreate(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'centrooper'=>$centrooper,'conceptodepago'=>$concepto,'fechadocumento'=>$fecha,
