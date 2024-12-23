@@ -332,5 +332,71 @@ class CuentasxPagarController extends Controller
                   ],Response::HTTP_ACCEPTED);
     }
 
+    public function CxpDetallada(Request $request):JsonResponse
+    {
+        $fechacorte = $request->fechacorte;
+        $nit        = $request->nit;
+        $sucursal   = $request->sucursal;
+
+        $pagos = detalledepagocxp::select('nit', 'sucursal','numerodefactura','prefijo','tipodocumento','facturacxcid')
+                ->selectRaw('sum(detalledepagoscxp.valordelpago) as abonos')
+                ->where('detalledepagoscxp.fechadocumento','<=',$fechacorte)
+                ->where('detalledepagoscxp.nit','=',$nit)
+                ->where('detalledepagoscxp.sucursal','=',$sucursal)
+                ->groupBy(['facturacxpid']);
+
+        $cxp = cuentasporpagar::selectRaw("proveedores.nombrecompleto, cuentasporpagar.fechafactura, cuentasporpagar.fechadevencimiento")
+                ->selectRaw("cuentasporpagarr.numerodefactura,cuentasporpagar.prefijo,cuentasporpagar.tipodedocumento")
+                ->selectRaw("cuentasporpagar.nit,cuentasporcobrar.sucursal,cuentasporpagar.cuentasporpagarid")
+                ->selectRaw("DATEDIFF('$fechacorte', cuentasporpagar.fechadevencimiento) + 1 as Dias")
+                //->selectRaw("cuentasporcobrar.fechadevencimiento->diff($fechacorte) as Dias")
+                ->selectRaw('cuentasporpagar.cuentasporpagarid')
+                ->selectRaw("cuentasporpagar.valorfactura as total, pagos.abonos as abonos")
+                ->selectRaw("0.00 as saldo")
+                ->join("proveedores",function($join)
+                      {
+                        $join->on("proveedores.nit","=","cuentasporpagar.nit")
+                              ->on("proveedores.sucursal","=","cuentasporpagar.sucursal");
+                      })
+                  ->leftjoinSub($pagos,'pagos',function($join)
+                      {
+                          $join->on('cuentasporpagar.cuentasporpagarid','=','pagos.facturacxpid')
+                               ->on('cuentasporpagar.nit','=','pagos.nit')
+                               ->on('cuentasporpagar.tipodedocumento','=','pagos.tipodocumento')
+                               ->on('cuentasporpagar.prefijo','=','pagos.prefijo');
+                      })
+                ->where('cuentasporpagar.fechafactura','<=',$fechacorte)
+                ->where('cuentasporpagar.nit','=',$nit)
+                ->where('cuentasporpagar.sucursal','=',$sucursal)
+                ->groupBy('cuentasporpagar.cuentasporpagarid')
+                ->orderBy('proveedores.nombrecompleto')
+                ->havingRaw('total <> abonos')
+                ->orhavingRaw('abonos is NULL')
+                ->get();
+
+
+           $totalcxp = 0;
+           $totregistros = 0;
+           foreach ($cxp as $dato)
+           {
+              $dato->abonos =  is_null($dato->abonos)?"0.00":$dato->abonos;
+              $saldo         = (float) $dato->total - (float)  $dato->abonos;
+              $dato->total   = (float) $dato->total;
+              $dato->abonos  = (float) $dato->abonos;
+              $dato->saldo   = $saldo;
+              $totalcxp  += $saldo;
+              $totregistros += 1;
+           }
+
+         return response()->json(
+                  [
+                  'status'          => '200',
+                  'msg'             => 'Consulta de Cuentas por Pagar Existosa',
+                  'totalcartera'    => $totalcxp,
+                  'totalregistros'  => $totregistros,
+                  'facturas'      => $cxp,
+                  ],Response::HTTP_ACCEPTED);
+    }
+
 }
 
