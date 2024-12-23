@@ -391,9 +391,9 @@ class CuentasxPagarController extends Controller
                   [
                   'status'          => '200',
                   'msg'             => 'Consulta de Cuentas por Pagar Existosa',
-                  'totalcartera'    => $totalcxp,
-                  'totalregistros'  => $totregistros,
-                  'facturas'      => $cxp,
+                //   'totalcartera'    => $totalcxp,
+                //   'totalregistros'  => $totregistros,
+                //   'facturas'      => $cxp,
                   ],Response::HTTP_ACCEPTED);
     }
 
