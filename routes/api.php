@@ -58,6 +58,8 @@ Route::group(['middleware'=>['auth:sanctum']],function()
 
     // Procesar Información de Cuentas por Pagar
     Route::post('process-cxp', [CuentasxPagarController::class,'ProcessCxp']);
+    Route::get('cxp-resumida', [CuentasxPagarController::class,'CxpResumida']);
+    Route::get('cxp-detallada', [CuentasxPagarController::class,'CxpDetallada']);
 
     //Route::get('consult-documents', [AutorizacionesController::class,'ConsultDocuments']);
 
