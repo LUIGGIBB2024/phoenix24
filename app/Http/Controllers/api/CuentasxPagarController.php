@@ -374,7 +374,6 @@ class CuentasxPagarController extends Controller
                 ->orhavingRaw('abonos is NULL')
                 ->get();
 
-
            $totalcxp = 0;
            $totregistros = 0;
            foreach ($cxp as $dato)
