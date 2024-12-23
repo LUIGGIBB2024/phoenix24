@@ -324,8 +324,8 @@ class CuentasxPagarController extends Controller
 
          return response()->json(
                   [
-                  'status'          => '200 ok1',
-                  'msg'             => 'Consulta de Cartera Existosa',
+                  'status'          => '200',
+                  'msg'             => 'Consulta de Cuentas por Pagar Existosa',
                   'totalcxp'        => $totalcxp,
                   'totalregistros'  => $totregistros,
                   'detalles'        => $cxp,
