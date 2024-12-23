@@ -358,7 +358,7 @@ class CuentasxPagarController extends Controller
                         $join->on("proveedores.nit","=","cuentasporpagar.nit")
                               ->on("proveedores.sucursal","=","cuentasporpagar.sucursal");
                       })
-                  ->leftjoinSub($pagos,'pagos',function($join)
+                ->leftjoinSub($pagos,'pagos',function($join)
                       {
                           $join->on('cuentasporpagar.cuentasporpagarid','=','pagos.facturacxpid')
                                ->on('cuentasporpagar.nit','=','pagos.nit')
