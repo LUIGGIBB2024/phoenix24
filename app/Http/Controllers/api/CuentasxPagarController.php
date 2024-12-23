@@ -326,7 +326,7 @@ class CuentasxPagarController extends Controller
                   [
                   'status'          => '200 ok1',
                   'msg'             => 'Consulta de Cartera Existosa',
-                  'totalcartera'    => $totalcxp,
+                  'totalcxp'        => $totalcxp,
                   'totalregistros'  => $totregistros,
                   'detalles'        => $cxp,
                   ],Response::HTTP_ACCEPTED);
