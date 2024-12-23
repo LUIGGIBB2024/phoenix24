@@ -107,11 +107,6 @@ class CuentasxPagarController extends Controller
 
                 }
 
-                
-
-                
-
-
                 $reg_otros = detalledeotrospago::updateOrCreate(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'centrooper'=>$centrooper,'conceptodepago'=>$concepto,'fechadocumento'=>$fecha,
                              'nittercero'=>$nitter,'sucursaltercero'=>$sucursal,'cuenta'=>$cuenta,'centro'=>$centro],
                 [
@@ -281,5 +276,61 @@ class CuentasxPagarController extends Controller
             'msg'          => 'Actualización Exitosa 200 CXP',
             ],Response::HTTP_ACCEPTED);
     }
+
+    public function CxpResumida(Request $request):JsonResponse
+    {
+
+        $fechacorte = $request->fechacorte;
+        $name       = $request->nombre;
+
+        $pagos = detalledepagocxp::select('nit', 'sucursal')
+                ->selectRaw('sum(detalledepagoscxp.valor) as abonos')
+                ->where('detalledepagoscxp.fechadocumento','<=',$fechacorte)
+                ->groupBy(['detalledepagoscxp.nit', 'detalledepagoscxp.sucursal']);
+
+          $cxp = cuentasporpagar::selectRaw("proveedores.nombrecompleto, SUM(cuentasporpagar.valorfactura) as total, dpagos.abonos,  SUM(cuentasporpagar.valorfactura) - IFNULL(dpagos.abonos,0) as misaldo")
+          ->selectRaw("cuentasporpagar.nit,cuentasporpagar.sucursal,cuentasporpagar.cuentasporpagarid")
+          ->selectRaw("0.00 as saldo")
+          ->join("clientes",function($join)
+                {
+                  $join->on("proveedores.nit","=","cuentasporpagar.nit")
+                       ->on("proveedores.sucursal","=","cuentasporpagar.sucursal");
+                })
+          ->leftjoinSub($pagos,'dpagos',function($join)
+                {
+                    $join->on('cuentasporpagar.nit','=','dpagos.nit')
+                         ->on('cuentasporpagar.sucursal','=','dpagos.sucursal');
+                })
+           ->where('cuentasporpagar.fechafactura','<=',$fechacorte)
+           ->where('cuentasporpagar.estado','=',1)
+           ->where('proveedores.nombrecompleto', 'like', '%' . $name . '%')
+           ->groupBy('proveedores.nombrecompleto','cuentasporpagar.nit','cuentasporpagar.sucursal')
+           ->havingRaw('cast(misaldo as int) > 0')          
+           ->get();
+
+           $totalcxp     = 0;
+           $totregistros = 0;
+           
+           foreach ($cxp as $dato)
+           {
+              $dato->abonos =  is_null($dato->abonos)?"0":$dato->abonos;
+              $saldo         =  (int)  $dato->total - (int) $dato->abonos;
+              $dato->total   =  (int) $dato->total;
+              $dato->abonos  =  (int) $dato->abonos;
+              $dato->saldo   =  (int) $saldo;
+              $totalcxp      += (int) $saldo;
+              $totregistros += 1;
+           }
+
+         return response()->json(
+                  [
+                  'status'          => '200 ok1',
+                  'msg'             => 'Consulta de Cartera Existosa',
+                  'totalcartera'    => $totalcxp,
+                  'totalregistros'  => $totregistros,
+                  'detalles'        => $cxp,
+                  ],Response::HTTP_ACCEPTED);
+    }
+
 }
 
