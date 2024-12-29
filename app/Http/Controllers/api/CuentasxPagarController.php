@@ -63,6 +63,8 @@ class CuentasxPagarController extends Controller
                  {
                   DB::table('detalledepagoscxp')->where(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'documentopago'=>$tipodocto,
                   'fechadocumento'=>$fechadcto])->delete();
+
+                  DB::table('detalledeotrospagos')->where(['consecutivo'=>$consecutivo,'tipodocumento'=>$tipodocto,'fechadocumento'=>$fechadcto])->delete();
                  }
             }
 
