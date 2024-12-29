@@ -342,6 +342,7 @@ class CuentasxPagarController extends Controller
                 ->where('detalledepagoscxp.fechadocumento','<=',$fechacorte)
                 ->where('detalledepagoscxp.nit','=',$nit)
                 ->where('detalledepagoscxp.sucursal','=',$sucursal)
+                ->where('detalledepagoscxp.estado','=',1)
                 ->groupBy(['facturacxpid']);
 
         $cxp = cuentasporpagar::selectRaw("proveedores.nombrecompleto, cuentasporpagar.fechafactura, cuentasporpagar.fechadevencimiento")
