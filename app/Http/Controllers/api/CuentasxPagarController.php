@@ -25,12 +25,13 @@ class CuentasxPagarController extends Controller
 
             foreach ($pagos as $dato)
             {
-                $consecutivo =  $dato['consecutivo'];
-                $tipodocto   =  !is_null($dato['documentodepago'])?$dato['documentodepago']:"";
-                $lapso       =  !is_null($dato['lapso'])?$dato['lapso']:"";
-                $fechadcto   =  $dato['fechadocumento'];
-                $nit         =  !is_null($dato['nit'])?$dato['nit']:"";
-                $sucursal    =  !is_null($dato['sucursal'])?$dato['sucursal']:"";
+                $consecutivo    =  $dato['consecutivo'];
+                $tipodocto      =  !is_null($dato['documentodepago'])?$dato['documentodepago']:"";
+                $lapso          =  !is_null($dato['lapso'])?$dato['lapso']:"";
+                $fechadcto      =   $dato['fechadocumento'];
+                $nit            =  !is_null($dato['nit'])?$dato['nit']:"";
+                $sucursal       =  !is_null($dato['sucursal'])?$dato['sucursal']:"";
+                $estado         =  $dato['estado'];     
                 $reg_pagos   =  egreso::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodocto,'lapso'=>$lapso,'fechadocumento'=>$fechadcto,'nit'=>$nit,'sucursal'=>$sucursal],
                 [                   
                     'nit'                     =>  !is_null($dato['nit'])?$dato['nit']:"",
@@ -57,6 +58,12 @@ class CuentasxPagarController extends Controller
                     'usuario_created'         =>  $dato['usuariocreated'],
                     'usuario_updated'         =>  $dato['usuarioupdated'],
                 ]);
+
+                if ($estado == 2)
+                 {
+                  DB::table('detalledepagoscxp')->where(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'documentopago'=>$tipodocto,
+                  'fechadocumento'=>$fechadcto])->delete();
+                 }
             }
 
             return response()->json(
