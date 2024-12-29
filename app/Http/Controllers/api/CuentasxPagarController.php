@@ -32,8 +32,7 @@ class CuentasxPagarController extends Controller
                 $nit         =  !is_null($dato['nit'])?$dato['nit']:"";
                 $sucursal    =  !is_null($dato['sucursal'])?$dato['sucursal']:"";
                 $reg_pagos   =  egreso::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=>$tipodocto,'lapso'=>$lapso,'fechadocumento'=>$fechadcto,'nit'=>$nit,'sucursal'=>$sucursal],
-                [
-                   
+                [                   
                     'nit'                     =>  !is_null($dato['nit'])?$dato['nit']:"",
                     'sucursal'                =>  !is_null($dato['sucursal'])?$dato['sucursal']:"",
                     'nombredeltercero'        =>  !is_null($dato['nombredeltercero'])?$dato['nombredeltercero']:"",
@@ -338,7 +337,7 @@ class CuentasxPagarController extends Controller
         $nit        = $request->nit;
         $sucursal   = $request->sucursal;
 
-        $pagos = detalledepagocxp::select('nit', 'sucursal','numerodefactura','prefijo','tipodocumento','facturacxcid')
+        $pagos = detalledepagocxp::select('nit', 'sucursal','numerodefactura','prefijo','documentofactura','facturacxpid')
                 ->selectRaw('sum(detalledepagoscxp.valordelpago) as abonos')
                 ->where('detalledepagoscxp.fechadocumento','<=',$fechacorte)
                 ->where('detalledepagoscxp.nit','=',$nit)
