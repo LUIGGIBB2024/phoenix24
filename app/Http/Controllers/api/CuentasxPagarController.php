@@ -360,14 +360,15 @@ class CuentasxPagarController extends Controller
                       })
                 ->leftjoinSub($pagos,'pagos',function($join)
                       {
-                          $join->on('cuentasporpagar.cuentasporpagarid','=','pagos.facturacxpid')
-                               ->on('cuentasporpagar.nit','=','pagos.nit')
-                               ->on('cuentasporpagar.tipodedocumento','=','pagos.documentofactura')
-                               ->on('cuentasporpagar.prefijo','=','pagos.prefijo');
+                        $join->on('cuentasporpagar.cuentasporpagarid','=','pagos.facturacxpid')
+                             ->on('cuentasporpagar.nit','=','pagos.nit')
+                             ->on('cuentasporpagar.tipodedocumento','=','pagos.documentofactura')
+                             ->on('cuentasporpagar.prefijo','=','pagos.prefijo');
                       })
                 ->where('cuentasporpagar.fechafactura','<=',$fechacorte)
                 ->where('cuentasporpagar.nit','=',$nit)
                 ->where('cuentasporpagar.sucursal','=',$sucursal)
+                ->where('cuentasporpagar.estado','=',1)
                 ->groupBy('cuentasporpagar.cuentasporpagarid')
                 ->orderBy('proveedores.nombrecompleto')
                 ->havingRaw('total <> abonos')
