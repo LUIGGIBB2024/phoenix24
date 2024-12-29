@@ -361,7 +361,7 @@ class CuentasxPagarController extends Controller
                       {
                           $join->on('cuentasporpagar.cuentasporpagarid','=','pagos.facturacxpid')
                                ->on('cuentasporpagar.nit','=','pagos.nit')
-                               ->on('cuentasporpagar.tipodedocumento','=','pagos.tipodocumento')
+                               ->on('cuentasporpagar.tipodedocumento','=','pagos.documentofactura')
                                ->on('cuentasporpagar.prefijo','=','pagos.prefijo');
                       })
                 ->where('cuentasporpagar.fechafactura','<=',$fechacorte)
