@@ -345,7 +345,7 @@ class CuentasxPagarController extends Controller
                 ->groupBy(['facturacxpid']);
 
         $cxp = cuentasporpagar::selectRaw("proveedores.nombrecompleto, cuentasporpagar.fechafactura, cuentasporpagar.fechadevencimiento")
-                ->selectRaw("cuentasporpagar.numerodefactura,cuentasporpagar.prefijo,cuentasporpagar.tipodedocumento")
+                ->selectRaw("cuentasporpagar.numerofactura,cuentasporpagar.prefijo,cuentasporpagar.tipodedocumento")
                 ->selectRaw("cuentasporpagar.nit,cuentasporcobrar.sucursal,cuentasporpagar.cuentasporpagarid")
                 ->selectRaw("DATEDIFF('$fechacorte', cuentasporpagar.fechadevencimiento) + 1 as Dias")
                 //->selectRaw("cuentasporcobrar.fechadevencimiento->diff($fechacorte) as Dias")
