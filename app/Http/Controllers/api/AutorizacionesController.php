@@ -43,7 +43,43 @@ class AutorizacionesController extends Controller
             return response()->json(
                 [
                  'status'           => '200',
-                 'msg'              => 'COnsulta Exitosa',
+                 'msg'              => 'Consulta Exitosa',
+                 'datos'            => $autorizaciones
+                ],Response::HTTP_ACCEPTED);
+    }
+
+    public function Automatic_Process_Consultation():JsonResponse
+    {
+        $contador = 0;
+
+        $autorizaciones = autorizacion::select(
+            DB::raw("documentosautorizados.id as id"),
+            DB::raw("documentosautorizados.numerodedocumento as numerodedocumento"),
+            DB::raw("documentosautorizados.tipodedocumento as tipodedocumento"),
+            DB::raw("documentosautorizados.prefijo as prefijo"),
+            DB::raw("documentosautorizados.tipo as tipo"),
+            DB::raw("documentosautorizados.accion as accion"),
+            DB::raw("documentosautorizados.fechadereporte as fechadereporte"),
+            DB::raw("documentosautorizados.fechadesde as fechadesde"),
+            DB::raw("documentosautorizados.fechahasta as fechahasta"),
+            DB::raw("documentosautorizados.estado01 as estado01"),
+            DB::raw("documentosautorizados.estado02 as estado02"),
+            DB::raw("documentosautorizados.nit as nit"),
+            DB::raw("documentosautorizados.sucursal as sucursal"),
+            DB::raw("documentosautorizados.nombredeltercero as nombredeltercero"),
+            DB::raw("documentosautorizados.pin as pin"),
+            DB::raw("documentosautorizados.observaciones as observaciones"),
+            DB::raw("documentosautorizados.valordelafactura as valordelafactura"))
+            ->where('documentosautorizados.estado01','=', 2)
+            ->where('documentosautorizados.estado01','=', 0)
+            ->orderBy('documentosautorizados.fechadereporte','desc')
+            ->get();
+            
+
+            return response()->json(
+                [
+                 'status'           => '200',
+                 'msg'              => 'Consulta Exitosa',
                  'datos'            => $autorizaciones
                 ],Response::HTTP_ACCEPTED);
     }
