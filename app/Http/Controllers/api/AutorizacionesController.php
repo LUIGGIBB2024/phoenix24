@@ -64,6 +64,7 @@ class AutorizacionesController extends Controller
             DB::raw("documentosautorizados.fechahasta as fechahasta"),
             DB::raw("documentosautorizados.estado01 as estado01"),
             DB::raw("documentosautorizados.estado02 as estado02"),
+            DB::raw("documentosautorizados.estado03 as estado03"),
             DB::raw("documentosautorizados.nit as nit"),
             DB::raw("documentosautorizados.sucursal as sucursal"),
             DB::raw("documentosautorizados.nombredeltercero as nombredeltercero"),
