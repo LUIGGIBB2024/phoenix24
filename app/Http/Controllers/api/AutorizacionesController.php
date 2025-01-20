@@ -48,7 +48,7 @@ class AutorizacionesController extends Controller
                 ],Response::HTTP_ACCEPTED);
     }
 
-    public function Automatic_Process_Consultation():JsonResponse
+    public function AutomaticProcessConsultation():JsonResponse
     {
         $contador = 0;
 
