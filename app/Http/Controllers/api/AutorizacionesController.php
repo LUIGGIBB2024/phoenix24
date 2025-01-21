@@ -102,4 +102,21 @@ class AutorizacionesController extends Controller
               //'datos'            => $document
             ],Response::HTTP_ACCEPTED);
     }
+
+    public function UpdateAuthorizedDocuments(Request $request):JsonResponse
+    {
+        $idpedido = $request->id;
+
+        $document  = autorizacion::findOrFail($idpedido);
+        $document->estado03 = 1;
+        $document->update();
+
+
+        return response()->json(
+            [
+              'status'           => '200',
+              'msg'              => 'Actualización Exitosa',
+              //'datos'            => $document
+            ],Response::HTTP_ACCEPTED);
+    }
 }
