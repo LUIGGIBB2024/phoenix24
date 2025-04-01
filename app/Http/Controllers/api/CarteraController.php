@@ -241,38 +241,41 @@ class CarteraController extends Controller
               //                        ->where('tipodedocumento',$tipodocto)->where('fechafactura',$fecha)->first();
 
               $clientes         = cliente::where('nit',$nit)->where('sucursal',$sucursal)->first();
-              $vendedor         = $clientes->vendedor;
+              $vendedor         = !empty($clientes->vendedor)?$clientes->vendedor:"";
 
               $contador++;
               // $facturaid     = !is_null($facturas)?$facturas->FacturasID:1;
               // $clienteid     = !is_null($clientes)?$clientes->clientesID:1;
-
-              $reg_pago = recibosdecaja::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'tipodocumento'=>$documento,
-                                                  'fechadocumento'=>$fecha],
-              [
-                'lapso'             =>$lapso,
-                'valorefectivo'     =>$pagoenefectivo,
-                'valorotro'         =>$pagoencheques,
-                'observaciones'     =>$observaciones,
-                'tipodepago'        =>$tipopago,
-                'tipoderecibo'      =>$tiporecibo,
-                'saldoactual'       =>$saldoactual,
-                'proyecto'          =>$proyecto,
-                'sproyecto'         =>"",
-                'centrooper'        =>$centrooper,
-                'actividad'         =>$centrooper,
-                'cuenta'            =>$cuenta,
-                'centro'            =>$centro,
-                'scentro'           =>$scentro,
-                'tipodemovimiento'  =>0,
-                'vendedor'          =>$vendedor,
-                'estado'            =>$estado,
-                'estado1'           =>0,
-                'estado2'           =>0,
-                'estado3'           =>0,
-                'usuario_created'   =>$dato['usuariocreated'],
-                'usuario_updated'   =>$dato['usuarioupdated'],
-              ]);
+       
+              if ($consecutivo>0)
+              {
+                $reg_pago = recibosdecaja::updateOrCreate(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'tipodocumento'=>$documento,
+                                                    'fechadocumento'=>$fecha],
+                [
+                  'lapso'             =>$lapso,
+                  'valorefectivo'     =>$pagoenefectivo,
+                  'valorotro'         =>$pagoencheques,
+                  'observaciones'     =>$observaciones,
+                  'tipodepago'        =>$tipopago,
+                  'tipoderecibo'      =>$tiporecibo,
+                  'saldoactual'       =>$saldoactual,
+                  'proyecto'          =>$proyecto,
+                  'sproyecto'         =>"",
+                  'centrooper'        =>$centrooper,
+                  'actividad'         =>$centrooper,
+                  'cuenta'            =>$cuenta,
+                  'centro'            =>$centro,
+                  'scentro'           =>$scentro,
+                  'tipodemovimiento'  =>0,
+                  'vendedor'          =>$vendedor,
+                  'estado'            =>$estado,
+                  'estado1'           =>0,
+                  'estado2'           =>0,
+                  'estado3'           =>0,
+                  'usuario_created'   =>$dato['usuariocreated'],
+                  'usuario_updated'   =>$dato['usuarioupdated'],
+                ]);
+              }
               if ($estado == 2)
                  {
                   DB::table('detalledepagoscxc')->where(['nit'=>$nit,'sucursal'=>$sucursal,'consecutivo'=>$consecutivo,'documentopago'=>$documento,

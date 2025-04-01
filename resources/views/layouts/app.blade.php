@@ -88,23 +88,23 @@
     </head>
     <body>
         <div class="alerta-app @if (session('status')) active @endif">
-             <p>
+            <p>
                 {{ session('status') }}
             </p>
         </div>
         <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-            @guest
+             @guest
                 @yield('content')
-            @else
+             @else
                 <div class="app-main">
                     @include('template.partials.menu')
                     <div class="app-main__outer">
-                        <div class="app-main__inner">
-                            @yield('contenedor')
-                        </div>
+                         <div class="app-main__inner">
+                              @yield('contenedor')
+                         </div>
                     </div>
                 </div>
-            @endguest
+             @endguest
         </div>
         @yield('js')
     </body>
