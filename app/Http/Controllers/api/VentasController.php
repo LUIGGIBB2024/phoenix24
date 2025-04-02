@@ -932,7 +932,7 @@ class VentasController extends Controller
 
     }
 
-    public function ConsolidatedSalesCenter():JsonResponse
+    public function ConsolidatedSalesCenter(Request $request):JsonResponse
     {
         // $this->validate($request, [
         //     'mes' => 'required',
