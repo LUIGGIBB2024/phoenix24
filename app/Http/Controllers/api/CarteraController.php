@@ -23,8 +23,7 @@ class CarteraController extends Controller
 {
     public function ProcessCxc(Request $request):JsonResponse
     {
-        $Si_Entro = false;
-        $prueba = 0;
+        $Si_Entro = false;       
         if (isset($request->dataotrospagos))
         {
             $otrospagos   = $request->dataotrospagos;
@@ -296,6 +295,14 @@ class CarteraController extends Controller
 
         $fechacorte = $request->fechacorte;
         $name       = $request->nombre;
+        $vendedor   = $request->vendedor;
+        $desdevededor  = "";
+        $hastavededor  = "zzzzzzzzzz";
+        if ($vendedor !== "")
+        {
+          $desdevededor  = $vendedor;
+          $hastavededor  = $vendedor;
+        }
 
         $pagos = detalledepago::select('nit', 'sucursal')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
@@ -318,6 +325,7 @@ class CarteraController extends Controller
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->where('cuentasporcobrar.estado','=',1)
            ->where('clientes.nombrecompleto', 'like', '%' . $name . '%')
+           ->between('cuentasporcobrar.vendedor', $desdevededor, $hastavededor)
            ->groupBy('clientes.nombrecompleto','cuentasporcobrar.nit','cuentasporcobrar.sucursal')
            ->havingRaw('cast(misaldo as int) > 0')          
            ->get();
