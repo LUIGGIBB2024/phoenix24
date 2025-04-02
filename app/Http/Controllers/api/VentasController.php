@@ -937,7 +937,7 @@ class VentasController extends Controller
         return response()->json(
             [
              'status'       => '200',
-             'msg'          => 'Ventas Consolidadas por Centros de operaciones',            
+             'msg'          => 'Ventas Consolidadas por Centros de operaciones'            
             ],Response::HTTP_ACCEPTED);
 
         DB::statement("SET lc_time_names = 'es_Es';");
