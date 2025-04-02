@@ -310,7 +310,7 @@ class CarteraController extends Controller
             'status'          => '200 ok2',
             'msg'             => 'Consulta de Cartera Existosa',
             'desdevendedor'    => $desdevendedor,
-            'hastavendedor'    => $desdevendedor,
+            'hastavendedor'    => $hastavendedor,
             ],Response::HTTP_ACCEPTED);
         $pagos = detalledepago::select('nit', 'sucursal')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
