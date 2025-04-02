@@ -298,11 +298,11 @@ class CarteraController extends Controller
         $vendedor   = $request->vendedor;
         $desdevendedor  = "";
         $hastavendedor  = "zzzzzzzzzz";
-        if ($vendedor !== "")
-        {
-          $desdevendedor  = $vendedor;
-          $hastavendedor  = $vendedor;
-        }
+        if (empty($vendedor))
+           {
+              $desdevendedor  = $vendedor;
+              $hastavendedor  = $vendedor;
+           }
 
         $pagos = detalledepago::select('nit', 'sucursal')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
