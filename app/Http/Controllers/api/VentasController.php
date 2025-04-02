@@ -934,11 +934,6 @@ class VentasController extends Controller
 
     public function ConsolidatedSalesCenter(Request $request):JsonResponse
     {
-        $this->validate($request, [
-            'mes' => 'required',
-            'año' => 'required',
-        ]);
-
         return response()->json(
             [
              'status'       => '200',
