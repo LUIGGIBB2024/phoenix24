@@ -31,7 +31,7 @@ Route::group(['middleware'=>['auth:sanctum']],function()
 {
     // Rutas Información de Ventas
     Route::post('update-sales', [VentasController::class,'UpdateSales']);
-    Route::get('consolidated-sales-center', [VentasController::class,'ConsolidatedSalesCenter']);
+    Route::post('consolidated-sales-center', [VentasController::class,'ConsolidatedSalesCenter']);
     Route::get('daily-sales-center', [VentasController::class,'DailySalesCenter']);
     Route::get('daily-detailed-sales', [VentasController::class,'DailyDetailedSales']);
     Route::get('daily-consolidated-sales', [VentasController::class,'DailyConsolidatedSales']);
