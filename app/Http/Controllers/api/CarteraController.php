@@ -406,6 +406,7 @@ class CarteraController extends Controller
                       })
                 ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
                 ->where('cuentasporcobrar.nit','=',$nit)
+                ->where('cuentasporcobrar.estado','=',1)
                 ->where('cuentasporcobrar.sucursal','=',$sucursal)
                 ->where('cuentasporcobrar.vendedor', '>=' , $desdevendedor)
                 ->where('cuentasporcobrar.vendedor', '<=' , $hastavendedor)
