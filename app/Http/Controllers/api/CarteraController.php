@@ -297,7 +297,7 @@ class CarteraController extends Controller
         $name       = $request->nombre;
         $vendedor   = $request->vendedor;
         $desdevendedor  = "";
-        $hastavendedor  = "ZZZZZZZZZZZ";
+        $hastavendedor  = "zzzzzzzzzz";
         if ($vendedor !== "")
         {
           $desdevendedor  = $vendedor;
