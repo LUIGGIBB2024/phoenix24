@@ -938,6 +938,12 @@ class VentasController extends Controller
         $mes  = $request->mes;
         $anop  = $request->año;
 
+        return response()->json(
+            [
+             'status'       => '200',
+             'msg'          => 'Ventas Consolidadas por Centros de operaciones (' . $anop .')',            
+            ],Response::HTTP_ACCEPTED);
+
         $remisiones = remision::select(
             DB::raw('centrooperativo.nombre as centrodeoperacion'),
             DB::raw("sum(round(totaldocumento,0)) as totalventas"),
