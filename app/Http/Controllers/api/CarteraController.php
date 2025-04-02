@@ -296,12 +296,12 @@ class CarteraController extends Controller
         $fechacorte = $request->fechacorte;
         $name       = $request->nombre;
         $vendedor   = $request->vendedor;
-        $desdevededor  = "";
-        $hastavededor  = "ZZZZZZZZZZZ";
+        $desdevendedor  = "";
+        $hastavendedor  = "ZZZZZZZZZZZ";
         if ($vendedor !== "")
         {
-          $desdevededor  = $vendedor;
-          $hastavededor  = $vendedor;
+          $desdevendedor  = $vendedor;
+          $hastavendedor  = $vendedor;
         }
 
         $pagos = detalledepago::select('nit', 'sucursal')
@@ -325,7 +325,7 @@ class CarteraController extends Controller
            ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
            ->where('cuentasporcobrar.estado','=',1)
            ->where('clientes.nombrecompleto', 'like', '%' . $name . '%')
-           ->whereBetween('cuentasporcobrar.vendedor', [$desdevededor, $hastavededor])
+           ->whereBetween('cuentasporcobrar.vendedor', [$desdevendedor, $hastavendedor])
            ->groupBy('clientes.nombrecompleto','cuentasporcobrar.nit','cuentasporcobrar.sucursal')
            ->havingRaw('cast(misaldo as int) > 0')          
            ->get();
