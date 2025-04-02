@@ -24,6 +24,7 @@ class CarteraController extends Controller
     public function ProcessCxc(Request $request):JsonResponse
     {
         $Si_Entro = false;
+        $prueba = 0;
         if (isset($request->dataotrospagos))
         {
             $otrospagos   = $request->dataotrospagos;
