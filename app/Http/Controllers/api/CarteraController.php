@@ -304,6 +304,14 @@ class CarteraController extends Controller
               $hastavendedor  = $vendedor;
            }
            
+
+           return response()->json(
+            [
+            'status'          => '200 ok2',
+            'msg'             => 'Consulta de Cartera Existosa',
+            'desdevendedor'    => $desdevendedor,
+            'hastavendedor'    => $desdevendedor,
+            ],Response::HTTP_ACCEPTED);
         $pagos = detalledepago::select('nit', 'sucursal')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
                 ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
