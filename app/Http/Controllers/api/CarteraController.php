@@ -23,7 +23,6 @@ class CarteraController extends Controller
 {
     public function ProcessCxc(Request $request):JsonResponse
     {
-      
         $Si_Entro = false;
         if (isset($request->dataotrospagos))
         {
