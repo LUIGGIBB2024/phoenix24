@@ -298,7 +298,7 @@ class CarteraController extends Controller
         $vendedor   = $request->vendedor;
         $desdevendedor  = "";
         $hastavendedor  = "zzzzzzzzzz";
-        if (empty($vendedor))
+        if ($vendedor !== "")
            {
               $desdevendedor  = $vendedor;
               $hastavendedor  = $vendedor;
@@ -326,7 +326,7 @@ class CarteraController extends Controller
            ->where('cuentasporcobrar.estado','=',1)
            ->where('clientes.nombrecompleto', 'like', '%' . $name . '%')
            ->where('cuentasporcobrar.vendedor', '>=' , $desdevendedor)
-            ->where('cuentasporcobrar.vendedor', '<=' , $hastavendedor)
+           ->where('cuentasporcobrar.vendedor', '<=' , $hastavendedor)
            ->groupBy('clientes.nombrecompleto','cuentasporcobrar.nit','cuentasporcobrar.sucursal')
            ->havingRaw('cast(misaldo as int) > 0')          
            ->get();
