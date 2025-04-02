@@ -303,7 +303,7 @@ class CarteraController extends Controller
               $desdevendedor  = $vendedor;
               $hastavendedor  = $vendedor;
            }
-
+           
         $pagos = detalledepago::select('nit', 'sucursal')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
                 ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
