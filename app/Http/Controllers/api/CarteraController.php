@@ -369,7 +369,15 @@ class CarteraController extends Controller
         $fechacorte = $request->fechacorte;
         $nit        = $request->nit;
         $sucursal   = $request->sucursal;
-
+        $vendedor   = $request->vendedor;
+        $desdevendedor  = "";
+        $hastavendedor  = "zzzzzzzzzz";
+        if (!is_null($vendedor))
+           {
+              $desdevendedor  = $vendedor;
+              $hastavendedor  = $vendedor;
+           }
+           
         $pagos = detalledepago::select('nit', 'sucursal','numerodefactura','prefijo','tipodocumento','facturacxcid')
                 ->selectRaw('sum(detalledepagoscxc.valor) as abonos')
                 ->where('detalledepagoscxc.fechadocumento','<=',$fechacorte)
@@ -399,6 +407,8 @@ class CarteraController extends Controller
                 ->where('cuentasporcobrar.fechafactura','<=',$fechacorte)
                 ->where('cuentasporcobrar.nit','=',$nit)
                 ->where('cuentasporcobrar.sucursal','=',$sucursal)
+                ->where('cuentasporcobrar.vendedor', '>=' , $desdevendedor)
+                ->where('cuentasporcobrar.vendedor', '<=' , $hastavendedor)
                 ->groupBy('cuentasporcobrar.cuentasporcobrarid')
                 ->orderBy('clientes.nombrecompleto')
                 ->havingRaw('total <> abonos')
