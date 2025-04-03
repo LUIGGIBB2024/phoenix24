@@ -33,7 +33,7 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     Route::post('update-sales', [VentasController::class,'UpdateSales']);
     Route::post('consolidated-sales-center', [VentasController::class,'ConsolidatedSalesCenter']);
     Route::get('daily-sales-center', [VentasController::class,'DailySalesCenter']);
-    Route::get('daily-detailed-sales', [VentasController::class,'DailyDetailedSales']);
+    Route::post('daily-detailed-sales', [VentasController::class,'DailyDetailedSales']);
     Route::get('daily-consolidated-sales', [VentasController::class,'DailyConsolidatedSales']);
     Route::get('consult-inventories', [VentasController::class,'ConsultInventories']);
 
