@@ -1018,12 +1018,7 @@ class VentasController extends Controller
             ->groupBy('fecha','centrodeoperacion','prefijo');
            // ->get();
 
-           return response()->json(
-            [
-             'status'       => '200',
-             'msg'          => 'Ventas Detalladas por Centros de operaciones (Remisiones)',            
-            ],Response::HTTP_ACCEPTED);
-
+         
         $ventas = factura::select(
             DB::raw('centrooperativo.nombre as centrodeoperacion'),
             DB::raw('sum(round(totalfactura,0)) as totalventas'),
@@ -1039,6 +1034,12 @@ class VentasController extends Controller
             ->whereBetween('horadefactura',[$horad,$horah])
             ->groupBy('fecha','centrodeoperacion','prefijo')
             ->get();
+
+            return response()->json(
+                [
+                 'status'       => '200',
+                 'msg'          => 'Ventas Detalladas por Centros de operaciones (Facturas)',            
+                ],Response::HTTP_ACCEPTED);
 
         $consolidado = collect($ventas);
 
