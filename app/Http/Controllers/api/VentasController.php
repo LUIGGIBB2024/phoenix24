@@ -1001,15 +1001,8 @@ class VentasController extends Controller
         $fechah  = $request->fechahasta;
         $horad   = $request->horadesde;
         $horah   = $request->horahasta;
-        $anop  = $request->año;
-
-        return response()->json(
-            [
-             'status'       => '200',
-             'msg'          => 'Ventas Detalladas por Centros de operaciones'            
-            ],Response::HTTP_ACCEPTED);
+        $anop  = $request->año;      
             
-
         $remisiones = remision::select(
             DB::raw('centrooperativo.nombre as centrodeoperacion'),
             DB::raw('sum(round(totaldocumento,0)) as totalventas'),
@@ -1024,6 +1017,12 @@ class VentasController extends Controller
             ->whereBetween('horadocumento',[$horad,$horah])
             ->groupBy('fecha','centrodeoperacion','prefijo');
            // ->get();
+
+           return response()->json(
+            [
+             'status'       => '200',
+             'msg'          => 'Ventas Detalladas por Centros de operaciones (Remisiones)',            
+            ],Response::HTTP_ACCEPTED);
 
         $ventas = factura::select(
             DB::raw('centrooperativo.nombre as centrodeoperacion'),
