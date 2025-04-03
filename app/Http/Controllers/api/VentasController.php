@@ -1033,13 +1033,7 @@ class VentasController extends Controller
             ->whereBetween('fechafactura',[$fechad,$fechah])
             ->whereBetween('horadefactura',[$horad,$horah])
             ->groupBy('fecha','centrodeoperacion','prefijo')
-            ->get();
-
-            return response()->json(
-                [
-                 'status'       => '200',
-                 'msg'          => 'Ventas Detalladas por Centros de operaciones (Facturas)',            
-                ],Response::HTTP_ACCEPTED);
+            ->get();            
 
         $consolidado = collect($ventas);
 
