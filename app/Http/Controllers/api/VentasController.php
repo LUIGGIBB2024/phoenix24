@@ -995,18 +995,20 @@ class VentasController extends Controller
     public function DailySalesCenter(Request $request):JsonResponse
     {
 
-         return response()->json(
-            [
-             'status'       => '200',
-             'msg'          => 'Ventas Detalladas por Centros de operaciones'            
-            ],Response::HTTP_ACCEPTED);
-            
+       
         DB::statement("SET lc_time_names = 'es_Es';");
         $fechad  = $request->fechadesde;
         $fechah  = $request->fechahasta;
         $horad   = $request->horadesde;
         $horah   = $request->horahasta;
         $anop  = $request->año;
+
+        return response()->json(
+            [
+             'status'       => '200',
+             'msg'          => 'Ventas Detalladas por Centros de operaciones'            
+            ],Response::HTTP_ACCEPTED);
+            
 
         $remisiones = remision::select(
             DB::raw('centrooperativo.nombre as centrodeoperacion'),
