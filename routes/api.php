@@ -4,6 +4,7 @@ use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\AutorizacionesController;
 use App\Http\Controllers\api\CarteraController;
 use App\Http\Controllers\api\CuentasxPagarController;
+use App\Http\Controllers\api\GetUtilityController;
 use App\Http\Controllers\api\OnlyInvoiceController;
 use App\Http\Controllers\api\VentasController;
 use Illuminate\Http\Request;
@@ -63,8 +64,9 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     Route::get('cxp-resumida', [CuentasxPagarController::class,'CxpResumida']);
     Route::get('cxp-detallada', [CuentasxPagarController::class,'CxpDetallada']);
 
-    //Route::get('consult-documents', [AutorizacionesController::class,'ConsultDocuments']);
-
+    
+    // Procesar GetUtility
+    Route::post('get-utility', [GetUtilityController::class,'GetUtility']);
 
 });
 
