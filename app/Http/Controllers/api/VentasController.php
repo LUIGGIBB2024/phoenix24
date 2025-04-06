@@ -19,7 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\enlacevisual_nv;
+use App\Models\Lista;
 use App\Models\remision;
+use App\Models\vendedor;
 
 use function PHPUnit\Framework\isNull;
 
@@ -27,6 +29,56 @@ class VentasController extends Controller
 {
     public function UpdateSales(Request $request):JsonResponse
     {
+        $contador = 0;
+        if (isset($request->istas))
+        {
+           $listas  = $request->listas;
+           foreach($listas as $dato)
+           {
+             $codigo          =   $dato['codigo'];
+             $reg_info  = Lista::updateOrCreate(['codigo'=>$codigo],
+             [
+               'descripcion'                   => $dato['descripcion'],
+               'tipomoneda'                    => $dato['tipomoneda'],
+               'factor'                        => $dato['factor'],
+               'proyecto'                      => is_null($dato['proyecto'])?"":$dato['proyecto'],
+               'sproyecto'                     => is_null($dato['sproyecto'])?"":$dato['sproyecto'],
+               'centrooper'                    => is_null($dato['centrooper'])?"":$dato['centrooper'],
+               'estado'                        => $dato['estado'],
+               'usuario_created'               => $dato['usuariocreated'],
+               'usuario_updated'               => $dato['usuarioupdated'],
+             ]);
+           }
+        }
+
+        $contador = 0;
+        if (isset($request->vendedores))
+        {
+            $vendedores  = $request->vendedores;
+            foreach($vendedores as $dato)
+            {
+              $codigo          =   $dato['codigo'];
+              $reg_info  = vendedor::updateOrCreate(['codigo'=>$codigo],
+              [
+                'cedula'                        => $dato['cedula'],
+                'sucursal'                      => $dato['sucursal'],
+                'nombre'                        => $dato['nombre'],
+                'direccion'                     => $dato['direccion'],
+                'telefono'                      => "",
+                'email'                         => "",
+                'estado'                        => $dato['estado'],
+                'tipo'                          => $dato['tipovendedor'],
+                'tipodecomision'                => $dato['tipodecomision'],
+                'turno'                         => is_null($dato['turno'])?"":$dato['turno'],
+                'centrooper'                    => is_null($dato['centrooper'])?"":$dato['centrooper'],
+                'centrooperativoID'             => is_null($dato['centrooperativoID'])?"":$dato['centrooperativoID'],
+                'usuario_created'               => $dato['usuariocreated'],
+                'usuario_updated'               => $dato['usuarioupdated'],
+              ]);
+            }
+            
+        }
+      
 
         $contador = 0;
         if (isset($request->productos))
@@ -86,7 +138,7 @@ class VentasController extends Controller
                 'usuario_updated'               => $dato['usuarioupdated'],
               ]);
             }
-         }
+        }
 
          $contador = 0;
          if (isset($request->proveedores))
