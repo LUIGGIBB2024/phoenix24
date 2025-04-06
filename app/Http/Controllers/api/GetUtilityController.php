@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 
 class GetUtilityController extends Controller
 {
-    public function getListas()
+    public function getListas():JsonResponse
     {
         $listas         = Lista::all();
         $detlistas      = detalledelista::all();
