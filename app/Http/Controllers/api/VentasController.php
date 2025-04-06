@@ -58,6 +58,8 @@ class VentasController extends Controller
             foreach($vendedores as $dato)
             {
               $codigo          =   $dato['codigo'];
+
+              DB::statement('SET FOREIGN_KEY_CHECKS=0;');
               $reg_info  = vendedor::updateOrCreate(['codigo'=>$codigo],
               [
                 'cedula'                        => $dato['nit'],
@@ -71,10 +73,11 @@ class VentasController extends Controller
                 'tipodecomision'                => $dato['tipodecomisiones'],
                 'turno'                         => is_null($dato['turno'])?"":$dato['turno'],
                 'centrooper'                    => is_null($dato['centrooper'])?"":$dato['centrooper'],
-                'centrooperativoID'             => is_null($dato['centrooperativoID'])?"":$dato['centrooperativoID'],
+                'centrooperativoID'             => 0,
                 'usuario_created'               => $dato['usuariocreated'],
                 'usuario_updated'               => $dato['usuarioupdated'],
               ]);
+              DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             }
             
         }
