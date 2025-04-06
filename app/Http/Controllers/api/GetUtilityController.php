@@ -18,7 +18,6 @@ class GetUtilityController extends Controller
              'status'           => '200',
              'msg'              => 'Listas de Precios',
              'listas    '        => $listas,
-            ],Response::HTTP_ACCEPTED);
-        
+            ],Response::HTTP_ACCEPTED);        
     }
 }
