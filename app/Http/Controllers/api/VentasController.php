@@ -1186,7 +1186,7 @@ class VentasController extends Controller
         $anop  = $request->año;
 
         $remisiones = remision::select(
-            DB::raw('centrooperativo.nombre as centrodeoperacion'),
+            DB::raw('IFNULL(centrooperativo.nombre,"Sin Centro de Operación") as centrodeoperacion'),
             DB::raw("sum(round(totaldocumento,0)) as totalventas"),
             DB::raw("DATE_FORMAT(fechadocumento,'%M %Y') as months"),
             DB::raw("DATE_FORMAT(fechadocumento,'%m') as mes"),
@@ -1203,7 +1203,7 @@ class VentasController extends Controller
             //->get();
 
         $ventas = factura::select(
-            DB::raw('centrooperativo.nombre as centrodeoperacion'),
+            DB::raw('IFNULL(centrooperativo.nombre,"Sin Centro de Operación") as centrodeoperacion'),
             DB::raw("sum(round(totalfactura,0)) as totalventas"),
             DB::raw("DATE_FORMAT(fechafactura,'%M %Y') as months"),
             DB::raw("DATE_FORMAT(fechafactura,'%m') as mes"),
