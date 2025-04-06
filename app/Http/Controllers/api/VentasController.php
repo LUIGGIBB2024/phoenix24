@@ -30,7 +30,7 @@ class VentasController extends Controller
     public function UpdateSales(Request $request):JsonResponse
     {
         $contador = 0;
-        if (isset($request->istas))
+        if (isset($request->listas))
         {
            $listas  = $request->listas;
            foreach($listas as $dato)
