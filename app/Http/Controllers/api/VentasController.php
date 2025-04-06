@@ -68,7 +68,7 @@ class VentasController extends Controller
                 'email'                         => "",
                 'estado'                        => $dato['estado'],
                 'tipo'                          => $dato['tipovendedor'],
-                'tipodecomision'                => $dato['tipodecomision'],
+                'tipodecomision'                => $dato['tipodecomisiones'],
                 'turno'                         => is_null($dato['turno'])?"":$dato['turno'],
                 'centrooper'                    => is_null($dato['centrooper'])?"":$dato['centrooper'],
                 'centrooperativoID'             => is_null($dato['centrooperativoID'])?"":$dato['centrooperativoID'],
