@@ -62,8 +62,8 @@ class VentasController extends Controller
               DB::statement('SET FOREIGN_KEY_CHECKS=0;');
               $reg_info  = vendedor::updateOrCreate(['codigo'=>$codigo],
               [
-                'cedula'                        => $dato['nit'],
-                'sucursal'                      => $dato['sucursal'],
+                'cedula'                        => is_null($dato['nit'])?"":$dato['nit'], 
+                'sucursal'                      => is_null($dato['sucursal'])?"":$dato['sucursal'], 
                 'nombre'                        => $dato['nombre'],
                 'direccion'                     => "",
                 'telefono'                      => "",
