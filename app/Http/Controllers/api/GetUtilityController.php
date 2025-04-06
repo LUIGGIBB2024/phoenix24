@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\detalledelista;
 use App\Models\Lista;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,12 +13,14 @@ class GetUtilityController extends Controller
 {
     public function getUtility()
     {
-        $listas = Lista::all();
+        $listas         = Lista::all();
+        $detlistas      = detalledelista::all();
         return response()->json(
             [
              'status'           => '200',
              'msg'              => 'Listas de Precios',
-             'listas    '        => $listas,
+             'listas'           => $listas,
+             'detlistas'        => $detlistas,
             ],Response::HTTP_ACCEPTED);        
     }
 }
