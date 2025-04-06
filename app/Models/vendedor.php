@@ -11,7 +11,7 @@ class vendedor extends Model
     protected $table = "vendedor";
     protected $fillable = [
         'codigo', 'cedula','sucursal','nombre','direccion','telfono','email','estado','tipodecomision',
-        'turno','centrooper','centrooperativoID','usuario_created','usuario_update','fecha_created','fecha_updated'
+        'turno','centrooper','centrooperativoID','usuario_created','usuario_updated','fecha_created','fecha_updated'
     ];
     protected $primaryKey = "vendedorID";
     public $timestamps = false;
