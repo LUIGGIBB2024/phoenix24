@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 
 class GetUtilityController extends Controller
 {
-    public function getUtility(Request $request)
+    public function getUtility()
     {
         $listas = Lista::all();
         return response()->json(
