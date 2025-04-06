@@ -73,13 +73,12 @@ class VentasController extends Controller
                 'tipodecomision'                => $dato['tipodecomisiones'],
                 'turno'                         => is_null($dato['turno'])?"":$dato['turno'],
                 'centrooper'                    => is_null($dato['centrooper'])?"":$dato['centrooper'],
-                'centrooperativoID'             => 0,
+                'centrooperativoid'             => 0,
                 'usuario_created'               => $dato['usuariocreated'],
                 'usuario_updated'               => $dato['usuarioupdated'],
               ]);
               DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-            }
-            
+            }            
         }
       
 
