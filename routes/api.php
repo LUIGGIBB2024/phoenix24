@@ -63,7 +63,6 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     Route::post('process-cxp', [CuentasxPagarController::class,'ProcessCxp']);
     Route::get('cxp-resumida', [CuentasxPagarController::class,'CxpResumida']);
     Route::get('cxp-detallada', [CuentasxPagarController::class,'CxpDetallada']);
-
     
     // Procesar GetUtility
     Route::get('get-utility', [GetUtilityController::class,'GetUtility']);

@@ -60,10 +60,10 @@ class VentasController extends Controller
               $codigo          =   $dato['codigo'];
               $reg_info  = vendedor::updateOrCreate(['codigo'=>$codigo],
               [
-                'cedula'                        => $dato['cedula'],
+                'cedula'                        => $dato['nit'],
                 'sucursal'                      => $dato['sucursal'],
                 'nombre'                        => $dato['nombre'],
-                'direccion'                     => $dato['direccion'],
+                'direccion'                     => "",
                 'telefono'                      => "",
                 'email'                         => "",
                 'estado'                        => $dato['estado'],
