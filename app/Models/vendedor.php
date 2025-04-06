@@ -14,5 +14,12 @@ class vendedor extends Model
         'turno','centrooper','centrooperativoID','usuario_created','usuario_update','fecha_created','fecha_updated'
     ];
     protected $primaryKey = "vendedorID";
+    public $timestamps = false;
+    
+    public function getKeyName()
+    {
+        return "vendedorID";
+    }
 }
+
 
