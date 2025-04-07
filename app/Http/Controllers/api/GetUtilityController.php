@@ -28,7 +28,7 @@ class GetUtilityController extends Controller
 
     public function getProductos(Request $request):JsonResponse
     {
-        $productos       = producto::all();
+        $productos       = producto::where('estado',1)->get();
         $saldos          = saldosdeinventario::all();   
         return response()->json(
             [
