@@ -66,6 +66,6 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     
     // Procesar GetUtility
     Route::get('get-listas', [GetUtilityController::class,'GetListas']);
-
+    Route::get('get-productos', [GetUtilityController::class,'GetProductos']);
 });
 
