@@ -30,7 +30,7 @@ class GetUtilityController extends Controller
     {
         $productos       = producto::select('productoID','codigo','descripcion','medida','grupo','subgrupo','division','valorultimacompra','unidadesxempaque')
                            ->where('estado',1)->get();
-        $saldos          = saldosdeinventario::all();   
+        $saldos          = saldosdeinventario::select('saldosdeinventariosID','anodeproceso','producto','cantidad','cantidad1','costopromedio','ultimocostos')->get();   
         return response()->json(
             [
              'status'           => '200',
