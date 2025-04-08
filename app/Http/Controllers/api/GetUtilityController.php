@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\cliente;
 use App\Models\detalledelista;
+use App\Models\detalledemiscelaneo;
 use App\Models\Lista;
 use App\Models\producto;
 use App\Models\saldosdeinventario;
@@ -38,6 +40,21 @@ class GetUtilityController extends Controller
              'msg'              => 'Productos de la lista',
              'productos'        => $productos,
              'saldos'           => $saldos,
+            ],Response::HTTP_ACCEPTED);
+    }
+
+    public function getClientes(Request $request):JsonResponse
+    {
+        $clientes       = cliente  ::select('clientesID','nit','sucursal','nombres','apellidos','nombrecompleto','direccion','telefono','email','lista','vendedor','ciudad')
+                           ->where('estado',1)->where('facturable',1)->get();
+
+        $ciudades       = detalledemiscelaneo::where("codigoid","=","117")->get();
+        return response()->json(
+            [
+             'status'           => '200',
+             'msg'              => 'Clientes y Ciudades',
+             'clientes'         => $clientes,   
+             'ciudades'         => $ciudades,        
             ],Response::HTTP_ACCEPTED);
     }
 }
