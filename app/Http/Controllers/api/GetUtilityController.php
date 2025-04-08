@@ -45,8 +45,8 @@ class GetUtilityController extends Controller
 
     public function getClientes(Request $request):JsonResponse
     {
-        $clientes       = cliente  ::select('clientesID','nit','sucursal','nombres','apellidos','nombrecompleto','direccion','telefono','email','lista','vendedor','ciudad')
-                           ->where('estado',1)->where('facturable',1)->get();
+        $clientes       = cliente  ::select('clientesID','nit','sucursal','nombreprimero','apellidos','nombrecompleto','direccion','telefono','email','lista','vendedor','ciudad')
+                           ->where('estado',1)->get();
 
         $ciudades       = detalledemiscelaneo::where("codigoid","=","117")->get();
         return response()->json(
