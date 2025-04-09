@@ -303,7 +303,7 @@ class VentasController extends Controller
                     return response()->json(
                         [
                         'status'   => '404 OK',
-                        'msg'      => 'Error Dctp Invt',
+                        'msg'      => 'Error Clientes',
                         'error' => $ex,
                         ],Response::HTTP_BAD_REQUEST);    
                 } 
