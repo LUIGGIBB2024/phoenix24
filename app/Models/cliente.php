@@ -12,7 +12,7 @@ class cliente extends Model
     protected $fillable = [
         'nit','sucursal','codigo','nombreprimero','nombresegundo','dv','apellidoprimero', 'apellidosegundo',
         'nombrecompleto','direccion','telefono','email','razonzocial','contacto','cupodecartera','plazocartera',
-        'diascontrol','puntos','puntosacumulados','barrio','segmento','rutadeventa','zonadeventa','tipodecliente', 'vendedor',
+        'diascontrol','puntos','puntosacumulados','barrio','segmento','rutadeventa','zonadeventa','tipodecliente', 'vendedor','lista',
         'ciudad','categoria01','categoria02','sexo','declararentas','manejapuntos','retencionautomatica','actividadautomatica','tipoderegimen',
         'matriculamercantil','zonapostal','obligacionesfiscal','fechadenacimiento','codigoprestador','fechadecreacion','fechaultimacompra',
         'fechafinaldecontrato','rutafoto','fechaultimopago','rutafirma', 'numerodecontrato','propiedad','canon','administracion','porcentaje',
