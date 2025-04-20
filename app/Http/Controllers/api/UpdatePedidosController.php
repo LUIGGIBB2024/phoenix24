@@ -47,7 +47,7 @@ class UpdatePedidosController extends Controller
             $mes           = $fechaLapso->format('m');  
             $lapso         =  $ano . "-" . $mes;                
 
-            $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->get();   
+            $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->first();   
             $ruta          = $cliente ->rutadeventa; 
             $zona          = $cliente ->zonadeventa;
             $tipocliente   = $cliente ->tipodecliente;
