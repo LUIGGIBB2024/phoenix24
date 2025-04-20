@@ -22,15 +22,22 @@ class UpdatePedidosController extends Controller
         
         $cuantos = 0;
 
-        return response()->json(
-            [
-             'status'           => '202',
-             'msg'              => 'Actualización no Exitosa',
-             'request'          => $request->all(),
-            ],Response::HTTP_ACCEPTED);
+        // return response()->json(
+        //     [
+        //      'status'           => '202',
+        //      'msg'              => 'Actualización no Exitosa',
+        //      'request'          => $request->all(),
+        //     ],Response::HTTP_ACCEPTED);
 
         foreach ($pedidos as $pedido) 
         {
+            return response()->json(
+                     [
+                      'status'           => '202',
+                      'msg'              => 'Voy Aquí',
+                      'request'          => $pedido,
+                     ],Response::HTTP_ACCEPTED);
+                     
             $cuantos++;            
             $consecutivo    = $pedido['id'];
             $nit            = $pedido['nit'];
