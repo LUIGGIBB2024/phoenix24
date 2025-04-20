@@ -47,13 +47,15 @@ class UpdatePedidosController extends Controller
       
             $$mes           = $fechaLapso->format('m');  
 
-            $lapso         =  $ano . "-" . $mes;
-
             return response()->json(
                 [
                  'status'           => '202',
-                 'msg'              => 'Voy Aquí Antes yyyy ' .  $lapso ,
+                 'msg'              => 'Voy Aquí Antes yyyy ' .   $$mes ,
                 ],Response::HTTP_ACCEPTED);
+
+            $lapso         =  $ano . "-" . $mes;
+
+            
                 
 
             $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->get();
