@@ -35,17 +35,9 @@ class UpdatePedidosController extends Controller
 
             $cuantos++;            
             $consecutivo    = $pedido->id;
-
-            return response()->json(
-                [
-                 'status'           => '202',
-                 'msg'              => 'Voy Aquí',
-                 'request'          => $pedido,
-                ],Response::HTTP_ACCEPTED);
-
-            $nit            = $pedido['nit'];
-            $sucursal       = $pedido['sucursal'];
-            $fecha          = $pedido['fechapedido'];    
+            $nit            = $pedido->nit;
+            $sucursal       = ""; 
+            $fecha          = $pedido->fechapedido; 
             
             $fechaLapso     = Carbon::now();
             $ano            = $fecha->format('Y'); 
@@ -57,20 +49,20 @@ class UpdatePedidosController extends Controller
 
             $reg_pedidos = Pedido::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'nit'=>$nit,'sucursal'=>$sucursal],
             [
-                'tipodedocumento'       => $pedido['codigopedido'],
+                'tipodedocumento'       => $pedido->codigopedido,
                 'ncargue'               => 0,
                 'horadepedido'          => "00:00:00",
                 'nitaseguradora'        => "",
                 'sucursalaseg'          => "",
-                'nombreventa'           => $pedido['nombre'],
-                'nombres'               => $pedido['nombres'],
-                'apellidos'             => $pedido['apellidos'],              
+                'nombreventa'           => $pedido->nombre, 
+                'nombres'               => $pedido->nombres,  
+                'apellidos'             => $pedido->apellidos,           
                 'numerodepoliza'        => " ",
                 'numerodesiniestro'     => " ",
                 'fechadeentrega'        => $fecha,
                 'horadeentrega'         => "00:00:00",
-                'direcciondeentrega'    => $pedido['direccion'],
-                'telefonodeentrega'     => $pedido['telefono'],
+                'direcciondeentrega'    => $pedido->direccion, 
+                'telefonodeentrega'     => $pedido->telefono,   
                 'reportedelcliente'     => " ",
                 'numerodeorden'         => " ",
                 'vendedor'              => $pedido['vendedor'],
@@ -82,16 +74,16 @@ class UpdatePedidosController extends Controller
                 'placa'                 => "",
                 'numerodocumento'       => "",
                 'tipodepago'            => "",
-                'valorpedido'           => $pedido['valorpedido'],
+                'valorpedido'           => $pedido->valorpedido, 
                 'dsctosproductos'       => 0,
                 'dsctosadicionales'     => 0,
                 'lapso'                 => $lapso,
-                'valoriva'              => $pedido['valoriva'], 
-                'retefuente'            => $pedido['valorretefuente'], 
-                'reteiva'               => $pedido['valorreteiva'],                 
-                'reteica'               => $pedido['valorreteica'],
+                'valoriva'              => $pedido->valoriva,  
+                'retefuente'            => $pedido->valorretefuente,   
+                'reteiva'               => $pedido->valorreteiva,                   
+                'reteica'               => $pedido->valorreteica, 
                 'valoradicional'        => 0,
-                'totalpedido'           => $pedido['totalpedido'],
+                'totalpedido'           => $pedido->totalpedido,  
                 'costodeventa'          => 0,
                 'valorotrodocumento'    => 0,
                 'proyecto'              => "",
@@ -109,8 +101,8 @@ class UpdatePedidosController extends Controller
                 'lista'                 => "",
                 'latitud'               => 0.00,
                 'longitud'              => 0.00,
-                'email'                 => $pedido['email'],
-                'ciudad'                => $pedido['ciudad'],
+                'email'                 => $pedido->email,   
+                'ciudad'                => $pedido->ciudad,   
                 'usuario_created'       =>"PHOENIX",
                 'usuario_updated'       =>"PHOENIX",                
             ]);
