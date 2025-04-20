@@ -34,7 +34,7 @@ class UpdatePedidosController extends Controller
            
 
             $cuantos++;            
-            $consecutivo    = $pedido['id'];
+            $consecutivo    = $pedido->id;
 
             return response()->json(
                 [
@@ -42,7 +42,7 @@ class UpdatePedidosController extends Controller
                  'msg'              => 'Voy Aquí',
                  'request'          => $pedido,
                 ],Response::HTTP_ACCEPTED);
-                
+
             $nit            = $pedido['nit'];
             $sucursal       = $pedido['sucursal'];
             $fecha          = $pedido['fechapedido'];    
