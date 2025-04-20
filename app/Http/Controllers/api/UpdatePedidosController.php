@@ -16,7 +16,7 @@ class UpdatePedidosController extends Controller
     public function UpdatePedidos(Request $request):JsonResponse
     {
         
-        $pedidos = json_decode($request->pedidos);  
+        //$pedidos = json_decode($request->pedidos);  
         
         //$pedidos = $request->pedidos;  
         
@@ -26,6 +26,7 @@ class UpdatePedidosController extends Controller
             [
              'status'           => '202',
              'msg'              => 'Actualización Exitosa',
+             'request'          => $request,
             ],Response::HTTP_BAD_REQUEST);
 
         foreach ($pedidos as $pedido) 
