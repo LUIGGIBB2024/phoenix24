@@ -25,10 +25,8 @@ class UpdatePedidosController extends Controller
         return response()->json(
             [
              'status'           => '202',
-             'msg'              => 'Actualización Exitosa',
-             //'request'          => $request->pedidos,
-             //'pedidos'          => $pedidos,
-            ],Response::HTTP_BAD_REQUEST);
+             'msg'              => 'Actualización no Exitosa',
+            ],Response::HTTP_ACCEPTED);
 
         foreach ($pedidos as $pedido) 
         {
