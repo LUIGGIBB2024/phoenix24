@@ -41,7 +41,7 @@ class UpdatePedidosController extends Controller
             
             $fechaLapso     = Carbon::now();
             $ano            = $fecha->format('Y'); 
-            $$mes           = $fecha->format('M');  
+            $$mes           = $fecha->format('m');  
 
             $lapso         =  $ano . "-" . $mes;
 
