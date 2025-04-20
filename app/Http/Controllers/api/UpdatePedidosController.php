@@ -9,12 +9,12 @@ use Illuminate\Http\JsonResponse;
 
 class UpdatePedidosController extends Controller
 {
-    public function UpdatePedidos1(Request $request):JsonResponse
-    {
-        return response()->json(
-            [
-             'status'           => '201',
-             'msg'              => 'Actualización Exitosa',
-            ],Response::HTTP_ACCEPTED);
-    }
+    // public function UpdatePedidos1(Request $request):JsonResponse
+    // {
+    //     return response()->json(
+    //         [
+    //          'status'           => '201',
+    //          'msg'              => 'Actualización Exitosa',
+    //         ],Response::HTTP_ACCEPTED);
+    // }
 }
