@@ -26,7 +26,8 @@ class UpdatePedidosController extends Controller
             [
              'status'           => '202',
              'msg'              => 'Actualización Exitosa',
-             'request'          => $request,
+             'request'          => $request->pedidos,
+             //'pedidos'          => $pedidos,
             ],Response::HTTP_BAD_REQUEST);
 
         foreach ($pedidos as $pedido) 
