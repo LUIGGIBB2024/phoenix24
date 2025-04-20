@@ -88,14 +88,14 @@
                     $ano = $ano->format('Y');
                     $title  = "Software Enlace Visual (" . $ano . ")";
                     $title2  = "<< Licenciado por CIS de la Costa (" . $ano . ") >>";
-                    $passw   = Hash::make("Password1*.");
+                    //$passw   = Hash::make("Password1*.");
                 @endphp
 
-                <nav class="navbar navbar-expand-lg bg-body-tertiary p-1 header_home">
+                {{--  <nav class="navbar navbar-expand-lg bg-body-tertiary p-1 header_home">
                     <div class="container-fluid">
                         <label class="form-label titulo_login">{{ $passw  }} </label>                       
                     </div>
-                </nav>
+                </nav>  --}}
                 <nav class="navbar navbar-expand-lg bg-body-tertiary p-1 header_home">
                     <div class="container-fluid">
                         <label class="form-label titulo_login">{{ $title }} </label>

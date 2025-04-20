@@ -6,6 +6,7 @@ use App\Http\Controllers\api\CarteraController;
 use App\Http\Controllers\api\CuentasxPagarController;
 use App\Http\Controllers\api\GetUtilityController;
 use App\Http\Controllers\api\OnlyInvoiceController;
+use App\Http\Controllers\api\UpdatePedidosController;
 use App\Http\Controllers\api\VentasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -68,5 +69,8 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     Route::get('get-listas', [GetUtilityController::class,'GetListas']);
     Route::get('get-productos', [GetUtilityController::class,'GetProductos']);
     Route::get('get-clientes', [GetUtilityController::class,'GetClientes']);
+
+    // Procesar Pedidos (Actualización)
+    Route::post('update-pedidos', [UpdatePedidosController::class,'UpdatePedidos']);
 });
 
