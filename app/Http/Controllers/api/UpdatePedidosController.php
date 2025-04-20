@@ -37,13 +37,7 @@ class UpdatePedidosController extends Controller
             $nit            = $pedido->identificacion;
             $sucursal       = ""; 
             $fecha          = $pedido->fechadepedido; 
-
-            return response()->json(
-                [
-                 'status'           => '202',
-                 'msg'              => 'Voy Aquí Antes 222',
-                ],Response::HTTP_ACCEPTED);
-            
+           
             //$fechaLapso     = Carbon::now();
 
             //$fecha = '2025-04-20'; // o cualquier otra fecha
