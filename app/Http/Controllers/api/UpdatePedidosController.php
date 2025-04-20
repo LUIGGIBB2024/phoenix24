@@ -44,6 +44,12 @@ class UpdatePedidosController extends Controller
             //$fecha = '2025-04-20'; // o cualquier otra fecha
             $fechaLapso = Carbon::parse($fecha);
 
+            return response()->json(
+                [
+                 'status'           => '202',
+                 'msg'              => 'Voy Aquí Antes',
+                ],Response::HTTP_ACCEPTED);
+
             $ano            = $fechaLapso->format('Y'); 
             $$mes           = $fechaLapso->format('m');  
 
