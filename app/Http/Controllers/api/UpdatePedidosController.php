@@ -29,7 +29,8 @@ class UpdatePedidosController extends Controller
         //      'request'          => $request->all(),
         //     ],Response::HTTP_ACCEPTED);
 
-       
+        foreach ($pedidos as $pedido)
+         {
 
             $cuantos++;            
             $consecutivo    = $pedido->id;
