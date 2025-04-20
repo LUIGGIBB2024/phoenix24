@@ -13,7 +13,7 @@ class UpdatePedidosController extends Controller
     {
         return response()->json(
             [
-             'status'           => '200',
+             'status'           => '201',
              'msg'              => 'Actualización Exitosa',
             ],Response::HTTP_ACCEPTED);
     }
