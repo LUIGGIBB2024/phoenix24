@@ -42,13 +42,6 @@ class UpdatePedidosController extends Controller
 
             //$fecha = '2025-04-20'; // o cualquier otra fecha
             $fechaLapso = Carbon::parse($fecha);
-
-            return response()->json(
-                [
-                 'status'           => '202',
-                 'msg'              => 'Voy Aquí Antes',
-                ],Response::HTTP_ACCEPTED);
-
             $ano            = $fechaLapso->format('Y'); 
             $$mes           = $fechaLapso->format('m');  
 
@@ -59,7 +52,7 @@ class UpdatePedidosController extends Controller
             return response()->json(
                 [
                  'status'           => '202',
-                 'msg'              => 'Voy Aquí Antes',
+                 'msg'              => 'Voy Aquí Antes dddd',
                 ],Response::HTTP_ACCEPTED);
 
             $reg_pedidos = Pedido::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'nit'=>$nit,'sucursal'=>$sucursal],
