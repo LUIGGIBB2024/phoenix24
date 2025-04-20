@@ -15,7 +15,8 @@ class UpdatePedidosController extends Controller
 {
     public function UpdatePedidos(Request $request):JsonResponse
     {
-        $pedidos = $request->pedidos;
+        
+        $pedidos = json_decode($request->entradas);  
         $cuantos = 0;
 
         foreach ($pedidos as $pedido) 
