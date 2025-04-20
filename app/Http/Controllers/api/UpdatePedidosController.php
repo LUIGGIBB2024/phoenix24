@@ -31,7 +31,11 @@ class UpdatePedidosController extends Controller
 
         foreach ($pedidos as $pedido) 
         {
-           
+            return response()->json(
+                [
+                 'status'           => '202',
+                 'msg'              => 'Voy Aquí Antes 1111',
+                ],Response::HTTP_ACCEPTED);
 
             $cuantos++;            
             $consecutivo    = $pedido->id;
