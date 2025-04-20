@@ -47,14 +47,7 @@ class UpdatePedidosController extends Controller
             $mes           = $fechaLapso->format('m');  
             $lapso         =  $ano . "-" . $mes;                
 
-            $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->get();
-
-            return response()->json(
-                [
-                 'status'           => '202',
-                 'msg'              => 'Información del cliente',
-                 'cliente'          => $cliente,
-                ],Response::HTTP_ACCEPTED);
+            $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->get();    
 
             try {
                     $reg_pedidos = Pedido::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'nit'=>$nit,'sucursal'=>$sucursal],
@@ -76,8 +69,8 @@ class UpdatePedidosController extends Controller
                         'reportedelcliente'     => " ",
                         'numerodeorden'         => " ",
                         'vendedor'              => $pedido->vendedor,
-                        'rutadeventa'           => $cliente->rutadeventa,
-                        'zonadeventa'           => $cliente->zonadeventa,
+                        'rutadeventa'           => "",
+                        'zonadeventa'           => "",
                         'transportador'         => "",
                         'tipocliente'           => $cliente->tipodecliente,
                         'kilometraje'           => 0,
