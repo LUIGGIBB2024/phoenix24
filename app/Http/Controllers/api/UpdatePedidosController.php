@@ -11,7 +11,6 @@ class UpdatePedidosController extends Controller
 {
     public function UpdatePedidos(Request $request):JsonResponse
     {
-       
         return response()->json(
             [
              'status'           => '201',
