@@ -45,7 +45,7 @@ class UpdatePedidosController extends Controller
            
             $ano            = $fechaLapso->format('Y'); 
       
-            $$mes           = $fechaLapso->format('m');  
+            $mes           = $fechaLapso->format('m');  
 
             return response()->json(
                 [
