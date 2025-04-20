@@ -50,7 +50,7 @@ class UpdatePedidosController extends Controller
             return response()->json(
                 [
                  'status'           => '202',
-                 'msg'              => 'Voy Aquí Antes yyyy ' .   $$mes ,
+                 'msg'              => 'Voy Aquí Antes yyyy ' .   $mes ,
                 ],Response::HTTP_ACCEPTED);
 
             $lapso         =  $ano . "-" . $mes;
