@@ -37,7 +37,7 @@ class UpdatePedidosController extends Controller
             $consecutivo    = $pedido->id;
             $nit            = $pedido->nit;
             $sucursal       = ""; 
-            $fecha          = $pedido->fechapedido; 
+            $fecha          = $pedido->fechadepedido; 
             
             $fechaLapso     = Carbon::now();
             $ano            = $fecha->format('Y'); 
