@@ -19,6 +19,13 @@ class UpdatePedidosController extends Controller
         $pedidos = json_decode($request->entradas);  
         $cuantos = 0;
 
+
+        return response()->json(
+            [
+             'status'           => '202',
+             'msg'              => $pedidos,
+            ],Response::HTTP_ACCEPTED);
+
         foreach ($pedidos as $pedido) 
         {
             $cuantos++;            
