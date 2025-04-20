@@ -49,6 +49,13 @@ class UpdatePedidosController extends Controller
 
             $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->get();
 
+            return response()->json(
+                [
+                 'status'           => '202',
+                 'msg'              => 'Información del cliente',
+                 'cliente'          => $cliente,
+                ],Response::HTTP_ACCEPTED);
+
             try {
                     $reg_pedidos = Pedido::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'nit'=>$nit,'sucursal'=>$sucursal],
                     [
