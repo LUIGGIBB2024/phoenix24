@@ -120,18 +120,18 @@ class UpdatePedidosController extends Controller
                     ],Response::HTTP_ACCEPTED);
             }
         }
-        if ($cuantos > 0)
+        if ($cuantos == 0)
         {
             return response()->json(
                 [
                  'status'           => '202',
                  'msg'              => 'No se encontraron pedidos para actualizar',
-                ],Response::HTTP_BAD_REQUEST);
+                ],Response::HTTP_ACCEPTED);
         } else
         return response()->json(
             [
              'status'           => '202',
-             'msg'              => 'Actualización no Exitosa',
+             'msg'              => 'Actualización de Pedidos Exitosa',
             ],Response::HTTP_ACCEPTED);
     }
 }
