@@ -31,15 +31,18 @@ class UpdatePedidosController extends Controller
 
         foreach ($pedidos as $pedido) 
         {
-            return response()->json(
-                     [
-                      'status'           => '202',
-                      'msg'              => 'Voy Aquí',
-                      'request'          => $pedido,
-                     ],Response::HTTP_ACCEPTED);
-                     
+           
+
             $cuantos++;            
             $consecutivo    = $pedido['id'];
+
+            return response()->json(
+                [
+                 'status'           => '202',
+                 'msg'              => 'Voy Aquí',
+                 'request'          => $pedido,
+                ],Response::HTTP_ACCEPTED);
+                
             $nit            = $pedido['nit'];
             $sucursal       = $pedido['sucursal'];
             $fecha          = $pedido['fechapedido'];    
