@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\cliente;
+use App\Models\Detalledepedido;
 use App\Models\Pedido;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -137,11 +138,96 @@ class UpdatePedidosController extends Controller
 
     public function UpdateDetPedidos(Request $request):JsonResponse
     {
-        return response()->json(
-            [
-             'status'           => '202',
-             'msg'              => 'Actualización de Pedidos Exitosa',
-            ],Response::HTTP_ACCEPTED); 
+        $detpedidos = json_decode($request->detpedidos); 
+        
+        foreach ($detpedidos as $detpedido)
+        {
+            $consecutivo    = $detpedido->id;
+            $nit            = $detpedido->identificacion;
+            $sucursal       = "";
+            $fecha          = $detpedido->fechadepedido;
+
+            $fechaLapso = Carbon::parse($fecha);         
+           
+            $ano            = $fechaLapso->format('Y'); 
+            $mes           = $fechaLapso->format('m');  
+            $lapso         =  $ano . "-" . $mes;  
+
+            $producto       = $detpedido->producto;
+            $bodega         = $detpedido->bodega;
+
+            $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->first();   
+            $ruta           = $cliente ->rutadeventa; 
+            $zona           = $cliente ->zonadeventa;
+            $tipocliente    = $cliente ->tipodecliente;
+            $tipodcto       = $detpedido->tipodocumento;
+
+            try 
+            {
+                $registro = Detalledepedido::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=> $tipodcto,'fechadocumento'=>$fecha,'producto'=>$producto,'bodega'=>$bodega],
+                [
+                    'proyecto'              => "",
+                    'sproyecto'             => "",
+                    'centrooper'            => "",
+                    'actividad'             => "",
+                    'placa'                 => "",
+                    'lapso'                 => $lapso,
+                    'nittercero'            => "",
+                    'rutadeventa'           => $ruta,
+                    'zonadeventa'           => $zona,
+                    'tipocliente'           => $tipocliente,   
+                    'vendedor'              => $detpedido->vendedor,   
+                    'lista'                 => $detpedido->lista,
+                    'tecnico'               => "",
+                    'serial'                => "",
+                    'garantia'              => 0,
+                    'descripcion'           => $detpedido->descripcionproducto,  
+                    'lote'                  => "",
+                    'concepto'              => "",
+                    'cptoclase'             => "",
+                    'ncargue'               => 1,
+                    'pedidoid'              => $detpedido->id,
+                    'cantidad'              => $detpedido->cantidad, 
+                    'cantidad2'             => 0,
+                    'valor'                 => $detpedido->valor1,
+                    'descuento1'            => $detpedido->descuento1,
+                    'descuento2'            => $detpedido->descuento2,
+                    'descuento3'            => 0,
+                    'iva'                   => $detpedido->iva,  
+                    'costopromedio'         => 0,  
+                    'fechadevencimiento'    => $fecha, 
+                    'estado'                => 1,
+                    'estado01'              => 0,
+                    'estado02'              => 0,  
+                    'valorreal'             => $detpedido->valor1,  
+                    'usuario_created'       => Auth::user()->codigo,
+                    'usuario_updated'       => Auth::user()->codigo,               
+                ]);
+
+            } catch (\Exception $e) {
+                return response()->json(
+                    [
+                     'status'           => '202',
+                     'msg'              => 'Error al actualizar el pedido: '.$e->getMessage(),
+                    ],Response::HTTP_ACCEPTED);
+            }
+        }
+
+        //////// Validación de Número de Registros Actualizados ////////// 
+        if (count($detpedidos) == 0)
+        {
+            return response()->json(
+                [
+                 'status'           => '202',
+                 'msg'              => 'No se encontraron pedidos para actualizar',
+                ],Response::HTTP_ACCEPTED);
+        } 
+        else
+            return response()->json(
+                [
+                'status'           => '202',
+                'msg'              => 'Actualización de Pedidos Exitosa',
+                ],Response::HTTP_ACCEPTED); 
          
     }
 }
