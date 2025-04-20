@@ -16,18 +16,12 @@ class UpdatePedidosController extends Controller
     public function UpdatePedidos(Request $request):JsonResponse
     {
         
-        $pedidos = json_decode($request->pedidos);  
+        //$pedidos = json_decode($request->pedidos);  
         
-        //$pedidos = ($request->pedidos);  
+        $pedidos = $request->pedidos;  
         
         $cuantos = 0;
 
-
-        return response()->json(
-            [
-             'status'           => '202',
-             'msg'              => $pedidos,
-            ],Response::HTTP_ACCEPTED);
 
         foreach ($pedidos as $pedido) 
         {
