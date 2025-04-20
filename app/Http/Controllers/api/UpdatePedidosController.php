@@ -26,7 +26,7 @@ class UpdatePedidosController extends Controller
             [
              'status'           => '202',
              'msg'              => 'Actualización Exitosa',
-             'request'          => $request->pedidos,
+             //'request'          => $request->pedidos,
              //'pedidos'          => $pedidos,
             ],Response::HTTP_BAD_REQUEST);
 
