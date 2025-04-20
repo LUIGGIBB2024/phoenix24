@@ -72,5 +72,6 @@ Route::group(['middleware'=>['auth:sanctum']],function()
 
     // Procesar Pedidos (Actualización)
     Route::post('update-pedidos', [UpdatePedidosController::class,'UpdatePedidos']);
+    Route::post('update-detpedidos', [UpdatePedidosController::class,'UpdateDetPedidos']);
 });
 

@@ -134,4 +134,14 @@ class UpdatePedidosController extends Controller
              'msg'              => 'Actualización de Pedidos Exitosa',
             ],Response::HTTP_ACCEPTED);
     }
+
+    public function UpdateDetPedidos(Request $request):JsonResponse
+    {
+        return response()->json(
+            [
+             'status'           => '202',
+             'msg'              => 'Actualización de Pedidos Exitosa',
+            ],Response::HTTP_ACCEPTED); 
+         
+    }
 }
