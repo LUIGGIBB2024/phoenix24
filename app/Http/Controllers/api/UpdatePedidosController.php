@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class UpdatePedidosController extends Controller
 {
-    public function UpdatePedidos(Request $request):JsonResponse
+    public function UpdatePedidos1(Request $request):JsonResponse
     {
         return response()->json(
             [
