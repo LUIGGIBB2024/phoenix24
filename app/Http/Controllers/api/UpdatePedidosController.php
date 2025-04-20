@@ -29,24 +29,18 @@ class UpdatePedidosController extends Controller
         //      'request'          => $request->all(),
         //     ],Response::HTTP_ACCEPTED);
 
-        foreach ($pedidos as $pedido) 
-        {
-            return response()->json(
-                [
-                 'status'           => '202',
-                 'msg'              => 'Voy Aquí Antes 1111',
-                ],Response::HTTP_ACCEPTED);
+       
 
             $cuantos++;            
             $consecutivo    = $pedido->id;
-            $nit            = $pedido->nit;
+            $nit            = $pedido->identificacion;
             $sucursal       = ""; 
             $fecha          = $pedido->fechadepedido; 
 
             return response()->json(
                 [
                  'status'           => '202',
-                 'msg'              => 'Voy Aquí Antes 000',
+                 'msg'              => 'Voy Aquí Antes 222',
                 ],Response::HTTP_ACCEPTED);
             
             //$fechaLapso     = Carbon::now();
