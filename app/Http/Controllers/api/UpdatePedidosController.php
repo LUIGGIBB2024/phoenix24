@@ -44,19 +44,8 @@ class UpdatePedidosController extends Controller
             $fechaLapso = Carbon::parse($fecha);         
            
             $ano            = $fechaLapso->format('Y'); 
-      
             $mes           = $fechaLapso->format('m');  
-
-            return response()->json(
-                [
-                 'status'           => '202',
-                 'msg'              => 'Voy Aquí Antes yyyy ' .   $mes ,
-                ],Response::HTTP_ACCEPTED);
-
-            $lapso         =  $ano . "-" . $mes;
-
-            
-                
+            $lapso         =  $ano . "-" . $mes;                
 
             $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->get();
 
