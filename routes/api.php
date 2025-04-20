@@ -71,6 +71,6 @@ Route::group(['middleware'=>['auth:sanctum']],function()
     Route::get('get-clientes', [GetUtilityController::class,'GetClientes']);
 
     // Procesar Pedidos (Actualización)
-    Route::post('update-pedidos', [UpdatePedidosController::class,'UpdatePedidos']);
+    //Route::post('update-pedidos', [UpdatePedidosController::class,'UpdatePedidos']);
 });
 
