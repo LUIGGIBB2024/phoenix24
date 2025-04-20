@@ -26,6 +26,7 @@ class UpdatePedidosController extends Controller
             [
              'status'           => '202',
              'msg'              => 'Actualización no Exitosa',
+             'request'          => $request->all(),
             ],Response::HTTP_ACCEPTED);
 
         foreach ($pedidos as $pedido) 
