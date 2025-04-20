@@ -38,6 +38,12 @@ class UpdatePedidosController extends Controller
             $nit            = $pedido->nit;
             $sucursal       = ""; 
             $fecha          = $pedido->fechadepedido; 
+
+            return response()->json(
+                [
+                 'status'           => '202',
+                 'msg'              => 'Voy Aquí Antes 000',
+                ],Response::HTTP_ACCEPTED);
             
             //$fechaLapso     = Carbon::now();
 
