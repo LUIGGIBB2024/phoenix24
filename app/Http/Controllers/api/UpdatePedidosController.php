@@ -47,7 +47,10 @@ class UpdatePedidosController extends Controller
             $mes           = $fechaLapso->format('m');  
             $lapso         =  $ano . "-" . $mes;                
 
-            $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->get();    
+            $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->get();   
+            $ruta          = $cliente ->rutadeventa; 
+            $zona          = $cliente ->zonadeventa;
+            $tipocliente   = $cliente ->tipodecliente;
 
             try {
                     $reg_pedidos = Pedido::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'nit'=>$nit,'sucursal'=>$sucursal],
@@ -69,10 +72,10 @@ class UpdatePedidosController extends Controller
                         'reportedelcliente'     => " ",
                         'numerodeorden'         => " ",
                         'vendedor'              => $pedido->vendedor,
-                        'rutadeventa'           => "",
-                        'zonadeventa'           => "",
+                        'rutadeventa'           => $ruta,
+                        'zonadeventa'           => $zona,
                         'transportador'         => "",
-                        'tipocliente'           => $cliente->tipodecliente,
+                        'tipocliente'           => $tipocliente,
                         'kilometraje'           => 0,
                         'placa'                 => "",
                         'numerodocumento'       => "",
