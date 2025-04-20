@@ -40,8 +40,12 @@ class UpdatePedidosController extends Controller
             $fecha          = $pedido->fechadepedido; 
             
             $fechaLapso     = Carbon::now();
-            $ano            = $fecha->format('Y'); 
-            $$mes           = $fecha->format('m');  
+
+            //$fecha = '2025-04-20'; // o cualquier otra fecha
+            $fechaLapso = Carbon::parse($fecha);
+
+            $ano            = $fechaLapso->format('Y'); 
+            $$mes           = $fechaLapso->format('m');  
 
             $lapso         =  $ano . "-" . $mes;
 
