@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Carbon as SupportCarbon;
+use Illuminate\Support\Facades\Auth;
 
 class UpdatePedidosController extends Controller
 {
@@ -49,13 +49,6 @@ class UpdatePedidosController extends Controller
 
             $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->get();
 
-            return response()->json(
-                [
-                 'status'           => '202',
-                 'msg'              => 'Actualización no Exitosa ccccc',
-                ],Response::HTTP_ACCEPTED);
-
-
             $reg_pedidos = Pedido::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'nit'=>$nit,'sucursal'=>$sucursal],
             [
                 'tipodedocumento'       => $pedido->codigopedido,
@@ -74,7 +67,7 @@ class UpdatePedidosController extends Controller
                 'telefonodeentrega'     => $pedido->telefono,   
                 'reportedelcliente'     => " ",
                 'numerodeorden'         => " ",
-                'vendedor'              => $pedido['vendedor'],
+                'vendedor'              => $pedido->vendedor,
                 'rutadeventa'           => $cliente->rutadeventa,
                 'zonadeventa'           => $cliente->zonadeventa,
                 'transportador'         => "",
@@ -112,8 +105,8 @@ class UpdatePedidosController extends Controller
                 'longitud'              => 0.00,
                 'email'                 => $pedido->email,   
                 'ciudad'                => $pedido->ciudad,   
-                'usuario_created'       =>"PHOENIX",
-                'usuario_updated'       =>"PHOENIX",                
+                'usuario_created'       => Auth::user()->codigo,
+                'usuario_updated'       => Auth::user()->codigo,               
             ]);
         }
         if ($cuantos > 0)
