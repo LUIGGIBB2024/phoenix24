@@ -47,8 +47,9 @@ class UpdatePedidosController extends Controller
             return response()->json(
                 [
                  'status'           => '202',
-                 'msg'              => 'Voy Aquí Antes yyyy',
+                 'msg'              => 'Voy Aquí Antes yyyy ' . $ano,
                 ],Response::HTTP_ACCEPTED);
+                
             $$mes           = $fechaLapso->format('m');  
 
             $lapso         =  $ano . "-" . $mes;
