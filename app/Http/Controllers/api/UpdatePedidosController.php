@@ -39,7 +39,7 @@ class UpdatePedidosController extends Controller
             $sucursal       = ""; 
             $fecha          = $pedido->fechadepedido; 
             
-            $fechaLapso     = Carbon::now();
+            //$fechaLapso     = Carbon::now();
 
             //$fecha = '2025-04-20'; // o cualquier otra fecha
             $fechaLapso = Carbon::parse($fecha);
