@@ -208,7 +208,7 @@ class UpdatePedidosController extends Controller
                 return response()->json(
                     [
                      'status'           => '202',
-                     'msg'              => 'Error al actualizar el pedido: '.$e->getMessage(),
+                     'msg'              => 'Error al actualizar el Detalle del pedido: '.$e->getMessage(),
                     ],Response::HTTP_ACCEPTED);
             }
         }
