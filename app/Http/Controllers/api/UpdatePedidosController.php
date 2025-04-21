@@ -102,7 +102,7 @@ class UpdatePedidosController extends Controller
                         'actividad'             => "",
                         'estado'                => 1,
                         'estado01'              => 0,
-                        'estado02'              => 0,
+                        'estado02'              => $pedido->estado02,
                         'reportedeltecnico'     => "",
                         'mesa'                  => "",
                         'caja'                  => "",
