@@ -54,6 +54,7 @@ class UpdatePedidosController extends Controller
             $zona          = $cliente ->zonadeventa;
             $tipocliente   = $cliente ->tipodecliente;
             $lista         = $cliente->lista;
+            $sucursal      = $cliente->sucursal;
 
             try {
                     $reg_pedidos = Pedido::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'nit'=>$nit,'sucursal'=>$sucursal],
