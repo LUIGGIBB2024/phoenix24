@@ -167,6 +167,7 @@ class UpdatePedidosController extends Controller
             $tipodcto       = $detpedido->tipodocumento;
             $lista          = $cliente->lista;
             $sucursal       = $detpedido->sucursal;
+            $sucursal       = is_null($sucursal)?"":$sucursal;
 
             try 
             {
