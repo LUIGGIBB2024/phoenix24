@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UpdatePedidosController extends Controller
 {
@@ -164,7 +165,7 @@ class UpdatePedidosController extends Controller
 
             try 
             {
-                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+                DB::statement('SET FOREIGN_KEY_CHECKS=0;');              
                 $registro = Detalledepedido::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=> $tipodcto,'fechadocumento'=>$fecha,'producto'=>$producto,'bodega'=>$bodega],
                 [
                     'proyecto'              => "",
