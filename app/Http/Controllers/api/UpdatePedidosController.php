@@ -53,6 +53,7 @@ class UpdatePedidosController extends Controller
             $ruta          = $cliente ->rutadeventa; 
             $zona          = $cliente ->zonadeventa;
             $tipocliente   = $cliente ->tipodecliente;
+            $lista         = $cliente->lista;
 
             try {
                     $reg_pedidos = Pedido::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'nit'=>$nit,'sucursal'=>$sucursal],
@@ -106,7 +107,7 @@ class UpdatePedidosController extends Controller
                         'caja'                  => "",
                         'cajero'                => "",
                         'tecnico'               => "",
-                        'lista'                 => "",
+                        'lista'                 => $lista,
                         'latitud'               => 0.00,
                         'longitud'              => 0.00,
                         'email'                 => $pedido->email,   
@@ -162,6 +163,7 @@ class UpdatePedidosController extends Controller
             $zona           = $cliente ->zonadeventa;
             $tipocliente    = $cliente ->tipodecliente;
             $tipodcto       = $detpedido->tipodocumento;
+            $lista          = $detpedido->lista;
 
             try 
             {
@@ -179,7 +181,7 @@ class UpdatePedidosController extends Controller
                     'zonadeventa'           => $zona,
                     'tipocliente'           => $tipocliente,   
                     'vendedor'              => $detpedido->vendedor,   
-                    'lista'                 => $detpedido->lista,
+                    'lista'                 => $lista,
                     'tecnico'               => "",
                     'serial'                => "",
                     'garantia'              => 0,
