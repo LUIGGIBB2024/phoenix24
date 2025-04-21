@@ -47,7 +47,7 @@ class UpdatePedidosController extends Controller
            
             $ano           = $fechaLapso->format('Y'); 
             $mes           = $fechaLapso->format('m');  
-            $lapso         =  $ano . $mes;                
+            $lapso         = $ano . $mes;                
 
             $cliente       = cliente::where('nit',$nit)->where('sucursal','01')->first();   
             $ruta          = $cliente ->rutadeventa; 
@@ -148,7 +148,7 @@ class UpdatePedidosController extends Controller
         {
             $consecutivo    = $detpedido->idpedido;
             $nit            = $detpedido->identificacion;
-            $sucursal       = "";
+          
             $fecha          = $detpedido->fechadepedido;
 
             $fechaLapso = Carbon::parse($fecha);         
