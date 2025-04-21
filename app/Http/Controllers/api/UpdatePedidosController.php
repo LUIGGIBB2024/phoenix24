@@ -186,7 +186,7 @@ class UpdatePedidosController extends Controller
                     'concepto'              => "",
                     'cptoclase'             => "",
                     'ncargue'               => 1,
-                    'pedidoid'              => $detpedido->id,
+                    'pedidosid'              => $detpedido->id,
                     'cantidad'              => $detpedido->cantidad, 
                     'cantidad2'             => 0,
                     'valor'                 => $detpedido->valor1,
