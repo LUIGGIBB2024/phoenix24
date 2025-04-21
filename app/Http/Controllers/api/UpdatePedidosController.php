@@ -153,7 +153,7 @@ class UpdatePedidosController extends Controller
             $mes           = $fechaLapso->format('m');  
             $lapso         =  $ano . "-" . $mes;  
 
-            $producto       = $detpedido->producto;
+            $producto       = $detpedido->codigo;
             $bodega         = $detpedido->bodega;
 
             $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->first();   
