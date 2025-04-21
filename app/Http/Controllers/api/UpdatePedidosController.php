@@ -45,11 +45,11 @@ class UpdatePedidosController extends Controller
             //$fecha = '2025-04-20'; // o cualquier otra fecha
             $fechaLapso = Carbon::parse($fecha);         
            
-            $ano            = $fechaLapso->format('Y'); 
+            $ano           = $fechaLapso->format('Y'); 
             $mes           = $fechaLapso->format('m');  
             $lapso         =  $ano . $mes;                
 
-            $cliente        = cliente::where('nit',$nit)->where('sucursal','01')->first();   
+            $cliente       = cliente::where('nit',$nit)->where('sucursal','01')->first();   
             $ruta          = $cliente ->rutadeventa; 
             $zona          = $cliente ->zonadeventa;
             $tipocliente   = $cliente ->tipodecliente;
@@ -164,12 +164,15 @@ class UpdatePedidosController extends Controller
             $tipocliente    = $cliente ->tipodecliente;
             $tipodcto       = $detpedido->tipodocumento;
             $lista          = $detpedido->lista;
+            $sucursal       = $detpedido->sucursal;
 
             try 
             {
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');              
                 $registro = Detalledepedido::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=> $tipodcto,'fechadocumento'=>$fecha,'producto'=>$producto,'bodega'=>$bodega],
                 [
+                    'nit'                   => $nit,
+                    'sucursal'              => $sucursal,
                     'proyecto'              => "",
                     'sproyecto'             => "",
                     'centrooper'            => "",
