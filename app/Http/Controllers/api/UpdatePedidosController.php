@@ -54,7 +54,7 @@ class UpdatePedidosController extends Controller
             $zona          = $cliente ->zonadeventa;
             $tipocliente   = $cliente ->tipodecliente;
             $lista         = $cliente->lista;
-            $sucursal      = $cliente->sucursal;
+            $sucursal      = $pedido->sucursal;
 
             try {
                     $reg_pedidos = Pedido::updateOrCreate(['consecutivo'=>$consecutivo,'fechadocumento'=>$fecha,'nit'=>$nit,'sucursal'=>$sucursal],
@@ -113,6 +113,7 @@ class UpdatePedidosController extends Controller
                         'longitud'              => 0.00,
                         'email'                 => $pedido->email,   
                         'ciudad'                => $pedido->ciudad,   
+                        'observaciones'         => is_null($pedido->observaciones)?"":$pedido->observaciones,
                         'usuario_created'       => Auth::user()->codigo,
                         'usuario_updated'       => Auth::user()->codigo,               
                     ]);
@@ -165,7 +166,7 @@ class UpdatePedidosController extends Controller
             $tipocliente    = $cliente ->tipodecliente;
             $tipodcto       = $detpedido->tipodocumento;
             $lista          = $cliente->lista;
-            $sucursal       = $cliente->sucursal;
+            $sucursal       = $detpedido->sucursal;
 
             try 
             {
@@ -236,7 +237,6 @@ class UpdatePedidosController extends Controller
                 [
                 'status'           => '202',
                 'msg'              => 'Actualización de Pedidos Exitosa',
-                ],Response::HTTP_ACCEPTED); 
-         
+                ],Response::HTTP_ACCEPTED);          
     }
 }
