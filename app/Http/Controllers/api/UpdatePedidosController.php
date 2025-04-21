@@ -163,8 +163,8 @@ class UpdatePedidosController extends Controller
             $zona           = $cliente ->zonadeventa;
             $tipocliente    = $cliente ->tipodecliente;
             $tipodcto       = $detpedido->tipodocumento;
-            $lista          = $detpedido->lista;
-            $sucursal       = $detpedido->sucursal;
+            $lista          = $cliente->lista;
+            $sucursal       = $cliente->sucursal;
 
             try 
             {
