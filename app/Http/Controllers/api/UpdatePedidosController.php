@@ -143,7 +143,7 @@ class UpdatePedidosController extends Controller
         
         foreach ($detpedidos as $detpedido)
         {
-            $consecutivo    = $detpedido->id;
+            $consecutivo    = $detpedido->idpedido;
             $nit            = $detpedido->identificacion;
             $sucursal       = "";
             $fecha          = $detpedido->fechadepedido;
@@ -188,7 +188,7 @@ class UpdatePedidosController extends Controller
                     'concepto'              => "",
                     'cptoclase'             => "",
                     'ncargue'               => 1,
-                    'pedidosid'              => $detpedido->id,
+                    'pedidosid'             => $detpedido->idpedido,
                     'cantidad'              => $detpedido->cantidad, 
                     'cantidad2'             => 0,
                     'valor'                 => $detpedido->valor1,
