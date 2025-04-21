@@ -164,6 +164,7 @@ class UpdatePedidosController extends Controller
 
             try 
             {
+                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
                 $registro = Detalledepedido::updateOrCreate(['consecutivo'=>$consecutivo,'tipodedocumento'=> $tipodcto,'fechadocumento'=>$fecha,'producto'=>$producto,'bodega'=>$bodega],
                 [
                     'proyecto'              => "",
@@ -203,6 +204,7 @@ class UpdatePedidosController extends Controller
                     'usuario_created'       => Auth::user()->codigo,
                     'usuario_updated'       => Auth::user()->codigo,               
                 ]);
+                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
             } catch (\Exception $e) {
                 return response()->json(
