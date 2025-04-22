@@ -120,18 +120,18 @@ class UpdatePedidosController extends Controller
             } catch (\Exception $e) {
                 return response()->json(
                     [
-                     'status'           => '202',
+                     'status'           => '400',
                      'msg'              => 'Error al actualizar el pedido: '.$e->getMessage(),
-                    ],Response::HTTP_ACCEPTED);
+                    ],Response::HTTP_BAD_REQUEST);
             }
         }
         if ($cuantos == 0)
         {
             return response()->json(
                 [
-                 'status'           => '202',
+                 'status'           => '204',
                  'msg'              => 'No se encontraron pedidos para actualizar',
-                ],Response::HTTP_ACCEPTED);
+                ],Response::HTTP_NO_CONTENT);
         } else
         return response()->json(
             [
@@ -218,9 +218,9 @@ class UpdatePedidosController extends Controller
             } catch (\Exception $e) {
                 return response()->json(
                     [
-                     'status'           => '202',
+                     'status'           => '400',
                      'msg'              => 'Error al actualizar el Detalle del pedido: '.$e->getMessage(),
-                    ],Response::HTTP_ACCEPTED);
+                    ],Response::HTTP_BAD_REQUEST);
             }
         }
 
@@ -229,15 +229,15 @@ class UpdatePedidosController extends Controller
         {
             return response()->json(
                 [
-                 'status'           => '202',
+                 'status'           => '204',
                  'msg'              => 'No se encontraron pedidos para actualizar',
-                ],Response::HTTP_ACCEPTED);
+                ],Response::HTTP_NO_CONTENT);
         } 
         else
             return response()->json(
                 [
                 'status'           => '202',
-                'msg'              => 'Actualización de Pedidos Exitosa',
+                'msg'              => 'Actualización de del Detalle de Pedidos Exitosa',
                 ],Response::HTTP_ACCEPTED);          
     }
 }
