@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\reportedeservicios;
+use App\Models\Reportedeservicio;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class SendServiciosController extends Controller
 {
-    public function UpdateSales(Request $request):JsonResponse
+    public function SendServicios(Request $request):JsonResponse
     {
         $servicios = json_decode($request->servicios); 
 
@@ -26,7 +26,7 @@ class SendServiciosController extends Controller
             try 
             {
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');              
-                $registro = reportedeservicios::updateOrCreate(['fechadereporte'=>$fecha,'tipo'=> $tipo,'idregistro'=>$idregistro,'producto'=>$producto],
+                $registro = Reportedeservicio::updateOrCreate(['fechadereporte'=>$fecha,'tipo'=> $tipo,'idregistro'=>$idregistro,'producto'=>$producto],
                 [                 
                     'descripcion'           => $servicio->descripcion,
                     'vendedor'              => $servicio->vendedor,
@@ -62,7 +62,6 @@ class SendServiciosController extends Controller
                'status'          => '200',
                'msg'             => 'Actualización de Servicios Existosa',
             ],Response::HTTP_ACCEPTED);
-    }    
-      
+    }          
 
 }
