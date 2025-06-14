@@ -30,5 +30,3 @@ class CreateListasTable extends Migration
     }
 }
 
-'codigo','descripcion','tipomoneda','factor','proyecto','sproyecto','centrooper','estado','usuario_created','usuario_updated',
-'fecha_created','fecha_updated'];
