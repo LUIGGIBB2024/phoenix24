@@ -23,7 +23,7 @@ class SendServiciosController extends Controller
             $idregistro = $servicio->idregistro;
             $producto   = $servicio->producto;
 
-             try 
+            try 
             {
                 DB::statement('SET FOREIGN_KEY_CHECKS=0;');              
                 $registro = reportedeservicios::updateOrCreate(['fechadereporte'=>$fecha,'tipo'=> $tipo,'idregistro'=>$idregistro,'producto'=>$producto],
