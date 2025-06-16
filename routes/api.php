@@ -6,6 +6,7 @@ use App\Http\Controllers\api\CarteraController;
 use App\Http\Controllers\api\CuentasxPagarController;
 use App\Http\Controllers\api\GetUtilityController;
 use App\Http\Controllers\api\OnlyInvoiceController;
+use App\Http\Controllers\api\SendAperturasController;
 use App\Http\Controllers\api\SendServiciosController;
 use App\Http\Controllers\api\UpdatePedidosController;
 use App\Http\Controllers\api\VentasController;
@@ -77,5 +78,8 @@ Route::group(['middleware'=>['auth:sanctum']],function()
 
     // Procesar Envios de Reporte de Servicios
     Route::post('send-servicios', [SendServiciosController::class,'SendServicios']);
+
+    // Procesar Envios de Apertura de Servicios
+    Route::post('send-aperturas', [SendAperturasController::class,'SendAperturas']);
 });
 

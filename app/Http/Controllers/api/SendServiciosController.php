@@ -15,13 +15,15 @@ class SendServiciosController extends Controller
     public function SendServicios(Request $request):JsonResponse
     {
         $servicios = json_decode($request->servicios); 
+        //$servicios = ($request->servicios); 
 
         foreach ($servicios as $servicio)
         {
             $fecha      = $servicio->fechadereporte;
             $tipo       = $servicio->tipo;
-            $idregistro = $servicio->idregistro;
+            $idregistro = $servicio->id;
             $producto   = $servicio->producto;
+
 
             try 
             {
@@ -37,7 +39,8 @@ class SendServiciosController extends Controller
                     'porcentaje'            => $servicio->porcentaje,
                     'observaciones'         => $servicio->observaciones,
                     'tipo'                  => $tipo,
-                    'estado'                => 1, // Assuming estado is always 1 for active
+                    'estado'                => $servicio->estado, // Assuming estado is always 1 for active
+                    'estado2'               => $servicio->estado2, // Assuming
                     'usuario_created'       => Auth::user()->codigo,
                     'usuario_updated'       => Auth::user()->codigo,               
                 ]);
@@ -52,10 +55,7 @@ class SendServiciosController extends Controller
                     ],Response::HTTP_BAD_REQUEST);
             }
 
-
-
         }
-
 
         return response()->json(
             [

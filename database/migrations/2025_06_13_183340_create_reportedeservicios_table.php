@@ -29,6 +29,7 @@ class CreateReportedeserviciosTable extends Migration
             $table->string('observaciones',250);
             $table->numeric('tipo',3);
             $table->string('estado',10);
+            $table->string('estado2',10);
             $table->string('usuario_created',20);
             $table->string('usuario_updated',20);
             $table->timestamp('fecha_created');
