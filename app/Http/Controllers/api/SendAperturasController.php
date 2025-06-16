@@ -47,19 +47,13 @@ class SendAperturasController extends Controller
                      'msg'              => 'Error al actualizar la apertura de servicios '.$e->getMessage(),
                     ],Response::HTTP_BAD_REQUEST);
             }
-
         }
-
-
 
         return response()->json(
             [
                'status'          => '200',
                'msg'             => 'Actualización de Aperturas Existosa',
             ],Response::HTTP_ACCEPTED);
-
-
-
     }
 
 }
