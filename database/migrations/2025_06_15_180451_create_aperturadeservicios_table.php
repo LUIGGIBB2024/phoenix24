@@ -13,7 +13,8 @@ class CreateAperturadeserviciosTable extends Migration
      */
     public function up()
     {
-        Schema::create('aperturadeservicios', function (Blueprint $table) {
+        Schema::create('aperturadeservicios', function (Blueprint $table) 
+        {
            $table->id();
            $table->datetime('fechareporte')->index()->index();
            $table->float('numerodeservicios',15,2);
