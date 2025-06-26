@@ -43,6 +43,13 @@ class AuthController extends Controller
     public function login(Request $request):JsonResponse
     {
       //$correo = $request->email ."--" . $request->password;
+
+        return response()->json(
+            [
+             'status'           => '200',
+             'msg'              => 'Voy aquí 100',
+            ],Response::HTTP_ACCEPTED);
+            
       $usuario = User::where('email','=',$request->email)->first();
 
       return response()->json(
