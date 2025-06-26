@@ -20,6 +20,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\enlacevisual_nv;
 use App\Models\Lista;
+use App\Models\miscelaneo;
 use App\Models\remision;
 use App\Models\vendedor;
 
@@ -30,6 +31,22 @@ class VentasController extends Controller
     public function UpdateSales(Request $request):JsonResponse
     {
         // Voidando las relaciones de claves foráneas   
+        $contador = 0;
+        if (isset($request->miscelaneos))
+        {
+           $miscelaneos  = $request->miscelaneos;
+           foreach($miscelaneos as $dato)
+           {
+             $codigo          =   $dato['codigo'];
+             $reg_info  = miscelaneo::updateOrCreate(['codigoid'=>$codigo],
+             [
+               'descripcion'                   => is_null($dato['descripcion'])?"":$dato['descripcion'],  
+               'usuario_created'               => is_null($dato['usuariocreated'])?"":$dato['usuariocreated'],
+               'usuario_updated'               => is_null($dato['usuarioupdated'])?"":$dato['usuarioupdated'],
+             ]);
+           }
+        }
+
         $contador = 0;
         if (isset($request->listas))
         {
