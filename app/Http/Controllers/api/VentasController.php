@@ -473,14 +473,7 @@ class VentasController extends Controller
                      'estado02'              => is_null($detalle['estado02'])?0:$detalle['estado02'],
                      'estado03'              => is_null($detalle['estado03'])?0:$detalle['estado03'],
                      'usuario_updated'       => is_null($detalle['usuarioupdated'])?"":$detalle['usuarioupdated'],
-                 ]);
-                 // return response()->json(
-                 //     [
-                 //     'status'   => '200OK',
-                 //     'msg'      => 'Salida Pre Exitosa',
-                 //     'msg2'      => $contador,
-                 //     ],Response::HTTP_ACCEPTED);
-                 //}
+                 ]);       
              }
          }
 
@@ -773,14 +766,7 @@ class VentasController extends Controller
                 'copdestino'                => is_null($documento['copdestino'])?"":$documento['copdestino'],
                 'usuario_created'           => is_null($documento['usuariocreated'])?"":$documento['usuariocreated'],
                 'usuario_updated'           => is_null($documento['usuarioupdated'])?"":$documento['usuarioupdated'],
-            ]);
-
-            // return response()->json(
-            //     [
-            //      'status'   => '200OK',
-            //      'msg'      => 'Grabé Registro dentro del FOR DctoInvt',
-            //      'msg2'      => $contador
-            //       ],Response::HTTP_BAD_REQUEST);
+            ]);     
 
         }
        }
