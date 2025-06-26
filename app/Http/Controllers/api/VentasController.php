@@ -29,6 +29,7 @@ class VentasController extends Controller
 {
     public function UpdateSales(Request $request):JsonResponse
     {
+        // Voidando las relaciones de claves foráneas   
         $contador = 0;
         if (isset($request->listas))
         {
