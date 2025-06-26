@@ -18,5 +18,11 @@ class detalledemiscelaneo extends Model
         'identif01','identif02','identif03','identif04','identif05','documentoanexo','MiscelaneosID ','usuario_created','usuario_update',
         'fecha_created','fecha_updated'
     ];
+    public $timestamps = false;
     protected $primaryKey = "DetalleMiscelaneosID";
+
+     public function getKeyName(){
+
+        return "detallemiscelaneosID";
+    }
 }
