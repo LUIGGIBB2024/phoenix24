@@ -44,14 +44,16 @@ class AuthController extends Controller
     {
       //$correo = $request->email ."--" . $request->password;
 
-        return response()->json(
-            [
-             'status'           => '200',
-             'msg'              => 'Voy aquí 100',
-             'data'             => $request->email,
-            ],Response::HTTP_ACCEPTED);
+      //   return response()->json(
+      //       [
+      //        'status'           => '200',
+      //        'msg'              => 'Voy aquí 100',
+      //        'data'             => $request->email,
+      //       ],Response::HTTP_ACCEPTED);
+      
+      $email = $request->email;
 
-      $usuario = User::where('email','=',$request->email)->first();
+      $usuario = User::where('email','=',$email)->first();
 
       return response()->json(
             [
