@@ -973,7 +973,6 @@ class VentasController extends Controller
                'usuario_created'  => is_null($dato['usuariocreated'])?"":$dato['usuariocreated'],
                'usuario_updated'  => is_null($dato['usuarioupdated'])?"":$dato['usuarioupdated'],
             ]);
-
            }
        }
 
