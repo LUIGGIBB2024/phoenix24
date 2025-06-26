@@ -48,7 +48,7 @@ class AuthController extends Controller
             [
              'status'           => '200',
              'msg'              => 'Voy aquí 100',
-             'data'             => $request,
+             'data'             => $request->email,
             ],Response::HTTP_ACCEPTED);
 
       $usuario = User::where('email','=',$request->email)->first();
