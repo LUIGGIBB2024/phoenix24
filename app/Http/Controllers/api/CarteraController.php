@@ -15,9 +15,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-// protected $fillable = [
-//   'consecutivo','tipodocumento','fechadocumento','lapso','nrodocumento','concepto','banco','fechadecheque','plaza','valor','proyecto','sproyecto','actividad','centrooper',
-//   'usuario_created','usuario_updated','fecha_created','fecha_updated'];
 
 class CarteraController extends Controller
 {
@@ -55,7 +52,7 @@ class CarteraController extends Controller
                 'usuario_created'  => is_null($dato['usuariocreated'])?"":$dato['usuariocreated'],
                 'usuario_updated'  => is_null($dato['usuarioupdated'])?"":$dato['usuarioupdated'],
               ]);
-              
+
               $Si_Entro = true;
               DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
