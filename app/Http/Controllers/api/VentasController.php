@@ -66,7 +66,7 @@ class VentasController extends Controller
                'campouti003'                   => is_null($dato['campouti003'])?"":$dato['campouti003'],
                'campouti004'                   => is_null($dato['campouti004'])?"":$dato['campouti004'],
                'campouti005'                   => is_null($dato['campouti005'])?"":$dato['campouti005'],
-               'formtodeimpresion'             => is_null($dato['formtodeimpresion'])?"":$dato['formtodeimpresion'],                
+               'formatodeimpresion'            => is_null($dato['formatodeimpresion'])?"":$dato['formatodeimpresion'],                
                'cuenta'                        => is_null($dato['cuenta'])?"":$dato['cuenta'],
                'cuenta01'                      => is_null($dato['cuenta01'])?"":$dato['cuenta01'],
                'cuenta02'                      => is_null($dato['cuenta02'])?"":$dato['cuenta02'],
