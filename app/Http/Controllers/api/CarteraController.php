@@ -9,10 +9,9 @@ use App\Models\detalledepago;
 use App\Models\factura;
 use App\Models\otrospagosventa;
 use App\Models\recibosdecaja;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
@@ -57,11 +56,11 @@ class CarteraController extends Controller
               DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
            }
-            return response()->json(
-                 [
-                 'status'       => '200',
-                 'msg'          => 'Actualización Exitosa - Otros Pagos',
-                 ],Response::HTTP_ACCEPTED);
+           return response()->json(
+                [
+                'status'       => '200',
+                'msg'          => 'Actualización Exitosa (otros Pagos) 200',
+                ],Response::HTTP_ACCEPTED); 
        }
 
 
@@ -286,6 +285,12 @@ class CarteraController extends Controller
                  'msg'          => 'Actualización Exitosa - Pagos',
                  ],Response::HTTP_ACCEPTED);
        }
+       return response()->json(
+                 [
+                 'status'       => '200',
+                 'msg'          => 'Actualización Exitosa - Pagos',
+                 ],Response::HTTP_ACCEPTED);
+
     }
 
     public function CarteraResumida(Request $request):JsonResponse
